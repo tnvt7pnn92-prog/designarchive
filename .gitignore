@@ -33,6 +33,10 @@ photo-report*.json
 .env.*
 !.env.example
 
+# Working files of the photo replacement (backup and before/after page): kept locally only
+foto-sostituite-backup.json
+foto-produttori-prima-dopo.html
+
 # The buying guide's private source files (never published)
 data-private/
 
