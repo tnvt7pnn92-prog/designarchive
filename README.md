@@ -190,6 +190,24 @@ browser: nel sito finiscono solo l'indirizzo di Supabase e la chiave pubblica "a
 service_role vive nei segreti delle funzioni server o nel tuo `.env.local`, che non viene mai
 pubblicato (`.env.example` elenca tutto).
 
+### In alternativa: account su Railway
+
+Il sito resta su GitHub Pages; su Railway gira solo il servizio degli account (`server/`: email e
+password, con nome, data di nascita e paese). `railway.json` dice già a Railway come avviarlo.
+
+1. Su <https://railway.com>: **New Project → Deploy from GitHub repo** e scegli questo repository.
+2. Nello stesso progetto: **New → Database → PostgreSQL**. Poi, nelle **Variables** del servizio,
+   aggiungi `DATABASE_URL` come riferimento al database (`${{Postgres.DATABASE_URL}}`): senza, gli
+   account stanno in memoria e si perdono a ogni riavvio.
+3. Sempre nelle **Variables** del servizio: `ALLOWED_ORIGINS=https://<utente>.github.io` e
+   `SITE_URL=https://<utente>.github.io/<repository>`; facoltative `RESEND_API_KEY` ed `EMAIL_FROM`
+   per le email di recupero password.
+4. In **Settings → Networking → Generate Domain** Railway dà un indirizzo pubblico; controlla che
+   `<indirizzo>/health` risponda.
+5. Su GitHub, nelle variabili del repository (Settings → Secrets and variables → Actions →
+   **Variables**), crea `API_URL` con quell'indirizzo e rilancia la pubblicazione: da quel momento il
+   sito usa gli account di Railway invece di Supabase.
+
 ### Costi mensili
 
 | Voce | In prova | Online |
