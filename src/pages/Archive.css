@@ -1,0 +1,415 @@
+.archive-hero {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-5);
+}
+
+.archive-hero h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  margin: var(--space-2) 0 var(--space-3);
+}
+
+.archive-hero__subtitle {
+  color: var(--color-text-dim);
+  max-width: 60ch;
+  font-size: 1rem;
+}
+
+.archive-results__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-height: 44px;
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--color-border-soft);
+  flex-wrap: wrap;
+}
+
+.archive-results__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.archive-results__none {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+/* An active filter: the same cream pill as in the panel, with the way to take it off. */
+.archive-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 34px;
+  padding: 0 0.55rem 0 0.8rem;
+  border: 1px solid var(--paper);
+  border-radius: var(--radius-pill);
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-size: 0.76rem;
+  cursor: pointer;
+}
+
+.archive-chip span {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  line-height: 1;
+  color: var(--paper-ink-dim);
+}
+
+.archive-chip:hover span {
+  background: var(--paper-ink);
+  color: var(--paper);
+}
+
+.archive-results__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* View: a segmented control. */
+.archive-density {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.archive-density__label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.archive-density__options {
+  display: inline-flex;
+  padding: 3px;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-pill);
+}
+
+.archive-density button {
+  min-height: 30px;
+  padding: 0 0.75rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-dim);
+  font-size: 0.74rem;
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
+}
+
+.archive-density button:hover {
+  color: var(--color-text);
+}
+
+.archive-density button[aria-pressed="true"] {
+  background: var(--paper);
+  color: var(--paper-ink);
+}
+
+.archive-sort {
+  min-height: 38px;
+  padding: 0 2.1rem 0 0.9rem;
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-pill);
+  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a39d90' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0.85rem center;
+  color: var(--color-text-dim);
+  font-size: 0.76rem;
+  white-space: nowrap;
+  appearance: none;
+  cursor: pointer;
+}
+
+.archive-sort:hover {
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+
+.archive-sort:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.archive-sort option {
+  background: var(--surface-1);
+  color: var(--color-text);
+}
+/* Denser grids: narrower columns, tighter gaps, and less text under each photo.
+   Doubled class so these win over the base .archive-grid rule declared further down. */
+.archive-grid.archive-grid--medium {
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: var(--space-3) var(--space-2);
+}
+
+.archive-grid.archive-grid--small {
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: var(--space-3) var(--space-2);
+}
+
+.archive-grid.archive-grid--mini {
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  gap: var(--space-2) 0.4rem;
+}
+
+/* Medium keeps the label without the facts. Small and mini drop the label altogether: just the
+   name, small, under the photo. */
+.archive-grid--medium .museum-label__rows,
+.archive-grid--small .museum-label__rows,
+.archive-grid--mini .museum-label__rows,
+.archive-grid--small .museum-label__line,
+.archive-grid--mini .museum-label__line,
+.archive-grid--small .museum-label__by,
+.archive-grid--mini .museum-label__by {
+  display: none;
+}
+
+.archive-grid--medium .museum-label__name {
+  font-size: 0.9rem;
+}
+
+.archive-grid--small .object-card__label,
+.archive-grid--mini .object-card__label,
+.archive-grid--small .object-card:hover .object-card__label,
+.archive-grid--mini .object-card:hover .object-card__label {
+  margin: 0.35rem 0 0;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+}
+
+.archive-grid--small .museum-label__name,
+.archive-grid--mini .museum-label__name {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 0.74rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  color: var(--color-text-dim);
+  overflow-wrap: break-word;
+}
+
+.archive-grid--mini .museum-label__name {
+  font-size: 0.64rem;
+}
+
+/* No label over the photo here, so a cut-out needs no room at its foot. */
+.archive-grid--small .object-card__media .is-cutout img,
+.archive-grid--mini .object-card__media .is-cutout img {
+  padding: 8%;
+}
+
+.archive-grid--small .object-card:hover .museum-label__name,
+.archive-grid--mini .object-card:hover .museum-label__name {
+  color: var(--color-text);
+}
+
+.archive-grid--small .object-card__add,
+.archive-grid--mini .object-card__add {
+  width: 24px;
+  height: 24px;
+  top: 5px;
+  right: 5px;
+}
+
+/* Small thumbnails have no room for a second button. */
+.archive-grid--small .object-card__zoom,
+.archive-grid--mini .object-card__zoom {
+  display: none;
+}
+
+.archive-grid--small .object-card__add svg,
+.archive-grid--mini .object-card__add svg {
+  width: 11px;
+  height: 11px;
+}
+.archive-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: var(--space-6);
+  padding-bottom: var(--space-7);
+}
+
+/* The results column never grows wider than its track. */
+.archive-results {
+  min-width: 0;
+}
+
+.archive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: var(--space-4) var(--space-3);
+  align-content: start;
+}
+
+/* No results: say so plainly and offer the way back, instead of an empty grid. */
+.archive-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: var(--space-6) 0;
+  max-width: 46ch;
+}
+
+.archive-empty h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.archive-empty p {
+  color: var(--color-text-dim);
+}
+
+.archive-empty__suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.archive-empty__suggestions button {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 44px;
+  padding: 0.7rem 1rem;
+  background: var(--surface-1);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.archive-empty__suggestions button:hover {
+  border-color: var(--color-accent);
+}
+
+.archive-empty__suggestions span {
+  flex: none;
+  font-size: var(--text-xs);
+  color: var(--color-accent);
+}
+
+.archive-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-5) 0 var(--space-3);
+}
+
+.archive-more__count {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.archive-more__sentinel {
+  display: block;
+  width: 1px;
+  height: 1px;
+}
+
+.archive-filter-toggle {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .archive-layout {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  /* Stays in reach while scrolling the results. */
+  .archive-filter-toggle {
+    position: sticky;
+    top: calc(var(--header-height) + var(--space-2));
+    z-index: var(--z-raised);
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    min-height: 44px;
+    padding: 0 1.2rem;
+    margin-bottom: var(--space-4);
+    background: var(--color-text);
+    border: 0;
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-md);
+    color: var(--color-bg);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .archive-filter-toggle__count {
+    display: inline-grid;
+    place-items: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    border-radius: var(--radius-pill);
+    background: var(--color-accent);
+    color: var(--color-bg);
+    font-size: 0.68rem;
+    letter-spacing: 0;
+  }
+}
+
+@media (max-width: 1000px) {
+  .archive-chip,
+  .archive-density button,
+  .archive-sort {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .archive-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: var(--space-3);
+  }
+
+  .archive-grid.archive-grid--medium {
+    grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  }
+
+  .archive-grid.archive-grid--small {
+    grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  }
+
+  .archive-grid.archive-grid--mini {
+    grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  }
+}

@@ -1,0 +1,685 @@
+/* The stories: the archive's daily paper, laid out like a magazine. Masthead, today's cover with
+   the pieces it names pinned on it, a gold ribbon of every story, a wall of figures that count
+   up, the back issues in blocks of big / middle / small, the guides on the cream band, the
+   morning email. */
+.stories-page {
+  padding-bottom: 0;
+}
+
+.stories-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.stories-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+}
+
+.stories-head h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.9rem, 3.6vw, 3rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.stories-head--ruled {
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-text);
+}
+
+/* ---------- masthead ---------- */
+
+.stories-mast {
+  padding-top: clamp(36px, 5vw, 56px);
+}
+
+.stories-mast__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: end;
+  gap: 8px 40px;
+}
+
+.stories-mast h1 {
+  padding-block: 18px 10px;
+  font-family: var(--font-serif);
+  font-size: clamp(3rem, 9vw, 7.5rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+.stories-mast h1 em {
+  color: var(--color-accent);
+}
+
+.stories-mast__sub {
+  max-width: 44ch;
+  padding-bottom: 28px;
+  color: var(--color-text-dim);
+}
+
+/* ---------- story of the day: a magazine cover ---------- */
+
+.stories-today {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: clamp(28px, 4.5vw, 64px);
+  align-items: center;
+  padding-block: 12px clamp(56px, 6vw, 80px);
+}
+
+.stories-today__cover .story-cover {
+  aspect-ratio: 5 / 4;
+  --mark-max: 42cqi;
+}
+
+.stories-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.stories-kicker span + span {
+  color: var(--color-text-faint);
+}
+
+.stories-today h2 {
+  margin-top: 14px;
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.stories-today h2 a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+.stories-today__hook {
+  margin-top: 16px;
+  max-width: 40ch;
+  font-size: 1.12rem;
+  color: var(--color-text-dim);
+}
+
+.stories-today .btn {
+  margin-top: 26px;
+}
+
+/* "In this story": the pieces it names, as small round photos that open them. */
+.stories-today__pieces {
+  margin-top: 30px;
+}
+
+.stories-today__pieces ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+.stories-today__pieces a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 4px 16px 4px 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  font-size: 0.86rem;
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.stories-today__pieces a:hover {
+  border-color: var(--color-accent);
+}
+
+.stories-today__pieces .smart-image {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+}
+
+.stories-today__pieces i {
+  font-style: normal;
+  color: var(--color-text-faint);
+}
+
+/* ---------- the ribbon of stories ---------- */
+
+.stories-ribbon {
+  background: var(--color-accent);
+  color: #16140f;
+  overflow: hidden;
+}
+
+.stories-ribbon__track {
+  display: flex;
+  width: max-content;
+  animation: stories-ribbon 90s linear infinite;
+}
+
+.stories-ribbon:hover .stories-ribbon__track,
+.stories-ribbon:focus-within .stories-ribbon__track {
+  animation-play-state: paused;
+}
+
+.stories-ribbon p {
+  display: flex;
+  flex: none;
+}
+
+.stories-ribbon a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  min-height: 44px;
+  padding-inline: 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.stories-ribbon a::after {
+  content: "✦";
+  margin-left: 1.1rem;
+  font-size: 0.6rem;
+  opacity: 0.7;
+}
+
+.stories-ribbon b {
+  font-weight: 500;
+}
+
+.stories-ribbon b::after {
+  content: " ·";
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.stories-ribbon a:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@keyframes stories-ribbon {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- the stories in one number ---------- */
+
+.stories-numbers {
+  padding-block: clamp(56px, 6vw, 88px);
+}
+
+.stories-numbers__wall {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each figure on its own story's tint; the piece the story names fades in behind it on hover. */
+.stories-numbers__wall a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: 100%;
+  min-height: 190px;
+  padding: 22px 20px 20px;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--tile-bg);
+  color: var(--tile-ink);
+  transition: transform var(--dur-base) var(--ease);
+}
+
+.stories-numbers__wall li:nth-child(odd) a:hover {
+  transform: rotate(-1deg) translateY(-3px);
+}
+
+.stories-numbers__wall li:nth-child(even) a:hover {
+  transform: rotate(1deg) translateY(-3px);
+}
+
+.stories-numbers__wall a > :not(.stories-numbers__photo) {
+  position: relative;
+}
+
+.stories-numbers__photo {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+
+.stories-numbers__photo img {
+  object-fit: cover;
+  filter: grayscale(0.2);
+}
+
+.stories-numbers__wall a:hover .stories-numbers__photo,
+.stories-numbers__wall a:focus-visible .stories-numbers__photo {
+  opacity: 0.28;
+}
+
+.stories-numbers__figure {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+  font-weight: 300;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.stories-numbers__caption {
+  font-size: 0.86rem;
+}
+
+.stories-numbers__meta {
+  margin-top: auto;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* ---------- back issues, laid out like a magazine ---------- */
+
+.stories-archive {
+  padding-block: 8px clamp(56px, 6vw, 88px);
+}
+
+.stories-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stories-tabs button {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 14px 8px;
+  border: 1px solid var(--color-border);
+  border-bottom: 0;
+  border-radius: 6px 6px 0 0;
+  background: var(--surface-1);
+  color: var(--color-text-dim);
+  font: 400 0.82rem var(--font-sans);
+  cursor: pointer;
+}
+
+.stories-tabs i {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-style: normal;
+  color: var(--color-text-faint);
+}
+
+.stories-tabs button[aria-pressed="true"] {
+  border-color: var(--paper);
+  background: var(--paper);
+  color: var(--paper-ink);
+}
+
+.stories-tabs button[aria-pressed="true"] i {
+  color: var(--paper-ink-dim);
+}
+
+/* Blocks of six: the big one (4 of 6 columns, 2 rows), two in the middle beside it, three small
+   below; every other block mirrors. See slot() in Stories.jsx for the short last block. */
+.stories-mag {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  grid-auto-flow: row dense;
+  gap: clamp(26px, 3vw, 40px) clamp(18px, 2.2vw, 30px);
+  margin-top: 36px;
+}
+
+.stories-mag__slot {
+  min-width: 0;
+}
+
+.stories-mag__slot.is-big {
+  grid-column: span 4;
+  grid-row: span 2;
+  min-height: clamp(460px, 46vw, 660px);
+}
+
+.stories-mag__slot.is-big.is-flip {
+  grid-column: 3 / span 4;
+}
+
+.stories-mag__slot.is-big.is-alone {
+  grid-column: 1 / -1;
+  grid-row: span 1;
+  min-height: clamp(420px, 40vw, 560px);
+}
+
+.stories-mag__slot.is-mid,
+.stories-mag__slot.is-small {
+  grid-column: span 2;
+}
+
+.stories-mag__slot.is-mid.is-tall {
+  grid-row: span 2;
+}
+
+.stories-mag__slot.is-small.of-2 {
+  grid-column: span 3;
+}
+
+.stories-mag__slot.is-mid .story-card__hook {
+  display: none;
+}
+
+/* One small story left over: it runs across the grid, cover beside its words. */
+.stories-mag__slot.is-small.of-1 {
+  grid-column: 1 / -1;
+}
+
+.stories-mag__slot.is-small.of-1 .story-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  align-items: center;
+  gap: clamp(18px, 3vw, 40px);
+}
+
+.stories-mag__slot.is-big > .story-card {
+  height: 100%;
+}
+
+.stories-archive__empty {
+  padding-top: 32px;
+}
+
+.stories-more {
+  margin-top: 40px;
+}
+
+/* ---------- practical guides, on the cream band ---------- */
+
+.stories-guides {
+  padding-block: clamp(56px, 6vw, 88px);
+}
+
+.stories-guides__shelf {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 2.6vw, 34px);
+  margin-top: 40px;
+  padding: 0;
+  list-style: none;
+}
+
+/* Labels pinned a little askew. */
+.stories-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: 22px;
+  border: 1px solid var(--paper-rule);
+  border-radius: 3px;
+  background: #fffdf8;
+  color: var(--paper-ink);
+  box-shadow: 0 14px 30px rgba(23, 22, 15, 0.12);
+  transition: transform var(--dur-base) var(--ease);
+}
+
+.stories-guides__shelf li:nth-child(3n + 1) .stories-guide {
+  rotate: -1deg;
+}
+
+.stories-guides__shelf li:nth-child(3n + 2) .stories-guide {
+  rotate: 0.8deg;
+  translate: 0 10px;
+}
+
+.stories-guides__shelf li:nth-child(3n) .stories-guide {
+  rotate: -0.5deg;
+}
+
+.stories-guide:hover {
+  transform: translateY(-4px);
+}
+
+.stories-guide__line {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--paper-ink-dim);
+}
+
+.stories-guide h3 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 450;
+  line-height: 1.15;
+}
+
+.stories-guide h3 a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.stories-guide > p:not(.stories-guide__line) {
+  font-size: 0.88rem;
+  color: var(--paper-ink-dim);
+}
+
+.stories-guide__use {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--paper-rule);
+  font-size: 0.82rem;
+}
+
+.stories-guide__use:hover {
+  text-decoration: underline;
+}
+
+/* ---------- the morning email ---------- */
+
+.stories-letter {
+  padding-block: clamp(56px, 6vw, 88px) clamp(64px, 7vw, 104px);
+}
+
+.stories-letter__inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.stories-letter h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.4vw, 3.6rem);
+  font-weight: 300;
+  line-height: 1.05;
+}
+
+.stories-letter__inner > div > p:not(.stories-letter__soon) {
+  margin-top: 12px;
+  max-width: 44ch;
+  color: var(--color-text-dim);
+}
+
+.stories-letter__soon {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 12px 20px;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+/* Three recent covers, fanned out. */
+.stories-letter__fan {
+  position: relative;
+  width: 340px;
+  height: 240px;
+}
+
+.stories-letter__fan .story-cover {
+  position: absolute;
+  top: 20px;
+  width: 150px;
+  aspect-ratio: 4 / 5;
+  --mark-max: 40cqi;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.5);
+}
+
+.stories-letter__fan .story-cover:nth-child(1) {
+  left: 0;
+  rotate: -9deg;
+}
+
+.stories-letter__fan .story-cover:nth-child(2) {
+  left: 95px;
+  top: 0;
+  rotate: -1deg;
+}
+
+.stories-letter__fan .story-cover:nth-child(3) {
+  left: 190px;
+  rotate: 8deg;
+}
+
+/* ---------- smaller screens ---------- */
+
+@media (max-width: 900px) {
+  .stories-today,
+  .stories-letter__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .stories-letter__fan {
+    display: none;
+  }
+
+  .stories-guides__shelf {
+    grid-template-columns: 1fr;
+  }
+
+  .stories-guides__shelf li:nth-child(3n + 2) .stories-guide {
+    translate: none;
+  }
+
+  /* Two columns: the big story across both, the rest side by side. */
+  .stories-mag {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stories-mag__slot.is-big,
+  .stories-mag__slot.is-big.is-flip,
+  .stories-mag__slot.is-big.is-alone {
+    grid-column: 1 / -1;
+    grid-row: span 1;
+    min-height: clamp(380px, 90vw, 520px);
+  }
+
+  .stories-mag__slot.is-mid,
+  .stories-mag__slot.is-small,
+  .stories-mag__slot.is-small.of-2 {
+    grid-column: span 1;
+  }
+
+  .stories-mag__slot.is-mid.is-tall {
+    grid-row: span 1;
+  }
+}
+
+@media (max-width: 760px) {
+  .stories-numbers__wall {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stories-numbers__wall a {
+    min-height: 150px;
+    padding: 16px 14px 14px;
+  }
+}
+
+@media (max-width: 560px) {
+  .stories-mag__slot.is-big,
+  .stories-mag__slot.is-big.is-flip,
+  .stories-mag__slot.is-big.is-alone {
+    min-height: 470px;
+  }
+
+  .stories-mag__slot.is-big .story-card__title {
+    font-size: 1.6rem;
+  }
+
+  .stories-mag__slot .story-card__hook {
+    display: none;
+  }
+
+  .stories-mag__slot:not(.is-big) .story-card__title {
+    font-size: 1.02rem;
+  }
+
+  .stories-mag__slot.is-small.of-1 .story-card {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stories-ribbon__track {
+    animation: none;
+  }
+
+  .stories-numbers__wall a,
+  .stories-numbers__photo,
+  .stories-guide {
+    transition: none;
+  }
+
+  .stories-numbers__wall li a:hover,
+  .stories-guide:hover {
+    transform: none;
+  }
+}

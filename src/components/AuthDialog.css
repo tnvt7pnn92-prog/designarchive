@@ -1,0 +1,318 @@
+.auth-dialog {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--space-3);
+  background: var(--surface-overlay);
+  backdrop-filter: blur(3px);
+  animation: auth-fade var(--dur-fast) var(--ease);
+}
+
+.auth-dialog__panel {
+  position: relative;
+  width: min(440px, 100%);
+  max-height: calc(100dvh - 2 * var(--space-3));
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  animation: auth-rise var(--dur-base) var(--ease);
+}
+
+.auth-dialog__panel h2 {
+  font-size: var(--text-2xl);
+  line-height: 1.08;
+}
+
+.auth-dialog__lede,
+.auth-dialog__fine {
+  color: var(--color-text-dim);
+  font-size: var(--text-sm);
+}
+
+.auth-dialog__fine {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+
+.auth-dialog__fine a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.auth-dialog__close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: var(--color-text-dim);
+  font-size: 1.6rem;
+  cursor: pointer;
+}
+
+.auth-dialog__google,
+.auth-dialog__submit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 48px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.auth-dialog__google {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border: 0;
+}
+
+.auth-dialog__submit {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+}
+
+.auth-dialog__submit:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.auth-dialog__submit:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.auth-dialog__or {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  color: var(--color-text-faint);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+}
+
+.auth-dialog__or::before,
+.auth-dialog__or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.auth-dialog__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.auth-dialog__form label {
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+}
+
+.auth-dialog__form input {
+  min-height: 48px;
+  padding: 0 1rem;
+  background: var(--surface-0);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: 1rem;
+}
+
+.auth-dialog__notice,
+.auth-dialog__sent {
+  padding: var(--space-3);
+  border: 1px solid var(--color-accent-soft);
+  background: rgba(201, 164, 77, 0.07);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  color: var(--color-text);
+}
+
+.auth-dialog__sent p {
+  margin-top: 0.3rem;
+  color: var(--color-text-dim);
+}
+
+.auth-dialog__error {
+  color: #e59a8b;
+  font-size: var(--text-sm);
+}
+
+@keyframes auth-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes auth-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.auth-form__toggle {
+  font-size: var(--text-sm);
+  color: var(--color-text-dim);
+}
+
+.auth-form__switch {
+  min-height: 36px;
+  padding: 0;
+  background: none;
+  border: 0;
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.auth-dialog__fine a {
+  color: var(--color-text-dim);
+}
+
+/* ---------- the account form (Railway) ---------- */
+.auth-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.auth-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.auth-field label {
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+}
+
+.auth-field input,
+.auth-field select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 0.9rem;
+  background: var(--surface-0);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text);
+  font-size: 1rem;
+  color-scheme: dark;
+}
+
+.auth-field.has-error input,
+.auth-field.has-error select {
+  border-color: #e59a8b;
+}
+
+.auth-field__hint {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+
+.auth-field__error {
+  font-size: var(--text-xs);
+  color: #e59a8b;
+}
+
+.auth-password {
+  position: relative;
+}
+
+.auth-password input {
+  padding-right: 5.5rem;
+}
+
+.auth-password__toggle {
+  position: absolute;
+  top: 50%;
+  right: 0.35rem;
+  transform: translateY(-50%);
+  min-height: 38px;
+  padding: 0 0.8rem;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+  color: var(--color-text-dim);
+  font-size: var(--text-xs);
+  cursor: pointer;
+}
+
+.auth-password__toggle:hover {
+  color: var(--color-text);
+}
+
+.auth-form__forgot {
+  align-self: flex-end;
+  margin-top: -0.4rem;
+}
+
+.auth-form .auth-dialog__google:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+@media (max-width: 420px) {
+  .auth-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.welcome-roles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: var(--space-1) 0 var(--space-2);
+  padding: 0;
+  border: 0;
+}
+
+.welcome-roles legend {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  font-size: var(--text-xs);
+  color: var(--color-text-dim);
+}
+
+.welcome-role {
+  min-height: 40px;
+  padding: 0 1rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text-dim);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.welcome-role.is-on {
+  border-color: var(--color-accent);
+  color: var(--color-text);
+  background: rgba(201, 164, 77, 0.1);
+}

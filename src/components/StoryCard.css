@@ -1,0 +1,214 @@
+/* A story in a grid: cover 4:3, a typed line, the title in Fraunces, the hook. */
+.story-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  color: var(--color-text);
+}
+
+.story-card__cover {
+  aspect-ratio: 4 / 3;
+  --mark-max: 44cqi;
+  transition: transform var(--dur-base) var(--ease);
+}
+
+.story-card:hover .story-card__cover {
+  transform: translateY(-4px);
+}
+
+.story-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.story-card__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.story-card__cat {
+  color: var(--color-accent);
+}
+
+.story-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+  font-weight: 450;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.story-card:hover .story-card__title {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.story-card__hook {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: var(--color-text-dim);
+}
+
+.story-card--compact {
+  display: grid;
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: center;
+  gap: 14px;
+}
+
+.story-card--compact .story-card__cover {
+  aspect-ratio: 1;
+  --mark-max: 40cqi;
+}
+
+.story-card--compact .story-card__title {
+  font-size: 1rem;
+}
+
+.story-card--compact .story-card__meta {
+  justify-content: flex-start;
+}
+
+/* The feature: the cover fills the card, the words sit on its foot over a dark veil. On a
+   typographic cover the figure moves to the top, out of the words' way. */
+.story-card--feature {
+  position: relative;
+  display: block;
+  min-height: 100%;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.story-card--feature .story-card__cover {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  --mark-max: 34cqi;
+}
+
+.story-card--feature:hover .story-card__cover {
+  transform: none;
+}
+
+.story-card--feature .story-card__cover img {
+  transition: transform 0.9s var(--ease);
+}
+
+.story-card--feature:hover .story-card__cover img {
+  transform: scale(1.03);
+}
+
+.story-card--feature .story-cover--type .story-cover__mark {
+  top: 5cqi;
+  bottom: auto;
+}
+
+.story-card--feature::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(10, 10, 9, 0.9) 0%, rgba(10, 10, 9, 0.35) 42%, rgba(10, 10, 9, 0) 62%);
+  pointer-events: none;
+}
+
+.story-card--feature .story-card__body {
+  position: absolute;
+  z-index: 2;
+  left: clamp(18px, 3vw, 36px);
+  right: clamp(18px, 3vw, 36px);
+  bottom: clamp(18px, 3vw, 32px);
+  gap: 12px;
+  color: #f4efe6;
+}
+
+.story-card--feature .story-card__meta {
+  justify-content: flex-start;
+  gap: 14px;
+  color: #c9c1b3;
+}
+
+.story-card--feature .story-card__title {
+  max-width: 22ch;
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.story-card--feature .story-card__hook {
+  max-width: 52ch;
+  color: #ddd5c8;
+  font-size: 1rem;
+}
+
+/* On a tint the words need no veil: they take the tint's own ink. */
+.story-card--feature.is-type::after {
+  display: none;
+}
+
+.story-card--feature.is-type .story-card__body,
+.story-card--feature.is-type .story-card__hook,
+.story-card--feature.is-type .story-card__meta {
+  color: var(--feature-ink);
+}
+
+.story-card--feature.is-type .story-card__hook {
+  opacity: 0.8;
+}
+
+.story-card--feature.is-type .story-card__cat {
+  color: inherit;
+  font-weight: 500;
+}
+
+/* The museum label of a photo cover moves up, clear of the words. */
+.story-card--feature .story-cover__label {
+  left: auto;
+  right: 5cqi;
+  top: 5cqi;
+  bottom: auto;
+  width: min(36%, 240px);
+  translate: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-card--feature .story-card__cover img,
+  .story-card--feature:hover .story-card__cover img {
+    transition: none;
+    transform: none;
+  }
+
+  .story-card__cover,
+  .story-card:hover .story-card__cover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* ---------- shared grid ---------- */
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2.4vw, 32px);
+}
+
+@media (max-width: 900px) {
+  .stories-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .stories-grid {
+    grid-template-columns: 1fr;
+  }
+}

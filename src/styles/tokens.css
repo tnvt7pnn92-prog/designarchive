@@ -1,0 +1,123 @@
+:root {
+  /* ---------- colour ---------- */
+  --color-bg: #0e0e0e;
+  --color-bg-raised: #161513;
+  --color-bg-card: #18171580;
+  --color-border: #2c2a26;
+  --color-border-soft: #201f1c;
+  --color-text: #f4efe6;
+  --color-text-dim: #b8b0a2;
+  /* 5.1:1 on the page background and 4.8:1 on raised surfaces: the eyebrow type is small, so it
+     has to clear 4.5:1. The old #7a7368 only reached 4.1:1. */
+  --color-text-faint: #8a8276;
+  --color-accent: #c9a44d;
+  --color-accent-soft: #c9a44d33;
+  --color-teal: #6f9c95;
+  --color-teal-soft: #6f9c9533;
+
+  /* Surfaces, from the page up: each step sits one level closer to the viewer. */
+  --surface-0: var(--color-bg);
+  --surface-1: var(--color-bg-raised);
+  --surface-2: #1d1c19;
+  --surface-overlay: rgba(10, 10, 9, 0.72);
+  --surface-scrim: linear-gradient(0deg, rgba(10, 10, 9, 0.82) 0%, rgba(10, 10, 9, 0) 55%);
+
+  /* The cream band: the one light surface, used to break the rhythm of the dark pages.
+     Apply it with the .section-light class rather than colouring sections by hand. */
+  --light-bg: #f1ece2;
+  --light-bg-raised: #e2dccf;
+  --light-text: #17160f;
+  --light-text-dim: #4f4a3e;
+  --light-text-faint: #6f6858;
+  --light-border: rgba(23, 22, 15, 0.14);
+
+  /* The museum label: warm card stock with typewriter ink. Paper sits on the dark pages, so it is
+     a shade deeper than --light-bg; the ink clears 12:1 on it, the dim ink 6:1. */
+  --paper: #efe8da;
+  --paper-edge: #e2d8c4;
+  --paper-ink: #1b1916;
+  --paper-ink-dim: #5d574c;
+  --paper-rule: #cfc6b4;
+
+  /* The four kinds of place, always in the same colours: chips, dots, legend, calendar. */
+  --kind-market: #d9a441;
+  --kind-fair: #6fa69c;
+  --kind-shop: #d27a5f;
+  --kind-sale: #a98bdb;
+
+  /* The tints of the stories' typographic covers, each with the ink that reads on it (all pairs
+     clear AA for large type; most clear it for body text too). */
+  --tone-cream: #efe8da;
+  --tone-cream-ink: #17160f;
+  --tone-teal: #6f9c95;
+  --tone-teal-ink: #0e0e0e;
+  --tone-pink: #e2a3b4;
+  --tone-pink-ink: #2a1118;
+  --tone-gold: #c9a44d;
+  --tone-gold-ink: #17160f;
+  --tone-ink: #24211d;
+  --tone-ink-ink: #f2ecdf;
+  --tone-cloud: #e9e6e0;
+  --tone-cloud-ink: #2b2921;
+  --tone-orange: #d9793f;
+  --tone-orange-ink: #1a0f08;
+  --tone-brown: #6b4a2e;
+  --tone-brown-ink: #f4efe6;
+
+  /* ---------- type ---------- */
+  --font-serif: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* A fluid scale: every step grows with the viewport between a phone and a wide screen. */
+  --text-2xs: 0.66rem;
+  --text-xs: 0.72rem;
+  --text-sm: 0.85rem;
+  --text-base: 1rem;
+  --text-lg: clamp(1.1rem, 1rem + 0.35vw, 1.3rem);
+  --text-xl: clamp(1.35rem, 1.1rem + 1vw, 1.9rem);
+  --text-2xl: clamp(1.7rem, 1.25rem + 1.8vw, 2.7rem);
+  --text-3xl: clamp(2.2rem, 1.5rem + 3vw, 3.6rem);
+  --text-display: clamp(3rem, 1.6rem + 5.4vw, 6.4rem);
+
+  --tracking-caps: 0.14em;
+
+  /* ---------- space ---------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.5rem;
+  --space-6: 4rem;
+  --space-7: 6rem;
+  --space-8: 9rem;
+
+  /* ---------- shape ---------- */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.38);
+
+  /* ---------- stacking ---------- */
+  --z-raised: 2;
+  --z-header: 50;
+  --z-sheet: 80;
+  --z-overlay: 90;
+  --z-toast: 120;
+  --z-modal: 1000;
+
+  /* ---------- motion ---------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.2s;
+  --dur-base: 0.35s;
+  --dur-slow: 0.7s;
+  --dur-slower: 1.4s;
+
+  --max-width: 1440px;
+  --header-height: 76px;
+}

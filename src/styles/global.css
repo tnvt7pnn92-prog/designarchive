@@ -1,0 +1,396 @@
+@import "./tokens.css";
+@import "./fonts.css";
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  font-variation-settings: "SOFT" 30, "WONK" 0;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, select {
+  font-family: inherit;
+  color: inherit;
+}
+
+/* Fraunces is a variable font: optical sizing picks a finer display cut for big titles and a sturdier
+   text cut for small ones; a touch of SOFT rounds the terminals, WONK 0 keeps the letterforms calm. */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 30, "WONK" 0;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  text-wrap: balance;
+  margin: 0;
+}
+
+h3, h4 {
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+p {
+  margin: 0;
+}
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-text);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 6px;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-5);
+}
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+/* The typed line between two hairlines that opens a page, as in a museum catalogue. Several
+   spans spread across it; one sits on the left. */
+.catalog-rule {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-self: stretch;
+  gap: 4px 12px;
+  padding-block: 8px;
+  border-block: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1px solid var(--color-text);
+  background: transparent;
+  color: var(--color-text);
+  padding: 0.85rem 1.6rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--ease) 0.25s, color var(--ease) 0.25s, border-color var(--ease) 0.25s;
+}
+
+.btn:hover {
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+/* The pill buttons of the label pages. Gold is the one main action of a section (one per section
+   at most); ghost is the quieter way on. */
+.btn--gold,
+.btn--ghost {
+  gap: 10px;
+  min-height: 48px;
+  padding: 0 22px;
+  border-radius: var(--radius-pill);
+  font-size: 0.92rem;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.btn--gold {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--paper-ink);
+  font-weight: 500;
+}
+
+.btn--gold:hover {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--paper-ink);
+  filter: brightness(1.08);
+}
+
+.btn--ghost {
+  font-size: 0.88rem;
+}
+
+.btn--gold:focus-visible,
+.btn--ghost:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+.btn-arrow {
+  display: inline-block;
+  transition: transform var(--ease) 0.25s;
+}
+
+.btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform var(--ease) 0.3s;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* One focus ring for the whole site. Mouse clicks keep their quiet look; keyboard focus is
+   always visible, including on elements whose own styles remove the default outline. */
+:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 1px;
+}
+
+/* Keyboard users land here first and can jump past the header. */
+.skip-link {
+  position: absolute;
+  top: var(--space-2);
+  left: var(--space-2);
+  z-index: 200;
+  transform: translateY(-200%);
+  background: var(--color-bg-raised);
+  border: 1px solid var(--color-accent);
+  color: var(--color-text);
+  padding: 0.6rem 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: transform 0.2s var(--ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Anyone who asks the system for less motion gets the site without it. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
+}
+
+/* Holds the page height steady while a lazily loaded route arrives. */
+.route-loading {
+  min-height: 70vh;
+}
+
+main:focus {
+  outline: none;
+}
+
+/* ---------- the cream band ---------- */
+/* The one light surface of the site: sections that use it get the whole palette flipped, so
+   anything inside that reads --color-text and friends turns to ink without its own rules. */
+.section-light {
+  background: var(--light-bg);
+  color: var(--light-text);
+  --color-text: var(--light-text);
+  --color-text-dim: var(--light-text-dim);
+  --color-text-faint: var(--light-text-faint);
+  --color-border: var(--light-border);
+}
+
+.section-light .eyebrow {
+  color: var(--light-text-faint);
+}
+
+.section-light :focus-visible {
+  outline-color: var(--light-text);
+}
+
+/* ---------- scroll reveals ---------- */
+/* Only elements that start below the fold are hidden, by Reveals.jsx, and only while
+   IntersectionObserver is there to bring them back — nothing can stay invisible. */
+[data-reveal] {
+  transition:
+    opacity var(--dur-slow) var(--ease),
+    transform var(--dur-slow) var(--ease);
+}
+
+[data-reveal-state="pending"] {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+/* ---------- page transitions ---------- */
+/* The photo of a card grows into the photo of the piece page (both are named piece-hero for
+   the length of the transition); everything else cross-fades. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.28s;
+}
+
+::view-transition-group(piece-hero) {
+  animation-duration: 0.55s;
+  animation-timing-function: var(--ease);
+}
+
+::view-transition-old(piece-hero),
+::view-transition-new(piece-hero) {
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  [data-reveal-state="pending"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- touch screens: everything tappable at least 44 × 44 px ---------- */
+/* Only where the pointer is a finger, so the desktop keeps its compact controls. ":root" lifts
+   these above each component's own sizes (min-height also beats a fixed height). Links inside
+   running text are left alone, as WCAG 2.5.8 allows. */
+@media (pointer: coarse) {
+  :root input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"], [type="file"], [type="hidden"]),
+  :root select,
+  :root .btn,
+  :root .header-cta,
+  :root .archive-density button,
+  :root .archive-chip,
+  :root .mk-chip,
+  :root .nearby__city button,
+  :root .nearby__locate,
+  :root .nearby__origin button,
+  :root .nearby__ics,
+  :root .mb-pill,
+  :root .mb-seg button,
+  :root .mb-side__chips button,
+  :root .mb-side__create,
+  :root .auth-form__switch,
+  :root .auth-password__toggle {
+    min-height: 44px;
+  }
+
+  :root .mb-icon-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  /* Text links that stand on their own line: taller, still looking like text. */
+  :root .site-header__logo,
+  :root .link-underline,
+  :root .related-group__more,
+  :root .designer-page__more,
+  :root .story-page__back,
+  :root .notfound__links a,
+  :root .privacy-links a,
+  :root .designers-rest a,
+  :root .piece-crumbs a,
+  :root .designer-facts a {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  :root .link-underline::after {
+    bottom: calc(50% - 0.8em);
+  }
+
+  /* The links on a piece's label: thumb-sized too, with the rows closed up to make room. */
+  :root .piece-label .museum-label__rows a {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  :root .piece-label .museum-label__rows {
+    gap: 0;
+  }
+}

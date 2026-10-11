@@ -1,0 +1,144 @@
+.designers-page {
+  padding-bottom: var(--space-7);
+}
+
+.designers-hero {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  align-items: flex-start;
+}
+
+.designers-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.02;
+}
+
+.designers-hero p {
+  color: var(--color-text-dim);
+}
+
+.designers-search {
+  margin-top: var(--space-2);
+  width: min(360px, 100%);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  padding: 0.6rem 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+}
+
+.designers-search:focus {
+  outline: none;
+  border-color: var(--color-accent);
+}
+
+.designers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--space-4);
+}
+
+.designer-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  color: inherit;
+}
+
+/* One tall photo and two small ones beside it; two pieces split the box, one fills it. */
+.designer-card__media {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--color-bg-raised);
+}
+
+.designer-card__media > :first-child {
+  grid-row: span 2;
+}
+
+.designer-card__media[data-count="2"] {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+}
+
+.designer-card__media[data-count="2"] > :first-child {
+  grid-row: auto;
+}
+
+.designer-card__media[data-count="0"],
+.designer-card__media[data-count="1"] {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+.designer-card__media img {
+  object-fit: cover;
+  transition: transform 0.6s var(--ease), opacity 0.5s var(--ease);
+}
+
+.designer-card:hover .designer-card__media img {
+  transform: scale(1.04);
+}
+
+.designer-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.designer-card__body strong {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  font-weight: 400;
+}
+
+.designer-card:hover .designer-card__body strong {
+  color: var(--color-accent);
+}
+
+.designer-card__body span {
+  font-size: 0.78rem;
+  color: var(--color-text-faint);
+}
+
+.designers-rest {
+  padding-top: var(--space-6);
+}
+
+.designers-rest h2 {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  margin-bottom: var(--space-3);
+}
+
+.designers-rest ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  columns: 4 200px;
+  column-gap: var(--space-4);
+}
+
+.designers-rest li {
+  break-inside: avoid;
+  padding: 0.18rem 0;
+}
+
+.designers-rest a {
+  color: var(--color-text-dim);
+  font-size: 0.88rem;
+  transition: color 0.2s var(--ease);
+}
+
+.designers-rest a:hover {
+  color: var(--color-accent);
+}

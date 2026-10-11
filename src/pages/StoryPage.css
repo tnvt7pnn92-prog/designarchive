@@ -1,0 +1,361 @@
+/* One story, set for reading: the cover across the page, a single column of about 65 characters,
+   a drop cap, big typed numbers for the items, the pieces as museum labels, sources in mono. */
+.story-page {
+  padding-bottom: clamp(56px, 8vw, 96px);
+}
+
+.story-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: 2px;
+  pointer-events: none;
+}
+
+.story-progress span {
+  display: block;
+  height: 100%;
+  background: var(--color-accent);
+  transform-origin: left;
+}
+
+.story-page__label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.story-page__kicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+.story-page__kicker > span + span {
+  color: var(--color-text-faint);
+}
+
+/* ---------- the cover and the title ---------- */
+
+.story-page__top {
+  padding-top: clamp(20px, 3vw, 32px);
+}
+
+.story-page__back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.story-page__back:hover {
+  color: var(--color-accent);
+}
+
+.story-page__cover {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  max-height: 600px;
+  --mark-max: 26cqi;
+}
+
+.story-page__header {
+  max-width: calc(42rem + 2 * var(--space-5));
+  padding-top: clamp(28px, 4vw, 48px);
+}
+
+.story-page__header h1 {
+  margin-top: 16px;
+  font-family: var(--font-serif);
+  font-size: clamp(2.3rem, 5.4vw, 4.4rem);
+  font-weight: 350;
+  line-height: 1.03;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.story-page__hook {
+  margin-top: 18px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--color-text-dim);
+}
+
+.story-page__share {
+  margin-top: 24px;
+}
+
+/* ---------- the article ---------- */
+
+.story-page__body {
+  max-width: calc(42rem + 2 * var(--space-5));
+  padding-top: clamp(28px, 4vw, 44px);
+  font-size: clamp(1.06rem, 0.4vw + 1rem, 1.18rem);
+  line-height: 1.7;
+  color: var(--color-text);
+}
+
+.story-page__body > p + p {
+  margin-top: 1.1em;
+}
+
+.story-page__lede::first-letter {
+  float: left;
+  margin: 0.06em 0.1em 0 0;
+  font-family: var(--font-serif);
+  font-size: 4.2em;
+  font-weight: 350;
+  line-height: 0.8;
+  color: var(--color-accent);
+}
+
+.story-page__items {
+  margin-top: 40px;
+  padding: 0;
+  list-style: none;
+}
+
+.story-page__items li {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 16px;
+  padding-block: 28px;
+  border-top: 1px solid var(--color-border);
+}
+
+.story-page__num {
+  font-family: var(--font-mono);
+  font-size: 2.6rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--color-accent);
+}
+
+.story-page__items h2 {
+  margin-bottom: 8px;
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 450;
+  line-height: 1.2;
+}
+
+.story-page__items p {
+  color: var(--color-text-dim);
+}
+
+.story-page__outro {
+  margin-top: 32px;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid var(--color-accent);
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+/* The pieces, as labels a reader can act on. */
+.story-piece {
+  max-width: 380px;
+  margin-top: 20px;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* The name opens the piece page from the whole label; the two buttons sit above that link. */
+.story-piece {
+  position: relative;
+}
+
+.story-piece .museum-label__name a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.story-piece .museum-label__name a:focus-visible {
+  outline: none;
+}
+
+.story-piece .museum-label__name a:focus-visible::after {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.story-piece:hover .museum-label__name a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.story-piece__actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.story-piece__actions button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--paper-rule);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--paper-ink);
+  font: 400 0.8rem var(--font-sans);
+  cursor: pointer;
+}
+
+.story-piece__actions button:hover {
+  border-color: var(--paper-ink);
+}
+
+.story-piece__actions button[aria-pressed="true"] {
+  border-color: var(--paper-ink);
+  background: var(--paper-ink);
+  color: var(--paper);
+}
+
+.story-page__pieces {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+.story-page__labels {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 260px), 1fr));
+  gap: 0 18px;
+}
+
+.story-page__labels .story-piece {
+  max-width: none;
+}
+
+.story-page__sources {
+  margin-top: 48px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.story-page__sources ol {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  padding-left: 2.4em;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  line-height: 1.5;
+  color: var(--color-text-faint);
+}
+
+.story-page__sources a {
+  color: var(--color-text-dim);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.story-page__sources a:hover {
+  color: var(--color-accent);
+}
+
+/* ---------- after the article ---------- */
+
+.story-page__next {
+  margin-top: clamp(56px, 8vw, 96px);
+}
+
+.story-next {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(20px, 4vw, 48px);
+  align-items: center;
+  margin-top: 16px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-border);
+}
+
+.story-next__cover {
+  aspect-ratio: 16 / 10;
+  --mark-max: 40cqi;
+}
+
+.story-next__text {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.story-next strong {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.story-next:hover strong {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 6px;
+}
+
+.story-next__hook {
+  color: var(--color-text-dim);
+}
+
+.story-page__more {
+  margin-top: clamp(48px, 6vw, 72px);
+}
+
+.story-page__more .stories-grid {
+  margin-top: 20px;
+}
+
+.story-missing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  padding-block: 96px;
+}
+
+.story-missing p {
+  color: var(--color-text-dim);
+}
+
+@media (max-width: 760px) {
+  .story-page__cover {
+    aspect-ratio: 4 / 3;
+    --mark-max: 44cqi;
+  }
+
+  .story-next {
+    grid-template-columns: 1fr;
+  }
+
+  .story-page__items li {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .story-page__num {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,62 @@
+# Builds the site and publishes it on GitHub Pages at every push to main.
+#
+# One-time setup in the repository: Settings → Pages → Source: "GitHub Actions".
+# A project site is served under /<repository-name>/, which is what VITE_BASE below assumes.
+# For a user site (<name>.github.io) or a custom domain, set the repository variable
+# SITE_BASE to "/" (Settings → Secrets and variables → Actions → Variables), and for a custom
+# domain also SITE_URL (e.g. https://designarchive.example) so the sitemap and the link
+# previews point at it.
+#
+# It also runs every morning: the prerender only writes pages for stories already published,
+# so a daily build gives each new story (and the sitemap) its own page.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "30 4 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm test
+      - run: npm run build
+        env:
+          VITE_BASE: ${{ vars.SITE_BASE || format('/{0}/', github.event.repository.name) }}
+          SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
+          # Accounts: public values (the anon key is meant to be public). Leave the variables unset
+          # and the site works without accounts, saving in the browser.
+          VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

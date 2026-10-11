@@ -1,0 +1,274 @@
+/* "My collection": a wall of labels. Each piece is a framed card — its photo, its label pinned
+   over the photo's foot with the stamp of its state, and the quiet controls underneath. */
+.collection-page {
+  padding-bottom: var(--space-7);
+}
+
+.collection-hero {
+  padding-top: clamp(40px, 6vw, 72px);
+  padding-bottom: var(--space-4);
+}
+
+.collection-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
+  font-weight: 350;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.collection-hero > p {
+  margin-top: 18px;
+  max-width: 52ch;
+  color: var(--color-text-dim);
+}
+
+.collection-hero > .catalog-rule {
+  margin: 0 0 18px;
+  max-width: none;
+  color: var(--color-text-faint);
+}
+
+.collection-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.collection-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.collection-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-dim);
+  font: 400 0.82rem var(--font-sans);
+  cursor: pointer;
+}
+
+.collection-tabs button span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  opacity: 0.7;
+}
+
+.collection-tabs button[aria-pressed="true"] {
+  border-color: var(--color-text);
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.collection-bar .btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.collection-bar .btn:disabled:hover {
+  background: transparent;
+  color: var(--color-text);
+}
+
+.collection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+  gap: var(--space-4) 18px;
+  align-items: start;
+  padding-top: var(--space-5);
+}
+
+.collection-card {
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  background: var(--surface-1);
+}
+
+.collection-card__photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 2px 2px 0 0;
+  background: var(--surface-2);
+}
+
+.collection-card__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.collection-card .museum-label {
+  position: relative;
+  margin: -46px 14px 0;
+  padding-bottom: 2.6rem;
+}
+
+.collection-card:nth-child(odd) .museum-label {
+  transform: rotate(-0.5deg);
+}
+
+.collection-card:nth-child(even) .museum-label {
+  transform: rotate(0.4deg);
+}
+
+.collection-card .museum-label__name {
+  font-size: 1.3rem;
+}
+
+.collection-card .museum-label__name a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* The visitor's own lines, opened with "Edit": fields on the card, under the label. */
+.collection-card__fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 16px 14px 0;
+}
+
+.collection-card__fields label {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.collection-card__wide {
+  grid-column: 1 / -1;
+}
+
+.collection-card__fields span {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.collection-card__fields input {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-sm);
+  color-scheme: dark;
+}
+
+.collection-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 18px;
+  padding: 8px 14px 6px;
+}
+
+.collection-card__actions button {
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--color-text-dim);
+  font: 400 0.8rem var(--font-sans);
+  cursor: pointer;
+}
+
+.collection-card__actions button:hover {
+  color: var(--color-text);
+}
+
+.collection-card__actions button:last-child {
+  margin-left: auto;
+}
+
+.collection-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5) 0 var(--space-6);
+  color: var(--color-text-dim);
+}
+
+.collection-empty p {
+  max-width: 48ch;
+}
+
+.collection-empty__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.collection-example {
+  align-self: stretch;
+  margin: var(--space-4) 0 0;
+}
+
+/* Four labels pinned a little askew, as on the home page's wall. */
+.collection-example__wall {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: var(--space-4);
+}
+
+/* The whole label opens the piece: a thumb-sized target on a phone. */
+.collection-example__wall .museum-label__name a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.collection-example__wall .museum-label:nth-child(odd) {
+  transform: rotate(-0.6deg);
+}
+
+.collection-example__wall .museum-label:nth-child(even) {
+  transform: rotate(0.5deg) translateY(10px);
+}
+
+.collection-note {
+  padding-top: var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+.collection-markets {
+  margin-top: var(--space-6);
+}
+
+.collection-bar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+/* On a touch screen the search links on a label are thumb-sized. */
+@media (hover: none) {
+  .collection-card .museum-label__rows a {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+

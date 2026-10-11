@@ -1,0 +1,92 @@
+/* Wide screens: four columns shared by the groups, each group spanning its own cards (subgrid
+   keeps every card on the same column lines, whatever the grouping). */
+.related-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: var(--space-4);
+}
+
+.related-group {
+  grid-column: span var(--n);
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-template-rows: auto 1fr auto;
+  align-content: start;
+  min-width: 0;
+}
+
+.related-group__title {
+  grid-column: 1 / -1;
+  margin-bottom: var(--space-3);
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+/* A second group reads as the continuation of the row: a quieter heading. */
+.related-group + .related-group .related-group__title {
+  color: var(--color-text-dim);
+}
+
+.related-group__cards {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: var(--space-4);
+}
+
+.related-group__more {
+  grid-column: 1 / -1;
+  justify-self: start;
+  margin-top: var(--space-3);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.related-group__more:hover {
+  color: var(--color-accent);
+}
+
+/* Phones: one row that slides sideways, snapping card by card and bleeding to the screen's
+   edges, the group headings riding above their cards. */
+@media (max-width: 700px) {
+  .related-row {
+    display: flex;
+    gap: var(--space-3);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin: 0 calc(-1 * var(--space-4));
+    padding: 0 var(--space-4) var(--space-1);
+    scroll-padding-inline: var(--space-4);
+  }
+
+  .related-row::-webkit-scrollbar {
+    display: none;
+  }
+
+  .related-group {
+    display: flex;
+    flex-direction: column;
+    flex: none;
+  }
+
+  .related-group__title {
+    font-size: 1.25rem;
+    max-width: calc(var(--n) * (44vw + var(--space-3)) - var(--space-3));
+  }
+
+  .related-group__cards {
+    display: flex;
+    gap: var(--space-3);
+  }
+
+  .related-group__cards > * {
+    flex: 0 0 44vw;
+    scroll-snap-align: start;
+  }
+}

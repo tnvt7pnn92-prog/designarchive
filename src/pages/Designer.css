@@ -1,0 +1,112 @@
+.designer-page {
+  padding-bottom: var(--space-7);
+}
+
+.designer-hero {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.designer-hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+  line-height: 1.02;
+}
+
+.designer-hero__count {
+  color: var(--color-text-dim);
+}
+
+.designer-facts {
+  display: grid;
+  gap: var(--space-2);
+  border-top: 1px solid var(--color-border-soft);
+  padding-top: var(--space-3);
+  margin-top: var(--space-3);
+}
+
+.designer-facts > div {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr);
+  gap: var(--space-3);
+  align-items: baseline;
+}
+
+.designer-facts dt {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.designer-facts dd {
+  margin: 0;
+}
+
+.designer-facts__inline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem 0.9rem;
+}
+
+.designer-facts__inline a {
+  color: var(--color-text);
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.designer-facts__inline a:hover {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent-soft);
+}
+
+.designer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: var(--space-4);
+}
+
+.designer-page__more {
+  display: inline-block;
+  margin-top: var(--space-5);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  transition: color 0.2s var(--ease);
+}
+
+.designer-page__more:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 880px) {
+  .designer-facts > div {
+    grid-template-columns: 7rem minmax(0, 1fr);
+  }
+}
+
+.designer-stories {
+  padding-top: var(--space-6);
+}
+
+.designer-stories h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  margin-bottom: var(--space-3);
+}
+
+.designer-stories__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-4);
+}
+
+.designer-page__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}

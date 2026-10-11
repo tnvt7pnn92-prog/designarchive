@@ -1,0 +1,241 @@
+/* The sheets are drawn on paper colours on screen too, so what you see is what prints. */
+.print-page {
+  padding-bottom: var(--space-7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.print-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-5);
+  width: 100%;
+}
+
+.print-toolbar p {
+  flex: 1 1 260px;
+  font-size: var(--text-sm);
+  color: var(--color-text-dim);
+}
+
+.print-back,
+.print-logo {
+  min-height: 42px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: 0;
+  color: var(--color-text-dim);
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.print-logo {
+  position: relative;
+  padding: 0 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+}
+
+.print-logo input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.print-go {
+  min-height: 46px;
+  padding: 0 1.5rem;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.print-sheet {
+  width: min(1100px, calc(100% - 2 * var(--space-3)));
+  aspect-ratio: 297 / 210;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 36px 44px;
+  background: #fbf8f2;
+  color: #17160f;
+  box-shadow: var(--shadow-lg);
+  overflow: hidden;
+}
+
+.print-sheet__head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid rgba(23, 22, 15, 0.15);
+  padding-bottom: 12px;
+}
+
+.print-sheet__head h1 {
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.print-sheet__head p {
+  font-size: 0.8rem;
+  color: #6f6858;
+}
+
+.print-sheet__brand {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+.print-sheet__logo {
+  max-height: 44px;
+  max-width: 160px;
+  object-fit: contain;
+}
+
+.print-sheet__board {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  object-fit: contain;
+}
+
+.print-sheet__foot {
+  font-size: 0.7rem;
+  color: #6f6858;
+}
+
+/* The pieces of the board as museum labels, three across. */
+.print-labels {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  align-content: start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.print-label {
+  padding: 10px 12px;
+  border: 1px solid rgba(23, 22, 15, 0.18);
+  background: #efe8da;
+  break-inside: avoid;
+}
+
+.print-label__line {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5d574c;
+}
+
+.print-label__name {
+  margin-top: 4px;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.15;
+}
+
+.print-label__by {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.78rem;
+  color: #5d574c;
+}
+
+.print-label dl {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2px 10px;
+  margin: 8px 0 0;
+  padding-top: 6px;
+  border-top: 1px solid #cfc6b4;
+  font-size: 0.72rem;
+}
+
+.print-label dt {
+  font-family: var(--font-mono);
+  font-size: 0.56rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5d574c;
+}
+
+.print-label dd {
+  margin: 0;
+}
+.print-sheet--list,
+.print-sheet--credits {
+  aspect-ratio: auto;
+  min-height: 0;
+}
+
+.print-sheet--credits h2 {
+  font-size: 1.2rem;
+}
+
+.print-sheet--credits ol {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 6px;
+  font-size: 0.75rem;
+}
+
+.print-url {
+  color: #6f6858;
+  word-break: break-all;
+}
+
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  body {
+    background: #fff !important;
+  }
+
+  .site-header,
+  .site-footer,
+  .print-toolbar,
+  .toaster,
+  .skip-link {
+    display: none !important;
+  }
+
+  .print-page {
+    padding: 0;
+    gap: 0;
+  }
+
+  .print-sheet {
+    width: 297mm;
+    height: 210mm;
+    aspect-ratio: auto;
+    box-shadow: none;
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .print-sheet--credits {
+    height: auto;
+    page-break-after: auto;
+  }
+}

@@ -1,0 +1,110 @@
+.error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-8);
+  min-height: 60vh;
+}
+
+.error-state h1 {
+  font-family: var(--font-serif);
+  font-size: var(--text-3xl);
+  line-height: 1.05;
+}
+
+.error-state p {
+  color: var(--color-text-dim);
+  max-width: 50ch;
+}
+
+.error-state__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-2);
+}
+
+.error-state__home {
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.7rem 0 2px;
+}
+
+.error-state__home:hover {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+/* ---------- route skeleton ---------- */
+/* What a page looks like while its code arrives: a title and a grid of empty frames. */
+.route-skeleton {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-7);
+  min-height: 70vh;
+}
+
+.route-skeleton__line,
+.route-skeleton__card {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: var(--surface-1);
+}
+
+.route-skeleton__line::after,
+.route-skeleton__card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, var(--surface-2) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: skeleton-sheen 1.6s var(--ease) infinite;
+}
+
+.route-skeleton__line {
+  height: 0.8rem;
+  width: 8rem;
+  margin-bottom: var(--space-3);
+}
+
+.route-skeleton__line.is-title {
+  height: 2.6rem;
+  width: min(26rem, 70%);
+  margin-bottom: var(--space-6);
+}
+
+.route-skeleton__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: var(--space-4) var(--space-3);
+}
+
+.route-skeleton__card {
+  aspect-ratio: 4 / 5;
+}
+
+/* It only appears when loading takes a moment, so a fast page never flashes it. */
+.route-skeleton {
+  animation: skeleton-appear 0.01s linear 0.25s both;
+}
+
+@keyframes skeleton-appear {
+  from {
+    visibility: hidden;
+  }
+}
+
+@keyframes skeleton-sheen {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

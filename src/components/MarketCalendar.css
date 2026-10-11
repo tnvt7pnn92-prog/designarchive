@@ -1,0 +1,205 @@
+/* The month: seven columns of days, the recurring markets written in each. */
+.mk-cal {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.mk-cal__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+}
+
+.mk-cal h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.mk-cal__nav {
+  display: flex;
+  gap: 6px;
+}
+
+.mk-cal__nav button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  background: none;
+  color: var(--color-text);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.mk-cal__nav button:hover {
+  border-color: var(--color-text-dim);
+}
+
+.mk-cal__note {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.mk-cal__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  margin-top: 24px;
+}
+
+.mk-cal__dh {
+  padding: 6px 8px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.mk-cal__cell {
+  min-width: 0;
+  min-height: 92px;
+  padding: 6px;
+  border-radius: 2px;
+  background: var(--surface-1);
+}
+
+.mk-cal__cell.is-off {
+  background: transparent;
+}
+
+.mk-cal__cell.is-past {
+  opacity: 0.55;
+}
+
+.mk-cal__cell.is-today {
+  outline: 1px solid var(--color-accent);
+}
+
+.mk-cal__day {
+  display: block;
+  padding: 2px;
+  line-height: 1.4;
+  border: 0;
+  background: none;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-faint);
+  cursor: default;
+}
+
+.mk-cal__cell.is-weekend .mk-cal__day {
+  color: var(--color-text-dim);
+}
+
+.mk-cal__event {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 3px 5px;
+  border: 0;
+  border-radius: 2px;
+  background: color-mix(in srgb, var(--kind) 18%, transparent);
+  color: var(--color-text);
+  font: 400 0.7rem/1.25 var(--font-sans);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.mk-cal__event:hover {
+  background: color-mix(in srgb, var(--kind) 32%, transparent);
+}
+
+.mk-cal__day-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  list-style: none;
+  border-left: 2px solid var(--color-accent);
+  background: var(--surface-1);
+  font-size: 0.9rem;
+}
+
+.mk-cal__day-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+}
+
+.mk-cal__day-list span:last-child {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-faint);
+}
+
+.mk-cal__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--kind);
+}
+
+.mk-cal__foot {
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--color-text-faint);
+}
+
+/* On a phone the names become dots, and the day itself is the button that lists them. */
+@media (max-width: 640px) {
+  .mk-cal__cell {
+    min-height: 60px;
+    padding: 4px;
+  }
+
+  .mk-cal__grid {
+    gap: 2px;
+  }
+
+  .mk-cal__cell {
+    padding: 0;
+  }
+
+  .mk-cal__day {
+    width: 100%;
+    min-height: 44px;
+    text-align: center;
+  }
+
+  button.mk-cal__day {
+    cursor: pointer;
+  }
+
+  .mk-cal__event {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin: 0 0 4px 4px;
+    padding: 0;
+    border-radius: 50%;
+    background: var(--kind);
+    font-size: 0;
+    pointer-events: none;
+  }
+}
+
+/* On the narrowest phones the grid borrows the page's margin, so each day stays a 44px target. */
+@media (max-width: 380px) {
+  .mk-cal__grid {
+    gap: 1px;
+    margin-inline: -8px;
+  }
+}

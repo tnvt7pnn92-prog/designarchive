@@ -1,0 +1,860 @@
+/* The Markets page: a hunt planner. A sentence of filters, a line about the weekend, then cream
+   tickets — a tear-off stub with the next date — beside a map of the city that stays in view. */
+
+.markets-page {
+  padding-bottom: var(--space-7);
+}
+
+.mk-intro {
+  padding-top: clamp(40px, 6vw, 72px);
+  padding-bottom: 24px;
+}
+
+.mk-note {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.mk-intro h1 {
+  margin-top: 14px;
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
+  font-weight: 350;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.mk-intro h1 em {
+  font-style: italic;
+  color: var(--color-accent);
+}
+
+/* ---------- the sentence ---------- */
+
+.mk-sentence {
+  margin-top: 22px;
+  max-width: 60ch;
+  font-family: var(--font-serif);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  line-height: 1.8;
+  color: var(--color-text-dim);
+}
+
+.mk-pick {
+  position: relative;
+  display: inline-block;
+}
+
+.mk-pick__button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 2px;
+  border: 0;
+  border-bottom: 1.5px dashed var(--color-accent);
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  font-style: italic;
+  cursor: pointer;
+}
+
+.mk-pick__button::after {
+  content: "▾";
+  font-size: 0.7em;
+  font-style: normal;
+  color: var(--color-accent);
+}
+
+.mk-pick__menu {
+  position: absolute;
+  z-index: var(--z-overlay);
+  top: calc(100% + 6px);
+  left: 0;
+  display: grid;
+  gap: 2px;
+  width: max-content;
+  min-width: 220px;
+  max-width: min(320px, calc(100vw - 32px));
+  max-height: min(420px, 60vh);
+  overflow-y: auto;
+  padding: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  box-shadow: var(--shadow-lg);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.3;
+}
+
+.mk-pick__option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 3px;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mk-pick__option:hover,
+.mk-pick__option:focus-visible {
+  outline: none;
+  background: var(--surface-1);
+}
+
+.mk-pick__option[aria-pressed="true"] {
+  color: var(--color-accent);
+}
+
+.mk-pick__option input {
+  accent-color: var(--color-accent);
+}
+
+.mk-pick__count {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-faint);
+}
+
+.mk-pick__search {
+  display: flex;
+  gap: 6px;
+  padding: 6px 4px 2px;
+  border-top: 1px solid var(--color-border);
+}
+
+.mk-pick__search input {
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+  font: inherit;
+}
+
+.mk-pick__search button {
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.mk-pick__note {
+  padding: 4px 10px;
+  font-size: 0.78rem;
+  color: var(--color-text-faint);
+}
+
+/* ---------- chips and the summary ---------- */
+
+.mk-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 22px;
+}
+
+.mk-chips__group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mk-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-text-dim);
+  font: 400 0.82rem var(--font-sans);
+  cursor: pointer;
+}
+
+.mk-chip[aria-pressed="true"] {
+  border-color: var(--color-text);
+  background: var(--color-text);
+  color: var(--color-bg);
+}
+
+.mk-chip__n {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  opacity: 0.7;
+}
+
+.mk-dot {
+  display: inline-block;
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--kind);
+}
+
+.mk-summary {
+  margin-top: 26px;
+  max-width: 72ch;
+  padding: 16px 18px;
+  border-left: 2px solid var(--color-accent);
+  background: var(--surface-1);
+  font-size: 0.95rem;
+  color: var(--color-text-dim);
+}
+
+.mk-summary b {
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* ---------- list and map ---------- */
+
+.mk-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 28px;
+  align-items: start;
+  padding-top: 28px;
+}
+
+.mk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+}
+
+.mk-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mk-group + .mk-group {
+  margin-top: 18px;
+}
+
+.mk-group__title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.mk-group__title span {
+  margin-left: 6px;
+  opacity: 0.7;
+}
+
+.mk-empty {
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+.mk-empty {
+  padding: var(--space-4) 0;
+  font-size: var(--text-base);
+  color: var(--color-text-dim);
+}
+
+
+/* The ticket: a cream stub (the date) torn from the body along a dotted line, with two
+   half-moons cut out of the edges. */
+.mk-ticket {
+  --stub: 96px;
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--stub) minmax(0, 1fr);
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--paper-ink);
+  transition:
+    transform var(--dur-base) var(--ease),
+    box-shadow var(--dur-base) var(--ease);
+}
+
+.mk-ticket::before,
+.mk-ticket::after {
+  content: "";
+  position: absolute;
+  left: calc(var(--stub) - 8px);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+
+.mk-ticket::before {
+  top: -8px;
+}
+
+.mk-ticket::after {
+  bottom: -8px;
+}
+
+.mk-ticket.is-hot,
+.mk-ticket:hover {
+  transform: translateX(4px);
+  box-shadow: -4px 0 0 var(--kind);
+}
+
+/* Picked on the map: lifted over the others, ringed in gold, while the rest of the list steps
+   back (each comes forward again under the pointer). */
+.mk-ticket.is-selected {
+  z-index: 2;
+  transform: translateX(6px) scale(1.015);
+  box-shadow:
+    -5px 0 0 var(--kind),
+    0 0 0 2px var(--color-accent),
+    0 22px 50px rgba(0, 0, 0, 0.6);
+  animation: mk-picked 0.45s var(--ease);
+}
+
+.mk-list .mk-ticket {
+  transition:
+    transform var(--dur-base) var(--ease),
+    box-shadow var(--dur-base) var(--ease),
+    opacity var(--dur-base) var(--ease);
+}
+
+.mk-list.has-selection .mk-ticket:not(.is-selected, :hover, :focus-within) {
+  opacity: 0.42;
+}
+
+@keyframes mk-picked {
+  from {
+    transform: translateX(6px) scale(0.97);
+    box-shadow:
+      -5px 0 0 var(--kind),
+      0 0 0 10px rgba(201, 164, 77, 0.35),
+      0 22px 50px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* The same ticket as a card over the full-screen map, with a way to close it. */
+.mk-map__card {
+  position: absolute;
+  left: 12px;
+  bottom: 64px;
+  z-index: 4;
+  width: min(420px, calc(100% - 24px));
+  animation: mk-card-in 0.25s var(--ease);
+}
+
+.mk-map__card .mk-ticket {
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.55);
+}
+
+.mk-ticket.is-card .mk-ticket__meta {
+  padding-right: 34px;
+}
+
+.mk-ticket__close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--paper-ink-dim);
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mk-ticket__close:hover {
+  color: var(--paper-ink);
+  background: rgba(27, 25, 22, 0.06);
+}
+
+@keyframes mk-card-in {
+  from {
+    opacity: 0;
+    translate: 0 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  .mk-map__card {
+    top: 64px;
+    bottom: auto;
+    left: 8px;
+    width: calc(100% - 16px);
+  }
+}
+
+.mk-ticket__stub {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  padding: 16px 8px;
+  border-right: 1.5px dashed var(--paper-rule);
+  text-align: center;
+}
+
+.mk-ticket__dow,
+.mk-ticket__mon {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-ink-dim);
+}
+
+.mk-ticket__day {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.mk-ticket__word {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.mk-ticket__body {
+  min-width: 0;
+  padding: 14px 18px;
+}
+
+.mk-ticket__meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper-ink-dim);
+}
+
+.mk-ticket__kind {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mk-ticket__kind::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--kind);
+}
+
+.mk-ticket h3 {
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 450;
+  line-height: 1.1;
+}
+
+.mk-ticket__desc {
+  margin-top: 4px;
+  font-size: 0.84rem;
+  color: var(--paper-ink-dim);
+}
+
+.mk-ticket__when {
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--paper-ink);
+}
+
+.mk-ticket__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.mk-ticket__actions button,
+.mk-ticket__actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1px solid #cbbfa8;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--paper-ink);
+  font: 400 0.76rem var(--font-sans);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.mk-ticket__actions button:hover,
+.mk-ticket__actions a:hover {
+  border-color: var(--paper-ink);
+}
+
+.mk-mapbox {
+  position: sticky;
+  top: calc(var(--header-height) + 16px);
+  min-width: 0;
+}
+
+.mk-map {
+  position: relative;
+  height: min(620px, calc(100vh - var(--header-height) - 80px));
+  border-radius: var(--radius-md);
+  background: #1e1b17;
+}
+
+.mk-map > .markets-globe,
+.mk-map > div:first-child {
+  height: 100%;
+}
+
+.mk-map__wait {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+/* World view and full screen, top right; the map's own zoom stays top left. */
+.mk-map__tools {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.mk-map__world {
+  min-height: 36px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: rgba(15, 14, 12, 0.85);
+  color: var(--color-text-dim);
+  font: 400 0.76rem var(--font-sans);
+  cursor: pointer;
+}
+
+.mk-map__world:hover {
+  color: var(--color-text);
+}
+
+/* "Search this area": once the map has been moved by hand, centred under the tools. */
+.mk-map__here {
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  z-index: 3;
+  max-width: calc(100% - 24px);
+  min-height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: #16140f;
+  font: 500 0.82rem var(--font-sans);
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  transform: translateX(-50%);
+  cursor: pointer;
+  animation: mk-here-in 0.25s var(--ease) both;
+}
+
+.mk-map__here:hover {
+  filter: brightness(1.08);
+}
+
+@keyframes mk-here-in {
+  from {
+    opacity: 0;
+    translate: 0 -6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mk-map__here {
+    animation: none;
+  }
+}
+
+/* The kinds, on the map itself: on the globe and in full screen the chips above are out of view. */
+.mk-map__kinds {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  pointer-events: none;
+}
+
+.mk-map__kinds .mk-chip {
+  min-height: 36px;
+  padding: 0 12px;
+  background: rgba(15, 14, 12, 0.85);
+  font-size: 0.76rem;
+  pointer-events: auto;
+}
+
+.mk-map__kinds .mk-chip[aria-pressed="true"] {
+  background: var(--color-text);
+}
+
+/* With the kinds along the bottom, the globe's hint moves above them. */
+.mk-map:has(.mk-map__kinds) .mk-map__hint {
+  bottom: 60px;
+}
+
+/* A phone's small map has no room for them: the chips are just above it. Full screen has. */
+@media (max-width: 760px) {
+  .mk-map:not(.is-full) .mk-map__kinds {
+    display: none;
+  }
+
+  .mk-map:not(.is-full) .mk-map__hint {
+    bottom: 10px;
+  }
+}
+
+/* Full screen: the browser's own, or the map covering the window where there is none. */
+.mk-map.is-full {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  height: auto;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+
+/* The sticky column is a layer of its own: in full screen it has to rise above the page too. */
+.mk-mapbox:has(.mk-map.is-full) {
+  z-index: var(--z-modal);
+}
+
+.mk-map.is-full .city-map {
+  border: 0;
+  border-radius: 0;
+}
+
+html:has(.mk-map.is-full) {
+  overflow: hidden;
+}
+
+.mk-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: var(--color-text-faint);
+}
+
+.mk-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mk-ticket,
+  .mk-list .mk-ticket {
+    transition: none;
+  }
+
+  .mk-ticket.is-hot,
+  .mk-ticket.is-selected,
+  .mk-ticket:hover {
+    transform: none;
+  }
+
+  .mk-ticket.is-selected,
+  .mk-map__card {
+    animation: none;
+  }
+}
+
+/* ---------- phones and tablets: the map on top, compact ---------- */
+
+@media (max-width: 900px) {
+  .mk-split {
+    grid-template-columns: 1fr;
+  }
+
+  .mk-mapbox {
+    position: relative;
+    top: 0;
+    order: -1;
+  }
+
+  .mk-map {
+    height: auto;
+    aspect-ratio: 4 / 3;
+  }
+}
+
+@media (max-width: 420px) {
+  .mk-ticket {
+    --stub: 78px;
+  }
+
+  .mk-ticket__day {
+    font-size: 1.8rem;
+  }
+
+  .mk-ticket__body {
+    padding: 12px 14px;
+  }
+}
+
+.mk-map__hint {
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+  z-index: 2;
+  max-width: calc(100% - 24px);
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.04em;
+  color: var(--color-text-faint);
+  pointer-events: none;
+}
+
+.mk-ticket h3 a {
+  color: inherit;
+}
+
+.mk-ticket h3 a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+/* ---------- other cities ---------- */
+
+.mk-cities {
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+
+.mk-cities h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 400;
+}
+
+.mk-cities ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+  padding: 0;
+  list-style: none;
+}
+
+.mk-cities a {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  background: var(--surface-1);
+  transition: border-color var(--dur-fast) var(--ease);
+}
+
+.mk-cities a:hover {
+  border-color: var(--color-text-dim);
+}
+
+.mk-cities b {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+.mk-cities span {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--color-text-faint);
+}
+
+/* Thumb-sized actions and map controls on a touch screen. */
+@media (hover: none) {
+  .mk-ticket__actions button,
+  .mk-ticket__actions a {
+    min-height: 44px;
+  }
+
+  .mk-ticket__close {
+    width: 44px;
+    height: 44px;
+    top: 0;
+    right: 0;
+  }
+
+  .mk-map__world,
+  .mk-map__here,
+  .mk-map__kinds .mk-chip {
+    min-height: 44px;
+  }
+
+  /* On a touch screen in full screen the kinds take the bottom of the map; the hint goes. */
+  .mk-map.is-full .mk-map__hint {
+    display: none;
+  }
+}
+
+/* The whole ticket opens the place's page; its buttons stay on top. */
+.mk-ticket h3 a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.mk-ticket__actions {
+  position: relative;
+  z-index: 1;
+}
+
+@media (hover: none) {
+  .mk-pick__button {
+    min-height: 44px;
+  }
+}

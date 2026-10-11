@@ -1,0 +1,7 @@
+/* The room fills the window (the site's header and footer are not drawn on this route). */
+.moodboard-page {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: var(--color-bg);
+}

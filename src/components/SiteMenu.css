@@ -1,0 +1,501 @@
+.site-menu {
+  position: relative;
+}
+
+/* ---------- the button: lines + avatar in one pill ---------- */
+.site-menu__button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0 0.3rem 0 0.8rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease);
+}
+
+.site-menu__button:hover,
+.site-menu__button.is-open {
+  border-color: var(--color-text-dim);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.site-menu__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 16px;
+}
+
+.site-menu__lines span {
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform var(--dur-base) var(--ease);
+}
+
+/* The lines cross into an X while the menu is open. */
+.site-menu__button.is-open .site-menu__lines span:first-child {
+  transform: translateY(2.75px) rotate(45deg);
+}
+
+.site-menu__button.is-open .site-menu__lines span:last-child {
+  transform: translateY(-2.75px) rotate(-45deg);
+}
+
+.site-menu__avatar {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--surface-2);
+  color: var(--color-text-dim);
+}
+
+.site-menu__avatar.has-initial {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.site-menu__badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  padding: 0 0.3rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: 0.58rem;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+  pointer-events: none;
+}
+
+/* ---------- the panel: a dropdown on desktop ---------- */
+.site-menu__panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: var(--z-overlay);
+  width: 320px;
+  max-height: calc(100dvh - var(--header-height) - 24px);
+  overflow-y: auto;
+  padding: var(--space-2) 0;
+  background: var(--surface-1);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  outline: none;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    opacity var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease),
+    visibility 0s linear var(--dur-fast);
+}
+
+.site-menu__panel.is-open {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+}
+
+.site-menu__head {
+  padding: 0.6rem 1rem 0.9rem;
+}
+
+.site-menu__who {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.3rem 0.75rem;
+}
+
+.site-menu__who-avatar {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: 600;
+}
+
+.site-menu__who p {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+
+.site-menu__who p > * {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.site-menu__who strong {
+  color: var(--color-text);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.site-menu__note {
+  font-size: var(--text-xs);
+  color: var(--color-text-faint);
+}
+
+/* Sign up / sign in: in the bar on larger screens, here on phones. */
+.site-menu__auth {
+  display: none;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+  margin-top: var(--space-3);
+}
+
+.site-menu__signup,
+.site-menu__signin {
+  min-height: 48px;
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.site-menu__signup {
+  background: var(--color-text);
+  color: var(--color-bg);
+  border: 0;
+}
+
+.site-menu__signin {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+/* The sections: in the bar on desktop, here on tablets and phones. */
+.site-menu__sections {
+  display: none;
+}
+
+.site-menu__view {
+  animation: site-menu-view var(--dur-fast) var(--ease);
+}
+
+@keyframes site-menu-view {
+  from {
+    opacity: 0;
+    transform: translateX(8px);
+  }
+}
+
+.site-menu__panel.is-lang .site-menu__view {
+  animation-name: site-menu-view-in;
+}
+
+@keyframes site-menu-view-in {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+}
+
+.site-menu__group {
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.site-menu__label {
+  padding: 0.45rem 1rem 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.site-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 1rem;
+  background: none;
+  border: 0;
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--text-sm);
+  text-align: left;
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.site-menu__item:hover,
+.site-menu__item:focus-visible {
+  background: var(--surface-2);
+  outline: none;
+}
+
+.site-menu__icon {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+}
+
+.site-menu__item:hover .site-menu__icon {
+  color: var(--color-text-dim);
+}
+
+.site-menu__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.site-menu__value {
+  color: var(--color-text-faint);
+  font-size: var(--text-xs);
+}
+
+.site-menu__chevron {
+  flex-shrink: 0;
+  color: var(--color-text-faint);
+}
+
+.site-menu__count {
+  min-width: 1.4rem;
+  padding: 0 0.4rem;
+  border-radius: var(--radius-pill);
+  background: var(--surface-2);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1.4rem;
+  text-align: center;
+  color: var(--color-text-dim);
+}
+
+/* The language list: it takes the menu's place, with the way back on top. */
+.site-menu__back {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 1rem;
+  margin-bottom: 0.3rem;
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--color-border-soft);
+  color: var(--color-text);
+  font: 500 var(--text-sm) var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+}
+
+.site-menu__back:hover .site-menu__chevron,
+.site-menu__back:focus-visible .site-menu__chevron {
+  color: var(--color-accent);
+}
+
+.site-menu__langs {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0.3rem;
+}
+
+.site-menu__lang {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto 18px;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 1rem;
+  background: none;
+  border: 0;
+  color: var(--color-text-dim);
+  font: inherit;
+  font-size: var(--text-sm);
+  text-align: left;
+  cursor: pointer;
+}
+
+.site-menu__lang:hover,
+.site-menu__lang:focus-visible {
+  background: var(--surface-2);
+  color: var(--color-text);
+  outline: none;
+}
+
+.site-menu__lang[aria-checked="true"] {
+  color: var(--color-text);
+}
+
+.site-menu__lang-code {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  color: var(--color-text-faint);
+}
+
+.site-menu__check {
+  visibility: hidden;
+  color: var(--color-accent);
+}
+
+.site-menu__lang[aria-checked="true"] .site-menu__check {
+  visibility: visible;
+}
+/* ---------- tablets and phones: a full-screen sheet under the bar ---------- */
+@media (max-width: 1100px) {
+  /* The header's blur makes it the containing block, hence the explicit height. */
+  .site-menu__panel {
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    width: auto;
+    height: calc(100dvh - var(--header-height));
+    max-height: none;
+    padding: var(--space-4) max(var(--space-4), calc((100% - 640px) / 2)) var(--space-7);
+    background: var(--color-bg);
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    transform: none;
+  }
+
+  .site-menu__head,
+  .site-menu__label,
+  .site-menu__item,
+  .site-menu__back,
+  .site-menu__lang {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .site-menu__item {
+    min-height: 48px;
+    font-size: var(--text-base);
+  }
+
+  .site-menu__item:hover,
+  .site-menu__item:focus-visible {
+    background: none;
+    color: var(--color-accent);
+  }
+
+  .site-menu__lang,
+  .site-menu__back {
+    min-height: 52px;
+    font-size: var(--text-base);
+  }
+
+  .site-menu__lang:hover,
+  .site-menu__lang:focus-visible {
+    background: none;
+  }
+
+  .site-menu__sections {
+    display: block;
+    margin-bottom: var(--space-4);
+  }
+
+  .site-menu__section {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--color-border-soft);
+    font-family: var(--font-serif);
+    font-size: var(--text-2xl);
+    letter-spacing: -0.01em;
+    color: var(--color-text);
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity var(--dur-slow) var(--ease),
+      transform var(--dur-slow) var(--ease),
+      color var(--dur-fast) var(--ease);
+  }
+
+  .site-menu__section:last-child {
+    border-bottom: 0;
+  }
+
+  .site-menu__panel.is-open .site-menu__section {
+    opacity: 1;
+    transform: none;
+    transition-delay: calc(0.05s + var(--i) * 0.05s);
+  }
+
+  .site-menu__section.is-active {
+    color: var(--color-accent);
+  }
+
+  .site-menu__index {
+    min-width: 1.6rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-2xs);
+    letter-spacing: var(--tracking-caps);
+    color: var(--color-text-faint);
+  }
+}
+
+/* With the sheet open, what it already offers leaves the bar and the page. */
+@media (max-width: 1100px) {
+  .has-site-menu .site-header .header-signin,
+  .has-site-menu .site-header .header-cta {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .site-menu__button {
+    gap: 0.45rem;
+    padding-left: 0.65rem;
+  }
+
+  .site-menu__avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .site-menu__auth {
+    display: grid;
+  }
+}
+
+@media (max-width: 400px) {
+  .site-menu__button {
+    gap: 0.35rem;
+    padding: 0 0.2rem 0 0.55rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-menu__section {
+    transform: none;
+  }
+
+  .site-menu__view {
+    animation: none;
+  }
+}

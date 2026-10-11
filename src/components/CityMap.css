@@ -1,0 +1,90 @@
+.city-map {
+  position: relative;
+  height: 100%;
+  min-height: 260px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #1e1b17;
+}
+
+.city-map__canvas {
+  position: absolute;
+  inset: 0;
+}
+
+.city-map__failed {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-faint);
+}
+
+/* MapLibre's own controls, in the site's colours. */
+.city-map .maplibregl-ctrl-group {
+  background: rgba(15, 14, 12, 0.85);
+  border: 1px solid var(--color-border);
+  box-shadow: none;
+}
+
+.city-map .maplibregl-ctrl-group button {
+  width: 36px;
+  height: 36px;
+}
+
+.city-map .maplibregl-ctrl-group button + button {
+  border-top-color: var(--color-border);
+}
+
+.city-map .maplibregl-ctrl-icon {
+  filter: invert(0.9) sepia(0.2);
+}
+
+.city-map .maplibregl-ctrl-attrib {
+  background: rgba(15, 14, 12, 0.8);
+  color: var(--color-text-faint);
+  font-size: 0.66rem;
+}
+
+.city-map .maplibregl-ctrl-attrib a {
+  color: var(--color-text-dim);
+}
+
+.city-map .maplibregl-ctrl-attrib-button {
+  filter: invert(0.9);
+}
+
+@media (hover: none) {
+  .city-map .maplibregl-ctrl-group button {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* The map credits: the round "i" and each credit link thumb-sized too. */
+  .city-map .maplibregl-ctrl-attrib.maplibregl-compact {
+    min-height: 44px;
+    border-radius: 22px;
+    padding-right: 44px;
+  }
+
+  .city-map .maplibregl-ctrl-attrib.maplibregl-compact-show {
+    padding: 0 48px 0 12px;
+  }
+
+  .city-map .maplibregl-ctrl-attrib-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 22px;
+    background-position: center;
+  }
+
+  .city-map .maplibregl-ctrl-attrib-inner a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}

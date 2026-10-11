@@ -1,0 +1,192 @@
+/* One card language for every grid: a 4:5 photo with a slow zoom, and the piece's museum label
+   pinned over the photo's foot. The title link inside the label is stretched over the whole card.
+
+   Stacking: the card is its own stacking context and the photo sits below it (z-index -1), so the
+   label — an ordinary block pulled up over the photo — paints above the photo while the stretched
+   link can still be positioned against the card. The buttons are the card's own children, above
+   the link. */
+.object-card {
+  position: relative;
+  isolation: isolate;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+}
+
+.object-card__media {
+  position: relative;
+  z-index: -1;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  background: var(--color-bg-raised);
+}
+
+.object-card__media .smart-image {
+  height: 100%;
+}
+
+.object-card__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(0.94) contrast(1.02);
+  transition:
+    opacity 0.5s var(--ease),
+    transform 1.1s var(--ease),
+    filter var(--dur-slow) var(--ease);
+}
+
+.object-card:hover .object-card__media img {
+  transform: scale(1.04);
+  filter: saturate(1) contrast(1.02);
+}
+
+/* A maker's cut-out photo (SmartImage `cutout`) keeps room at its foot for the pinned label. */
+.object-card__media .is-cutout img {
+  padding: 8% 8% 22%;
+  filter: none;
+}
+
+/* On a narrow card the label covers nearly half the photo. */
+@container (max-width: 172px) {
+  .object-card__media .is-cutout img {
+    padding: 6% 8% 44%;
+  }
+}
+
+/* On a narrow card (two columns on a phone) the label keeps the number, name and maker. */
+@container (max-width: 172px) {
+  .object-card__label .museum-label__rows,
+  .object-card__label .museum-label__status {
+    display: none;
+  }
+
+  .object-card__label {
+    --label-pad: 0.6rem 0.6rem 0.65rem;
+  }
+}
+
+.object-card__label {
+  margin: -2.6rem 0.55rem 0;
+  transition: box-shadow var(--dur-base) var(--ease);
+}
+
+.object-card:hover .object-card__label {
+  box-shadow: 0 22px 44px -16px rgba(0, 0, 0, 0.9);
+}
+
+.object-card__label .museum-label__name a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-raised);
+}
+
+.object-card:hover .museum-label__name a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.object-card__label .museum-label__name a:focus-visible {
+  outline: none;
+}
+
+.object-card__label .museum-label__name a:focus-visible::after {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* The two round buttons on the photo sit above the stretched link. */
+.object-card__add,
+.object-card__zoom {
+  position: absolute;
+  top: 10px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  background: rgba(14, 14, 14, 0.55);
+  backdrop-filter: blur(4px);
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    background var(--dur-fast) var(--ease);
+}
+
+.object-card__add {
+  right: 10px;
+}
+
+.object-card__zoom {
+  left: 10px;
+  cursor: zoom-in;
+}
+
+.object-card__add:hover,
+.object-card__zoom:hover {
+  background: rgba(14, 14, 14, 0.8);
+}
+
+.object-card:hover .object-card__add,
+.object-card:hover .object-card__zoom,
+.object-card__add:focus-visible,
+.object-card__zoom:focus-visible,
+.object-card__add.is-added {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.object-card__add.is-added {
+  color: var(--color-accent);
+}
+
+.object-card__add.is-added svg {
+  animation: heart-pop 0.45s var(--ease);
+}
+
+/* Touch screens have no hover: keep both buttons visible with thumb-sized targets. */
+@media (hover: none) {
+  .object-card__add,
+  .object-card__zoom {
+    opacity: 1;
+    transform: none;
+    width: 44px;
+    height: 44px;
+    top: 4px;
+  }
+
+  .object-card__add {
+    right: 4px;
+  }
+
+  .object-card__zoom {
+    left: 4px;
+    background: transparent;
+    backdrop-filter: none;
+  }
+
+  .object-card__zoom svg {
+    padding: 7px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(14, 14, 14, 0.55);
+  }
+}
+
+@keyframes heart-pop {
+  40% {
+    transform: scale(1.35);
+  }
+}

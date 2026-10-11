@@ -1,0 +1,124 @@
+/* Story covers: a figure on a tint, or a piece's photo with its label. The figure scales with the
+   cover's width (container units) and shrinks for longer marks, so "3" and "11-4201" both fill
+   the cover without overflowing. */
+.story-cover {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--surface-1);
+  container-type: inline-size;
+}
+
+.story-cover--type {
+  background: var(--cover-bg);
+  color: var(--cover-ink);
+}
+
+/* The ink tint sits on the dark page: a hairline keeps its edge. */
+.story-cover--ink {
+  box-shadow: inset 0 0 0 1px var(--color-border);
+}
+
+.story-cover__mark {
+  position: absolute;
+  left: 6cqi;
+  bottom: 5cqi;
+  font-family: var(--font-serif);
+  font-weight: 450;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  font-size: min(calc(88cqi / (var(--mark-len) * 0.6 + 0.2)), var(--mark-max, 50cqi));
+}
+
+.story-cover--photo > .smart-image {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+}
+
+.story-cover--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s var(--ease);
+}
+
+/* Photos of the pieces the story names, pinned on its tint like polaroids: the first big and
+   high on the right, a second smaller beside it, both a little askew and both above the figure,
+   which keeps the foot of the cover. */
+.story-cover__pin {
+  position: absolute;
+  z-index: 1;
+  width: 32cqi;
+  aspect-ratio: 5 / 6;
+  padding: 1.6cqi 1.6cqi 0;
+  background: #f6f1e7;
+  box-shadow: 0 1.6cqi 4.5cqi rgba(0, 0, 0, 0.45);
+}
+
+.story-cover__pin > .smart-image {
+  height: 100%;
+}
+
+.story-cover__pin img {
+  object-fit: cover;
+}
+
+.story-cover__pin:nth-of-type(2) {
+  right: 5cqi;
+  top: 7cqi;
+  rotate: 4deg;
+}
+
+.story-cover__pin:nth-of-type(3) {
+  right: 39cqi;
+  top: 5cqi;
+  width: 21cqi;
+  rotate: -6deg;
+}
+
+/* One pin only: smaller, in the corner, so the figure keeps the cover. */
+.story-cover.is-1 .story-cover__pin {
+  right: 4cqi;
+  top: 5cqi;
+  width: 24cqi;
+}
+
+/* The first pin's museum label, hanging off its foot (the cover of the day). */
+.story-cover__pin-label {
+  position: absolute;
+  right: -4%;
+  bottom: -9cqi;
+  width: 110%;
+  --label-pad: 0.55rem 0.7rem;
+}
+
+.story-cover__pin-label .museum-label__name {
+  display: block;
+  font-size: clamp(0.85rem, 2.4cqi, 1.1rem);
+}
+
+.story-cover__pin-label .museum-label__by {
+  font-size: clamp(0.68rem, 1.7cqi, 0.85rem);
+}
+
+/* The piece's label, pinned near the foot of its photo. */
+.story-cover__label {
+  position: absolute;
+  left: 50%;
+  bottom: 8cqi;
+  width: min(80%, 340px);
+  translate: -50% 0;
+  --label-pad: 0.7rem 0.85rem;
+}
+
+.story-cover__label .museum-label__name {
+  display: block;
+  font-size: clamp(0.95rem, 4.2cqi, 1.5rem);
+}
+
+.story-cover__label .museum-label__by {
+  font-size: clamp(0.72rem, 2.6cqi, 0.95rem);
+}

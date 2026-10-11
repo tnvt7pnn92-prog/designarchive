@@ -1,0 +1,192 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-header);
+  background: rgba(14, 14, 14, 0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+/* While the menu is a full-screen sheet the bar joins it: no see-through strip above it. */
+.site-header.has-menu {
+  background: var(--color-bg);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: var(--header-height);
+}
+
+.site-header__logo {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+/* ---------- sections ---------- */
+.site-header__nav {
+  display: flex;
+  gap: var(--space-5);
+  margin-left: var(--space-4);
+}
+
+.site-header__link {
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-text-dim);
+  position: relative;
+  padding: 0.3rem 0;
+  transition: color 0.2s var(--ease);
+}
+
+.site-header__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s var(--ease);
+}
+
+.site-header__link:hover,
+.site-header__link.is-active {
+  color: var(--color-text);
+}
+
+.site-header__link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ---------- right side: search, sign in / sign up, menu ---------- */
+.site-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+}
+
+.site-header__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0.4rem;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: var(--color-text);
+  cursor: pointer;
+  opacity: 0.85;
+  transition:
+    opacity 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.site-header__icon-btn:hover {
+  opacity: 1;
+  background: var(--surface-2);
+}
+
+.header-signin {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 0.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: var(--color-text-dim);
+  transition: color var(--dur-fast) var(--ease);
+}
+
+.header-signin:hover {
+  color: var(--color-text);
+}
+
+/* The one button in colour: "Sign up", for guests. */
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 38px;
+  padding: 0 1.05rem;
+  margin-right: var(--space-1);
+  border-radius: var(--radius-pill);
+  background: var(--color-text);
+  color: var(--color-bg);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background var(--dur-fast) var(--ease);
+}
+
+.header-cta:hover {
+  background: #fff;
+}
+
+/* Tablets and phones: the sections move into the menu. */
+@media (max-width: 1100px) {
+  .site-header__nav {
+    display: none;
+  }
+}
+
+/* Room is short between 1100 and 1240 px. */
+@media (max-width: 1240px) and (min-width: 1101px) {
+  .site-header__nav {
+    gap: var(--space-4);
+    margin-left: var(--space-2);
+  }
+}
+
+/* Phones: "Sign in" is in the menu; the call to action drops the capitals to fit. */
+@media (max-width: 560px) {
+  .site-header__inner {
+    gap: var(--space-2);
+  }
+
+  .site-header__logo {
+    font-size: 1.15rem;
+  }
+
+  .site-header__actions {
+    gap: 0.15rem;
+  }
+
+  .header-signin {
+    display: none;
+  }
+
+  .header-cta {
+    min-height: 34px;
+    padding: 0 0.75rem;
+    font-size: 0.78rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+}
+
+@media (max-width: 400px) {
+  .site-header__logo {
+    font-size: 1.05rem;
+  }
+
+  .header-cta {
+    padding: 0 0.6rem;
+    margin-right: 0;
+  }
+}

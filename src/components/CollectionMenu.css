@@ -1,0 +1,73 @@
+/* The collection menu: a small sheet of label paper under the heart. */
+.collection-menu {
+  position: fixed;
+  z-index: var(--z-overlay);
+  display: grid;
+  padding: 0.3rem;
+  border-radius: 3px;
+  background: var(--paper);
+  color: var(--paper-ink);
+  box-shadow: var(--shadow-lg);
+}
+
+.collection-menu button {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 44px;
+  padding: 0 0.7rem;
+  border: 0;
+  border-radius: 2px;
+  background: none;
+  color: inherit;
+  font: 400 0.88rem var(--font-sans);
+  text-align: left;
+  cursor: pointer;
+}
+
+.collection-menu button:hover,
+.collection-menu button:focus-visible {
+  outline: none;
+  background: var(--paper-edge);
+}
+
+.collection-menu button[aria-checked="true"] {
+  font-weight: 500;
+}
+
+.collection-menu button[aria-checked="true"]::after {
+  content: "✓";
+  margin-left: auto;
+}
+
+/* The same colours as the stamps on the labels. */
+.collection-menu__dot {
+  width: 9px;
+  height: 9px;
+  border: 1.5px solid currentColor;
+  border-radius: 2px;
+  color: var(--paper-ink-dim);
+}
+
+.collection-menu__dot.is-own {
+  color: #3f6b52;
+}
+
+.collection-menu__dot.is-want {
+  color: #9a4b2c;
+}
+
+.collection-menu__dot.is-seen {
+  color: #4d5f86;
+}
+
+.collection-menu button[aria-checked="true"] .collection-menu__dot {
+  background: currentColor;
+}
+
+.collection-menu .collection-menu__remove {
+  margin-top: 0.2rem;
+  border-top: 1px solid var(--paper-rule);
+  border-radius: 0 0 2px 2px;
+  color: var(--paper-ink-dim);
+}

@@ -1,0 +1,81 @@
+/* By default the box fills its parent (cards and tiles already fix their own ratio). With a
+   `ratio` it reserves that shape itself; with `natural` it takes the photo's own height. */
+.smart-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* A warm mid-tone, not black: a page of loading photos should not look empty. */
+  background: #2a2520;
+}
+
+.smart-image[style*="aspect-ratio"] {
+  height: auto;
+}
+
+/* A slow sheen while the photo is on its way — calmer than a spinner. It slides with a
+   transform, which the compositor animates without repainting the page on every frame. */
+.smart-image.is-loading::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 20%, rgba(244, 239, 230, 0.045) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: smart-image-sheen 1.6s var(--ease) infinite;
+}
+
+.smart-image img {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease), transform 0.7s var(--ease);
+}
+
+.smart-image.is-loaded img {
+  opacity: 1;
+}
+
+/* A maker's cut-out photo: the whole piece, a little inset, on the photo's own ground. */
+.smart-image.is-cutout.is-loaded {
+  background: var(--cutout);
+}
+
+.smart-image.is-cutout img {
+  padding: 8%;
+}
+
+.smart-image.is-natural {
+  height: auto;
+}
+
+.smart-image.is-natural img {
+  height: auto;
+}
+
+/* Until a natural-height photo arrives it still needs some room to show the sheen. */
+.smart-image.is-natural.is-loading {
+  aspect-ratio: 4 / 3;
+}
+
+.smart-image .photo-placeholder {
+  position: absolute;
+  inset: 0;
+}
+
+.smart-image.is-natural.is-error {
+  aspect-ratio: 4 / 3;
+}
+
+@keyframes smart-image-sheen {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

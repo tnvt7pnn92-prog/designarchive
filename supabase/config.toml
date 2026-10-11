@@ -1,0 +1,7 @@
+# Supabase CLI settings for this project (`npx supabase ...`). The project itself is linked with
+# `npx supabase link --project-ref <ref>`; see README.md → "Supabase".
+project_id = "design-archive"
+
+[auth]
+site_url = "https://example.github.io/design-archive"
+additional_redirect_urls = ["http://localhost:5173/account", "http://localhost:4173/design-archive/account"]

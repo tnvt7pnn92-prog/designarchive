@@ -1,0 +1,37 @@
+/* The board fills the stage; the dotted table behind the sheet is the stage's background. */
+.mb-canvas {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  /* The canvas owns every touch gesture (drag, pinch). */
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.mb-canvas.is-pannable {
+  cursor: grab;
+}
+
+.mb-canvas.is-pannable:active {
+  cursor: grabbing;
+}
+
+.mb-text-editor {
+  position: absolute;
+  z-index: 5;
+  margin: 0;
+  border: none;
+  outline: 1px dashed rgba(201, 164, 77, 0.7);
+  outline-offset: 2px;
+  background: rgba(201, 164, 77, 0.12);
+  resize: none;
+  overflow: hidden;
+  white-space: pre-wrap;
+  overflow-wrap: break-word;
+  transform-origin: 0 0;
+  box-sizing: border-box;
+  touch-action: auto;
+  user-select: text;
+  -webkit-user-select: text;
+}

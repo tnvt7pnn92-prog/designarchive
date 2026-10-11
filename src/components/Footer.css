@@ -1,0 +1,144 @@
+/* The footer: a big wordmark in Fraunces whose letters lift under the pointer, the sections in
+   three columns and the five languages as chips. */
+.site-footer {
+  padding-top: clamp(48px, 7vw, 72px);
+  border-top: 1px solid var(--color-border-soft);
+  background: #080807;
+}
+
+.site-footer__wordmark {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 0 clamp(32px, 5vw, 52px);
+  font: 300 clamp(3.2rem, 1rem + 10vw, 10.5rem) / 0.9 var(--font-serif);
+  letter-spacing: -0.04em;
+}
+
+.site-footer__wordmark span {
+  display: inline-block;
+  transition:
+    transform 0.5s var(--ease),
+    color 0.5s;
+}
+
+.site-footer__wordmark span:hover {
+  transform: translateY(-0.12em) rotate(-4deg);
+  color: var(--color-accent);
+}
+
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr repeat(3, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.site-footer__about p {
+  max-width: 36ch;
+  margin: 0 0 0.6rem;
+  color: var(--color-text-faint);
+  font-size: 0.88rem;
+}
+
+.site-footer__title {
+  margin: 0 0 0.8rem;
+  font: 500 0.68rem var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.site-footer ul {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.site-footer ul a {
+  color: var(--color-text-dim);
+  font-size: 0.92rem;
+  transition: color 0.3s;
+}
+
+.site-footer ul a:hover,
+.site-footer ul a.active {
+  color: var(--color-accent);
+}
+
+.site-footer__langs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 1.2rem;
+}
+
+.site-footer__langs button {
+  min-width: 42px;
+  min-height: 36px;
+  padding: 0 10px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--color-text-dim);
+  font: 0.72rem var(--font-mono);
+  cursor: pointer;
+  transition:
+    border-color 0.3s,
+    color 0.3s,
+    background 0.3s;
+}
+
+.site-footer__langs button:hover {
+  border-color: var(--color-text-faint);
+  color: var(--color-text);
+}
+
+.site-footer__langs button[aria-pressed="true"] {
+  border-color: var(--color-accent);
+  background: var(--color-accent);
+  color: var(--paper-ink);
+}
+
+.site-footer__bottom {
+  margin-top: clamp(32px, 5vw, 44px);
+  padding-block: 22px;
+  border-top: 1px solid var(--color-border-soft);
+  font-size: 0.78rem;
+  color: var(--color-text-faint);
+}
+
+/* Touch screens: links and chips at least 44 px tall, so the list needs no gap of its own. */
+@media (pointer: coarse) {
+  .site-footer ul {
+    gap: 0;
+  }
+
+  .site-footer ul a {
+    display: inline-flex;
+    align-items: center;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .site-footer__langs button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-footer__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .site-footer__about {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__wordmark span:hover {
+    transform: none;
+  }
+}

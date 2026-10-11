@@ -1,0 +1,125 @@
+/* A shared board: the sheet on the dark dotted table, its pieces clickable where they lie, then
+   their labels. */
+.shared-board {
+  padding-bottom: clamp(48px, 7vw, 88px);
+}
+
+.shared-board__head {
+  padding-top: clamp(28px, 4vw, 48px);
+  padding-bottom: 20px;
+}
+
+.shared-board__line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  padding-block: 8px;
+  border-block: 1px solid var(--color-border);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.shared-board__head h1,
+.shared-board__missing h1 {
+  margin-top: 14px;
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 350;
+  line-height: 1.03;
+}
+
+.shared-board__note,
+.shared-board__missing p {
+  color: var(--color-text-dim);
+}
+
+.shared-board__note {
+  padding-block: 96px;
+}
+
+.shared-board__missing {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+  padding-block: 72px;
+}
+
+.shared-board__table {
+  padding: clamp(20px, 5vw, 64px) clamp(12px, 4vw, 48px);
+  background-color: #0b0b0a;
+  background-image: radial-gradient(#2a2824 1px, transparent 1.3px);
+  background-size: 22px 22px;
+}
+
+.shared-board__sheet {
+  position: relative;
+  width: min(100%, 1280px, calc((100vh - 120px) * var(--sheet-ratio, 1.6)));
+  margin-inline: auto;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+}
+
+.shared-board__sheet img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.shared-board__spot {
+  position: absolute;
+  border-radius: 2px;
+}
+
+.shared-board__spot:hover,
+.shared-board__spot:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.shared-board__pieces {
+  padding-top: clamp(36px, 5vw, 56px);
+}
+
+.shared-board__pieces h2 {
+  margin-bottom: 18px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.shared-board__pieces ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* The name opens the piece page from the whole label. */
+.shared-board__label {
+  position: relative;
+  height: 100%;
+}
+
+.shared-board__label .museum-label__name a::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.shared-board__label:hover .museum-label__name a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.shared-board__cta {
+  padding-top: 32px;
+}
