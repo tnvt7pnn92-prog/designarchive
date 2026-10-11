@@ -179,6 +179,11 @@ utente `<utente>.github.io`, imposta la variabile del repository `SITE_BASE` a `
 (Settings → Secrets and variables → Actions → Variables); con un dominio tuo imposta anche `SITE_URL`
 (per esempio `https://designarchive.it`), che serve a sitemap e anteprime dei link.
 
+**Motori di ricerca.** Finché il sito non apre, Google e gli altri motori ne restano fuori: ogni
+pagina ha `noindex` e `robots.txt` non indica la sitemap. Per farli entrare crea la variabile del
+repository `SITE_INDEXING` con valore `on` (Settings → Secrets and variables → Actions → Variables) e
+rilancia la pubblicazione.
+
 Le lingue hanno un indirizzo ciascuna con `?lang=it` (e `es`, `fr`, `zh`): è quello che indicano i
 link `hreflang` delle pagine statiche.
 

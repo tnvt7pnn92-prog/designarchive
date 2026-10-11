@@ -45,6 +45,10 @@ const OG_LOCALES = { en: "en_GB", it: "it_IT", es: "es_ES", fr: "fr_FR", zh: "zh
 const BASE = (process.env.VITE_BASE ?? "/").replace(/\/?$/, "/");
 const SITE = (process.env.SITE_URL || `http://localhost:4173${BASE}`).replace(/\/+$/, "");
 if (!process.env.SITE_URL) console.warn(`prerender: SITE_URL not set, absolute links point at ${SITE}`);
+// Search engines stay out until the site opens: every page says noindex and robots.txt points at
+// no sitemap (crawling stays allowed, so the noindex is read). The repository variable
+// SITE_INDEXING=on lets them in.
+const INDEXING = process.env.SITE_INDEXING === "on";
 
 const today = dateKey();
 const byId = new Map(OBJECTS.map((o) => [o.id, o]));
@@ -485,7 +489,7 @@ function head(page) {
   const image = page.image;
   const tags = [
     `<link rel="canonical" href="${esc(url)}" />`,
-    page.noindex ? `<meta name="robots" content="noindex" />` : "",
+    page.noindex || !INDEXING ? `<meta name="robots" content="noindex" />` : "",
     `<meta property="og:site_name" content="${esc(SITE_NAME)}" />`,
     `<meta property="og:type" content="${esc(type)}" />`,
     `<meta property="og:title" content="${esc(title)}" />`,
@@ -559,10 +563,12 @@ writeFileSync(
 );
 writeFileSync(
   path.join(dist, "robots.txt"),
-  `User-agent: *\nAllow: /\nDisallow: ${BASE}collection\nDisallow: ${BASE}account\nDisallow: ${BASE}m/\nDisallow: ${BASE}moodboard/print\n\nSitemap: ${SITE}/sitemap.xml\n`
+  INDEXING
+    ? `User-agent: *\nAllow: /\nDisallow: ${BASE}collection\nDisallow: ${BASE}account\nDisallow: ${BASE}m/\nDisallow: ${BASE}moodboard/print\n\nSitemap: ${SITE}/sitemap.xml\n`
+    : `User-agent: *\nAllow: /\n`
 );
 
 // The manifest has been read: it is not part of the site.
 rmSync(path.join(dist, ".vite"), { recursive: true, force: true });
 
-console.log(`prerender: ${pages.length} pages (${(bytes / 1048576).toFixed(1)} MB), ${labelled.length} label images, sitemap with ${urls.length} addresses → ${SITE}`);
+console.log(`prerender: ${pages.length} pages (${(bytes / 1048576).toFixed(1)} MB), ${labelled.length} label images, sitemap with ${urls.length} addresses → ${SITE}${INDEXING ? "" : " · hidden from search engines (SITE_INDEXING not on)"}`);

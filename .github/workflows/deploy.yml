@@ -43,6 +43,8 @@ jobs:
         env:
           VITE_BASE: ${{ vars.SITE_BASE || format('/{0}/', github.event.repository.name) }}
           SITE_URL: ${{ vars.SITE_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
+          # Search engines are kept out (noindex on every page) until this variable is "on".
+          SITE_INDEXING: ${{ vars.SITE_INDEXING }}
           # Accounts: public values (the anon key is meant to be public). Leave the variables unset
           # and the site works without accounts, saving in the browser.
           # API_URL: the address Railway gives the accounts API (server/); when set, it is used
