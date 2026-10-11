@@ -168,9 +168,9 @@ export default function SiteMenu({ open, onOpenChange }) {
           </div>
         ) : (
           <div className="site-menu__view" key="main">
-            {/* Who is here */}
-            <div className="site-menu__head">
-              {signedIn ? (
+            {/* Who is here, when signed in */}
+            {signedIn && (
+              <div className="site-menu__head">
                 <div className="site-menu__who">
                   <span className="site-menu__who-avatar" aria-hidden="true">
                     {initial || "·"}
@@ -180,21 +180,8 @@ export default function SiteMenu({ open, onOpenChange }) {
                     {user.user_metadata?.full_name && <span>{user.email}</span>}
                   </p>
                 </div>
-              ) : (
-                <>
-                  <p className="site-menu__note">{t("account.guestNote")}</p>
-                  {/* On phones "Sign in" is not in the bar: it is here, with sign up. */}
-                  <div className="site-menu__auth">
-                    <button type="button" className="site-menu__signup" onClick={() => auth("signup")}>
-                      {t("header.signUpFree")}
-                    </button>
-                    <button type="button" className="site-menu__signin" onClick={() => auth("signin")}>
-                      {t("header.signIn")}
-                    </button>
-                  </div>
-                </>
-              )}
-            </div>
+              </div>
+            )}
 
             {/* The sections, when they are not in the bar */}
             <nav className="site-menu__sections" aria-label={t("a11y.mainNav")}>
@@ -230,6 +217,22 @@ export default function SiteMenu({ open, onOpenChange }) {
                 </Link>
               ))}
             </div>
+
+            {/* For visitors: the sections first, so they see what the site holds; signing up comes
+                near the foot. On phones "Sign in" is not in the bar: it is here, with sign up. */}
+            {!signedIn && (
+              <div className="site-menu__head site-menu__guest">
+                <p className="site-menu__note">{t("account.guestNote")}</p>
+                <div className="site-menu__auth">
+                  <button type="button" className="site-menu__signup" onClick={() => auth("signup")}>
+                    {t("header.signUpFree")}
+                  </button>
+                  <button type="button" className="site-menu__signin" onClick={() => auth("signin")}>
+                    {t("header.signIn")}
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* At the foot: the account, signing out, and the language last. */}
             <div className="site-menu__group">

@@ -45,7 +45,8 @@
   align-items: center;
   gap: 0.2rem 0.6rem;
   margin: 0;
-  padding: var(--space-4) 0 0;
+  /* Room on the right for the close button, which sits on the same line. */
+  padding: var(--space-4) 56px 0 0;
   font-size: var(--text-xs);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -70,7 +71,7 @@
 }
 
 .piece-crumbs [aria-current] {
-  max-width: 28ch;
+  max-width: min(28ch, 100%);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

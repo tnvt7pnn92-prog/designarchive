@@ -960,12 +960,12 @@ export default {
     toastRemoved: "{name} retiré de la collection",
     toastOpen: "Ouvrir la collection",
     intro: "Ce que vous possédez, ce que vous cherchez, ce que vous avez repéré et ce que vous avez enregistré : un cartel par pièce.",
-    empty: "Les cartels de vos pièces apparaîtront ici. Commencez par l'archive, ou photographiez une pièce.",
     emptyFilter: "Aucune pièce avec cet état pour l'instant.",
     localNote: "Votre collection n'est enregistrée que dans ce navigateur. Un compte gratuit la garde sur tous vos appareils.",
     nextMarket: "Prochain marché utile",
     edit: "Modifier",
     done: "Terminé",
     changeStatus: "Changer l'état",
+    empty: "Les cartels de vos pièces apparaîtront ici. Commencez par l'archive : chaque pièce s'ajoute d'un geste.",
   },
 };

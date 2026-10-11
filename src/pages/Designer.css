@@ -89,6 +89,21 @@
   }
 }
 
+/* Touch screens: the links are 44 px boxes (global.css); as chips the spacing reads even. */
+@media (pointer: coarse) {
+  .designer-facts__inline {
+    gap: 0.5rem;
+  }
+
+  .designer-facts__inline a {
+    justify-content: center;
+    padding: 0 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-pill);
+    font-size: 0.92rem;
+  }
+}
+
 .designer-stories {
   padding-top: var(--space-6);
 }

@@ -159,6 +159,12 @@
   position: relative;
 }
 
+/* The stamp sits in the bottom corner: a label that carries one keeps a strip free for it, so it
+   never lands on the last row. */
+.museum-label--collection:has(.museum-label__stamp) {
+  padding-bottom: 2.4rem;
+}
+
 .museum-label__stamp {
   position: absolute;
   right: 0.85rem;

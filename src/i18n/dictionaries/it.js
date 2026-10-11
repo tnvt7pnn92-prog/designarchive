@@ -960,12 +960,12 @@ export default {
     toastRemoved: "{name} tolto dalla collezione",
     toastOpen: "Apri la collezione",
     intro: "Quello che possiedi, quello che cerchi, quello che hai visto in giro e quello che hai salvato: un cartellino per pezzo.",
-    empty: "Qui compariranno i cartellini dei tuoi pezzi. Comincia dall'archivio, o fotografa un pezzo.",
     emptyFilter: "Ancora nessun pezzo con questo stato.",
     localNote: "La tua collezione è salvata solo in questo browser. Con un account gratuito ti segue su ogni dispositivo.",
     nextMarket: "Prossimo mercato utile",
     edit: "Modifica",
     done: "Fatto",
     changeStatus: "Cambia stato",
+    empty: "Qui compariranno i cartellini dei tuoi pezzi. Comincia dall'archivio: ogni pezzo si aggiunge con un tocco.",
   },
 };

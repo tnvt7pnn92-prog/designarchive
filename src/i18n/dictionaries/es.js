@@ -960,12 +960,12 @@ export default {
     toastRemoved: "{name} quitado de la colección",
     toastOpen: "Abrir colección",
     intro: "Lo que tienes, lo que buscas, lo que has visto por ahí y lo que has guardado: una cartela por pieza.",
-    empty: "Aquí aparecerán las cartelas de tus piezas. Empieza por el archivo o fotografía una pieza.",
     emptyFilter: "Aún no hay piezas con este estado.",
     localNote: "Tu colección solo está guardada en este navegador. Con una cuenta gratuita te sigue en todos tus dispositivos.",
     nextMarket: "Próximo mercado útil",
     edit: "Editar",
     done: "Hecho",
     changeStatus: "Cambiar estado",
+    empty: "Aquí aparecerán las cartelas de tus piezas. Empieza por el archivo: cada pieza se añade con un toque.",
   },
 };

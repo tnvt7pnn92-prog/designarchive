@@ -90,6 +90,8 @@ function inspect() {
   const texts = [...document.body.querySelectorAll("body *")].filter((el) => {
     if (!visible(el)) return false;
     if (el.closest(".site-menu__panel:not(.is-open), .toaster")) return false;
+    // The archive's Filters button floats over the results on purpose (fixed at the screen's foot).
+    if (el.closest(".archive-filter-toggle")) return false;
     return [...el.childNodes].some((n) => n.nodeType === 3 && n.textContent.trim());
   });
   // What of an element can be seen: its box cut down by every ancestor that clips its overflow

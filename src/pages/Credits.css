@@ -64,4 +64,16 @@
   .credits-list {
     grid-template-columns: 1fr;
   }
+
+  /* On a phone the credit goes under the name, so a long one is never cut at the edge. */
+  .credits-list li {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .credits-list__meta {
+    text-align: left;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
 }

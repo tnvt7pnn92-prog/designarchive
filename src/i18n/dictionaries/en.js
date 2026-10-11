@@ -960,12 +960,12 @@ export default {
     toastRemoved: "{name} removed from your collection",
     toastOpen: "Open collection",
     intro: "What you own, what you're after, what you've spotted and what you've saved: one label per piece.",
-    empty: "The labels of your pieces will appear here. Start from the archive, or photograph a piece.",
     emptyFilter: "No pieces with this state yet.",
     localNote: "Your collection is saved only in this browser. A free account keeps it on every device.",
     nextMarket: "Next useful market",
     edit: "Edit",
     done: "Done",
     changeStatus: "Change state",
+    empty: "The labels of your pieces will appear here. Start from the archive: every piece can be added with one tap.",
   },
 };

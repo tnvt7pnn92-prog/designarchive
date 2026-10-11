@@ -960,12 +960,12 @@ export default {
     toastRemoved: "已从收藏中移除 {name}",
     toastOpen: "打开收藏",
     intro: "你拥有的、在找的、见过的和收藏的：每件作品一张标签。",
-    empty: "你的作品标签会出现在这里。从档案馆开始，或拍下一件作品。",
     emptyFilter: "还没有这个状态的作品。",
     localNote: "你的收藏只保存在此浏览器中。免费账户可在所有设备上同步。",
     nextMarket: "下一个值得去的市集",
     edit: "编辑",
     done: "完成",
     changeStatus: "更改状态",
+    empty: "你的作品标签会出现在这里。从档案馆开始：每件作品轻点一下即可加入。",
   },
 };

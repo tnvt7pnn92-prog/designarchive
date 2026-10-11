@@ -62,7 +62,22 @@
   }
 
   .object-card__label {
-    --label-pad: 0.6rem 0.6rem 0.65rem;
+    --label-pad: 0.5rem 0.55rem 0.55rem;
+    margin-top: -2rem;
+  }
+
+  /* Smaller type, and one line of maker, so more of the photo shows. */
+  .object-card__label .museum-label__name {
+    margin-top: 0;
+    font-size: 0.9rem;
+  }
+
+  .object-card__label .museum-label__by {
+    font-size: 0.72rem;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
   }
 }
 

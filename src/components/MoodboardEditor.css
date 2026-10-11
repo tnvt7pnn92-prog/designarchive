@@ -642,6 +642,20 @@
   transform: rotate(-0.6deg);
 }
 
+/* On a phone the sheet is small and the card about as wide: centred on it, the sheet only peeked
+   out above like a misprint. The card sits low instead, above the toolbar, and the sheet shows. */
+@media (max-width: 700px) {
+  .mb-empty {
+    place-items: end center;
+    padding: 16px 16px 150px;
+  }
+
+  .mb-empty__card {
+    padding: 20px 20px 22px;
+    transform: none;
+  }
+}
+
 .mb-empty__title {
   font-family: var(--font-serif);
   font-size: clamp(1.5rem, 2.6vw, 2rem);

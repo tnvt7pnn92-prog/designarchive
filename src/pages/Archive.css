@@ -349,18 +349,19 @@
     gap: 0;
   }
 
-  /* Stays in reach while scrolling the results. */
+  /* Stays in reach while scrolling the results: floating at the foot of the screen, under the
+     thumb, where it never covers the buttons at the top of the cards. */
   .archive-filter-toggle {
-    position: sticky;
-    top: calc(var(--header-height) + var(--space-2));
-    z-index: var(--z-raised);
-    justify-self: start;
+    position: fixed;
+    left: 50%;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: var(--z-header);
+    transform: translateX(-50%);
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    min-height: 44px;
-    padding: 0 1.2rem;
-    margin-bottom: var(--space-4);
+    min-height: 48px;
+    padding: 0 1.4rem;
     background: var(--color-text);
     border: 0;
     border-radius: var(--radius-pill);
