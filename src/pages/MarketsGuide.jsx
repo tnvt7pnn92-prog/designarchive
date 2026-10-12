@@ -152,9 +152,6 @@ function Guide() {
           </form>
           <p className="mg-hero__facts">
             <span>{t("markets.guide.facts", { places: number(MARKETS.length), countries: COUNTRY_COUNT, cities: MARKET_CITIES.length })}</span>
-            <a href="#mg-map" className="mg-hero__plan">
-              {t("markets.guide.mapOpen")} ↓
-            </a>
           </p>
         </div>
         <a className="mg-hero__credit" href={commonsPage(MARKETS_HERO)} target="_blank" rel="noreferrer">

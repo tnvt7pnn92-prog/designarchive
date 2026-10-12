@@ -141,18 +141,6 @@
   color: #cfc7b8;
 }
 
-.mg-hero__plan {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  color: var(--color-text);
-  border-bottom: 1px solid currentColor;
-}
-
-.mg-hero__plan:hover {
-  color: var(--color-accent);
-}
-
 .mg-hero__credit {
   position: absolute;
   right: 12px;
