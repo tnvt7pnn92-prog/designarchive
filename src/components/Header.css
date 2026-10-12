@@ -3,6 +3,7 @@
   top: 0;
   z-index: var(--z-header);
   background: rgba(14, 14, 14, 0.82);
+  -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-border-soft);
 }
@@ -188,5 +189,13 @@
   .header-cta {
     padding: 0 0.6rem;
     margin-right: 0;
+  }
+}
+
+/* The smallest phones (360 px and less): the logo, search and menu fill the bar; signing up is in
+   the menu. */
+@media (max-width: 360px) {
+  .header-cta {
+    display: none;
   }
 }

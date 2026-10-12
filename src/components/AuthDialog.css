@@ -6,6 +6,7 @@
   place-items: center;
   padding: var(--space-3);
   background: var(--surface-overlay);
+  -webkit-backdrop-filter: blur(3px);
   backdrop-filter: blur(3px);
   animation: auth-fade var(--dur-fast) var(--ease);
 }

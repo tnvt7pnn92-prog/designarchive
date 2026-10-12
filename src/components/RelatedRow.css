@@ -75,9 +75,10 @@
     flex: none;
   }
 
+  /* As wide as the group's cards, but never past the screen: a long name wraps in view. */
   .related-group__title {
     font-size: 1.25rem;
-    max-width: calc(var(--n) * (44vw + var(--space-3)) - var(--space-3));
+    max-width: min(calc(var(--n) * (44vw + var(--space-3)) - var(--space-3)), calc(100vw - 2 * var(--space-4)));
   }
 
   .related-group__cards {

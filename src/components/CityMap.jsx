@@ -117,6 +117,16 @@ export default function CityMap({ origin, km, places, hoveredId, onHover, onSele
           // A tile that fails now and then is harmless; the style itself failing means no map.
           if (!instance.isStyleLoaded() && /style/i.test(event?.error?.message ?? "")) setFailed(true);
         });
+        // The compact credits open by themselves once the map has drawn, and cover a corner of a
+        // phone-sized map: they are folded behind their "i" button (as MapLibre itself does after the
+        // first drag).
+        const foldCredits = () => {
+          const credits = node.current?.querySelector(".maplibregl-ctrl-attrib.maplibregl-compact");
+          if (!credits) return;
+          credits.classList.remove("maplibregl-compact-show");
+          instance.off("idle", foldCredits);
+        };
+        instance.on("idle", foldCredits);
         instance.on("load", () => {
           recolour(instance);
           instance.addSource("rings", { type: "geojson", data: { type: "FeatureCollection", features: [] } });

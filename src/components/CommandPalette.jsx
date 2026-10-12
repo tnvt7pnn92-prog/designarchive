@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 import { OBJECTS } from "../data/objects.js";
@@ -166,7 +167,9 @@ export default function CommandPalette({ onClose }) {
   }
 
   let index = -1;
-  return (
+  // Rendered on the body: inside the header, whose blurred background makes it the containing block
+  // of anything fixed, the full-screen palette would be squeezed into the header's 76 px.
+  return createPortal(
     <div className="palette" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
       <div className="palette__dialog" role="dialog" aria-modal="true" aria-label={t("palette.label")}>
         <div className="palette__field">
@@ -243,6 +246,7 @@ export default function CommandPalette({ onClose }) {
           </span>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

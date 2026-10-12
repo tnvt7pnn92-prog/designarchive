@@ -75,11 +75,14 @@
     padding: 0 48px 0 12px;
   }
 
+  /* Larger than MapLibre's own button: its "i" icon must not tile over the extra room. */
   .city-map .maplibregl-ctrl-attrib-button {
     width: 44px;
     height: 44px;
     border-radius: 22px;
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
   }
 
   .city-map .maplibregl-ctrl-attrib-inner a {
