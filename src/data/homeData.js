@@ -5,7 +5,7 @@ export const STATS = {
   "pieces": 997,
   "designers": 527,
   "marketCountries": 57,
-  "stories": 27
+  "stories": 28
 };
 
 export const RIBBON = [
