@@ -32,48 +32,44 @@
   border-bottom: 1px solid var(--color-border-soft);
 }
 
+/* Name above, credit below: a long credit wraps under its name instead of squeezing it. */
 .credits-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem var(--space-5);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 0.25rem var(--space-5);
 }
 
 .credits-list li {
   display: flex;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding: 0.5rem 0;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.55rem 0;
   border-bottom: 1px solid var(--color-border-soft);
   font-size: 0.8rem;
 }
 
 .credits-list__label {
   color: var(--color-text);
+  font-weight: 500;
 }
 
 .credits-list__meta {
   color: var(--color-text-faint);
-  text-align: right;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1200px) {
+  .credits-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 700px) {
   .credits-list {
-    grid-template-columns: 1fr;
-  }
-
-  /* On a phone the credit goes under the name, so a long one is never cut at the edge. */
-  .credits-list li {
-    flex-direction: column;
-    gap: 0.15rem;
-  }
-
-  .credits-list__meta {
-    text-align: left;
-    white-space: normal;
-    overflow-wrap: anywhere;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
