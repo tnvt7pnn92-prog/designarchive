@@ -1,0 +1,83 @@
+.mwm {
+  position: relative;
+}
+
+.mwm svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+
+.mwm__land {
+  fill: #1f1d1a;
+  stroke: #2f2c27;
+  stroke-width: 0.6;
+}
+
+/* A transparent stroke widens the target round each dot, so a small one is easy to point at. */
+.mwm circle {
+  stroke: transparent;
+  cursor: pointer;
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.mwm.is-in circle {
+  animation: mwm-dot 0.6s var(--ease) both;
+  animation-delay: calc(var(--d) * 1.4s);
+}
+
+@keyframes mwm-dot {
+  from {
+    opacity: 0;
+    transform: scale(0.2);
+  }
+  to {
+    opacity: 0.9;
+    transform: none;
+  }
+}
+
+.mwm circle:hover {
+  opacity: 1;
+  filter: brightness(1.25);
+}
+
+.mwm__tip {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: 0.1rem;
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+  transform: translate(-50%, calc(-100% - 10px));
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-size: 0.8rem;
+  line-height: 1.25;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.mwm__tip b {
+  font-family: var(--font-serif);
+  font-weight: 500;
+}
+
+.mwm__tip span {
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper-ink-dim);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mwm circle,
+  .mwm.is-in circle {
+    opacity: 0.9;
+    animation: none;
+  }
+}

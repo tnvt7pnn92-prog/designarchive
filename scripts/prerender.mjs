@@ -160,11 +160,13 @@ const SECTION_BODIES = {
       <span class="eyebrow">${esc(en.stories.storyOfDay)}</span>
       <p class="prerender__feature">${a(`/stories/${storyOfTheDay(today).id}`, storyOfTheDay(today).title)}</p>
       ${list(publishedStories(today).map((s) => `${a(`/stories/${s.id}`, s.title)} <span>${esc(s.hook)}</span>`))}`,
-  // The guide: its cover, the six ways in, the editorial selection and every country with its cities.
+  // The guide: its cover, the map band, the six ways in, the editorial selection and every country with its cities.
   "/markets": () => `
       <span class="eyebrow">${esc(en.markets.guide.eyebrow)}</span>
       <h1>${esc(en.markets.guide.title)}</h1>
       <p class="prerender__lede">${esc(en.markets.guide.subtitle)}</p>
+      <h2>${esc(en.markets.guide.mapTitle.replace("{count}", MARKETS.length.toLocaleString("en")))}</h2>
+      <p>${esc(en.markets.guide.mapText)} ${a("/markets?view=world", en.markets.guide.mapOpen)}</p>
       <h2>${esc(en.markets.guide.catsTitle)}</h2>
       ${list(GUIDE_CATEGORIES.map((c) => `<strong>${esc(en.markets.categories[c.key].name)}</strong> — ${esc(en.markets.categories[c.key].text)} <span>${MARKETS.filter(c.test).length}</span>`))}
       <h2>${esc(en.markets.guide.featuredTitle)}</h2>

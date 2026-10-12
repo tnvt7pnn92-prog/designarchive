@@ -576,7 +576,6 @@ export default {
       searchPlaceholder: "Busca una ciudad, un país, una tienda o un mercadillo…",
       searchButton: "Buscar",
       facts: "{places} lugares · {countries} países · {cities} ciudades",
-      planCta: "Planea el fin de semana",
       photoCredit: "Foto: {author}, {license}",
       catsEyebrow: "Por dónde empezar",
       catsTitle: "Seis maneras de salir a buscar",
@@ -603,6 +602,14 @@ export default {
       more: "Mostrar más",
       sponsored: "Anuncio de pago",
       themes: "Especialidad",
+      mapEyebrow: "El mapa",
+      mapTitle: "{count} lugares, un punto cada uno",
+      mapText: "Elige una ciudad, una distancia y las fechas: el mapa te muestra qué hay cerca, este fin de semana o este mes, con las próximas fechas de cada mercadillo.",
+      mapOpen: "Abrir el mapa",
+      mapPlanIn: "Planea el fin de semana en {city}",
+      mapLabel: "Mapa del mundo de los {count} lugares de la guía, coloreados por tipo",
+      mapRegions: "Abrir el mapa en",
+      mapHint: "Pasa sobre un punto para leer su nombre; haz clic para abrirlo.",
     },
     categories: {
       shops: {

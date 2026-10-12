@@ -576,7 +576,6 @@ export default {
       searchPlaceholder: "搜索城市、国家、店铺或市集…",
       searchButton: "搜索",
       facts: "{places} 个地点 · {countries} 个国家 · {cities} 座城市",
-      planCta: "规划周末",
       photoCredit: "照片：{author}，{license}",
       catsEyebrow: "从哪里开始",
       catsTitle: "六种寻宝方式",
@@ -603,6 +602,14 @@ export default {
       more: "显示更多",
       sponsored: "付费推广",
       themes: "特色",
+      mapEyebrow: "地图",
+      mapTitle: "{count} 个地点，每个一个点",
+      mapText: "选择城市、距离和日期：地图会显示附近本周末或本月有什么，以及每个市集的下一次日期。",
+      mapOpen: "打开地图",
+      mapPlanIn: "规划在{city}的周末",
+      mapLabel: "指南中 {count} 个地点的世界地图，按类型着色",
+      mapRegions: "在以下地区打开地图",
+      mapHint: "指向一个点查看名称，点击即可打开。",
     },
     categories: {
       shops: {

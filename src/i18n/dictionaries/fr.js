@@ -576,7 +576,6 @@ export default {
       searchPlaceholder: "Cherchez une ville, un pays, une boutique ou un marché…",
       searchButton: "Chercher",
       facts: "{places} lieux · {countries} pays · {cities} villes",
-      planCta: "Préparer le week-end",
       photoCredit: "Photo : {author}, {license}",
       catsEyebrow: "Par où commencer",
       catsTitle: "Six façons de chiner",
@@ -603,6 +602,14 @@ export default {
       more: "Afficher plus",
       sponsored: "Annonce payante",
       themes: "Spécialités",
+      mapEyebrow: "La carte",
+      mapTitle: "{count} lieux, un point chacun",
+      mapText: "Choisissez une ville, une distance et des dates : la carte montre ce qu'il y a près de vous, ce week-end ou ce mois-ci, avec les prochaines dates de chaque marché.",
+      mapOpen: "Ouvrir la carte",
+      mapPlanIn: "Préparer le week-end à {city}",
+      mapLabel: "Carte du monde des {count} lieux du guide, colorés par type",
+      mapRegions: "Ouvrir la carte en",
+      mapHint: "Survolez un point pour lire son nom ; cliquez pour l'ouvrir.",
     },
     categories: {
       shops: {

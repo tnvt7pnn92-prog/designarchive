@@ -163,8 +163,153 @@
   text-align: right;
 }
 
-/* ---------- six ways in ---------- */
-.mg-cats {
+/* ---------- the map band ---------- */
+.mg-mapband {
+  padding-block: clamp(56px, 8vw, 110px);
+  border-bottom: 1px solid var(--mg-rule);
+  background: #0b0b0a;
+  scroll-margin-top: var(--header-height);
+}
+
+.mg-mapband__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 1.5rem clamp(24px, 5vw, 80px);
+  align-items: end;
+}
+
+.mg-mapband__intro p {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--color-text-dim);
+  line-height: 1.6;
+}
+
+.mg-mapband__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem 1.4rem;
+  margin-top: 1.4rem;
+}
+
+.mg-mapband__open {
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 0 1.8rem;
+  border-radius: var(--radius-pill);
+  background: var(--color-accent);
+  color: var(--paper-ink);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.mg-mapband__open:hover {
+  filter: brightness(1.08);
+}
+
+.mg-mapband__plan {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--color-text);
+  border-bottom: 1px solid currentColor;
+  font-size: 0.95rem;
+}
+
+.mg-mapband__plan:hover {
+  color: var(--color-accent);
+}
+
+/* The space of the picture is kept before it loads, so nothing below jumps. */
+.mg-mapband__map {
+  aspect-ratio: 1000 / 378;
+  margin-top: clamp(28px, 4vw, 48px);
+}
+
+.mg-mapband__foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+  margin-top: 1.2rem;
+}
+
+.mg-mapband__legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem 1.2rem;
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--color-text-dim);
+}
+
+.mg-mapband__legend i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 0.4rem;
+  border-radius: 50%;
+}
+
+.mg-mapband__hint {
+  color: var(--color-text-faint);
+  font-style: italic;
+}
+
+.mg-mapband__regions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.2rem 1.1rem;
+}
+
+.mg-mapband__regions span {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+}
+
+.mg-mapband__regions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  color: var(--color-text);
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+}
+
+.mg-mapband__regions a b {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.66rem;
+  color: var(--color-text-faint);
+}
+
+.mg-mapband__regions a:hover {
+  color: var(--color-accent);
+}
+
+@media (max-width: 900px) {
+  .mg-mapband__head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (hover: none) {
+  .mg-mapband__hint {
+    display: none;
+  }
+}
+
+/* ---------- six ways in ---------- */.mg-cats {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   margin: clamp(28px, 4vw, 48px) 0 0;

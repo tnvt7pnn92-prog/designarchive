@@ -576,7 +576,6 @@ export default {
       searchPlaceholder: "Search a city, a country, a shop or a market…",
       searchButton: "Search",
       facts: "{places} places · {countries} countries · {cities} cities",
-      planCta: "Plan the weekend",
       photoCredit: "Photo: {author}, {license}",
       catsEyebrow: "Where to start",
       catsTitle: "Six ways into the hunt",
@@ -603,6 +602,14 @@ export default {
       more: "Show more",
       sponsored: "Paid listing",
       themes: "Known for",
+      mapEyebrow: "The map",
+      mapTitle: "{count} places, one dot each",
+      mapText: "Choose a city, a distance and some dates: the map shows what is on near you, this weekend or this month, with the next dates of every market.",
+      mapOpen: "Open the map",
+      mapPlanIn: "Plan the weekend in {city}",
+      mapLabel: "World map of the {count} places in the guide, coloured by kind",
+      mapRegions: "Open the map in",
+      mapHint: "Point at a dot to read its name; click to open it.",
     },
     categories: {
       shops: {

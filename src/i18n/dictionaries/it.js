@@ -576,7 +576,6 @@ export default {
       searchPlaceholder: "Cerca una città, un Paese, un negozio o un mercatino…",
       searchButton: "Cerca",
       facts: "{places} luoghi · {countries} Paesi · {cities} città",
-      planCta: "Pianifica il weekend",
       photoCredit: "Foto: {author}, {license}",
       catsEyebrow: "Da dove cominciare",
       catsTitle: "Sei modi di andare a caccia",
@@ -603,6 +602,14 @@ export default {
       more: "Mostra altri",
       sponsored: "Inserzione a pagamento",
       themes: "Specialità",
+      mapEyebrow: "La mappa",
+      mapTitle: "{count} luoghi, un punto ciascuno",
+      mapText: "Scegli una città, una distanza e le date: la mappa ti mostra cosa c'è vicino, questo weekend o questo mese, con le prossime date di ogni mercatino.",
+      mapOpen: "Apri la mappa",
+      mapPlanIn: "Pianifica il weekend a {city}",
+      mapLabel: "Mappa del mondo dei {count} luoghi della guida, colorati per tipo",
+      mapRegions: "Apri la mappa in",
+      mapHint: "Passa su un punto per leggerne il nome; cliccalo per aprirlo.",
     },
     categories: {
       shops: {

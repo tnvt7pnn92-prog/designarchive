@@ -1,8 +1,10 @@
-import { lazy, Suspense, useMemo, useRef, useState } from "react";
-import { Link, useSearchParams } from "react-router-dom";
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from "react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 import { seoForRoute } from "../lib/seo.js";
 import { useDocumentMeta } from "../lib/useDocumentMeta.js";
+import { useReducedMotion } from "../lib/motion.js";
+import { KIND_COLORS } from "../lib/marketFilters.js";
 import { MARKETS } from "../data/markets.js";
 import { MARKETS_HERO, commonsPage, commonsSrcSet, commonsThumb, marketPhoto } from "../data/marketPhotos.js";
 import { CATEGORIES, FEATURED, countryName, filterMarkets, geography, mainCategory, specialtiesOf } from "../lib/marketGuide.js";
@@ -13,6 +15,8 @@ import "./MarketsGuide.css";
 // The weekend planner (city, distance, dates, map) keeps the addresses it always had: an old link
 // to /markets?city=…&km=… still opens it.
 const Planner = lazy(() => import("./Markets.jsx"));
+// The world map of the band: its own chunk (the land outlines and topojson), loaded near the screen.
+const MarketsWorldMap = lazy(() => import("../components/MarketsWorldMap.jsx"));
 const PLANNER_PARAMS = ["city", "km", "when", "kinds", "at", "view", "market"];
 
 const PAGE = 30;
@@ -84,7 +88,30 @@ function Guide() {
   const counts = useMemo(() => Object.fromEntries(CATEGORIES.map((c) => [c.key, MARKETS.filter(c.test).length])), []);
   const [region, setRegion] = useState(geo[0]?.region ?? "europe");
   const featured = FEATURED.map((id) => byId.get(id)).filter(Boolean);
+  const navigate = useNavigate();
+  const reduced = useReducedMotion();
 
+  // The band's map loads when the band comes near the screen.
+  const mapBand = useRef(null);
+  const [mapNear, setMapNear] = useState(false);
+  useEffect(() => {
+    const el = mapBand.current;
+    if (!el || typeof IntersectionObserver === "undefined") return undefined;
+    const observer = new IntersectionObserver(([entry]) => entry.isIntersecting && (setMapNear(true), observer.disconnect()), { rootMargin: "300px 0px" });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  // Each region opens the map at its city with most places.
+  const regionCities = useMemo(
+    () =>
+      geo.map((r) => {
+        const top = r.countries.flatMap((c) => c.cities.map((city) => ({ ...city, country: c.key }))).sort((a, b) => b.count - a.count)[0];
+        const slug = top && MARKET_CITIES.find((mc) => mc.name === top.name && mc.country === top.country)?.slug;
+        return { region: r.region, count: r.countries.reduce((sum, c) => sum + c.count, 0), slug, city: top?.name };
+      }),
+    [geo]
+  );
   // A new search or filter starts the list from the top.
   const listKey = `${query}|${category}|${country}|${town}|${order}`;
   const [shown, setShown] = useState({ key: listKey, count: PAGE });
@@ -125,15 +152,68 @@ function Guide() {
           </form>
           <p className="mg-hero__facts">
             <span>{t("markets.guide.facts", { places: number(MARKETS.length), countries: COUNTRY_COUNT, cities: MARKET_CITIES.length })}</span>
-            <Link to={cityPath(planSlug)} className="mg-hero__plan">
-              {t("markets.guide.planCta")} →
-            </Link>
+            <a href="#mg-map" className="mg-hero__plan">
+              {t("markets.guide.mapOpen")} ↓
+            </a>
           </p>
         </div>
         <a className="mg-hero__credit" href={commonsPage(MARKETS_HERO)} target="_blank" rel="noreferrer">
           {MARKETS_HERO.caption} · {t("markets.guide.photoCredit", { author: MARKETS_HERO.author, license: MARKETS_HERO.license })}
         </a>
       </header>
+
+      {/* ---------- the map: every place a dot, the way into the planner ---------- */}
+      <section className="mg-mapband" id="mg-map" ref={mapBand} aria-labelledby="mg-map-title">
+        <div className="container">
+          <div className="mg-mapband__head">
+            <div>
+              <p className="mg-eyebrow">{t("markets.guide.mapEyebrow")}</p>
+              <h2 id="mg-map-title" className="mg-title">
+                {t("markets.guide.mapTitle", { count: number(MARKETS.length) })}
+              </h2>
+            </div>
+            <div className="mg-mapband__intro">
+              <p>{t("markets.guide.mapText")}</p>
+              <div className="mg-mapband__actions">
+                <Link to="/markets?view=world" className="mg-mapband__open">
+                  {t("markets.guide.mapOpen")} →
+                </Link>
+                <Link to={cityPath(planSlug)} className="mg-mapband__plan">
+                  {t("markets.guide.mapPlanIn", { city: marketCity(planSlug)?.name ?? planSlug })}
+                </Link>
+              </div>
+            </div>
+          </div>
+          <div className="mg-mapband__map">
+            {mapNear && (
+              <Suspense fallback={null}>
+                <MarketsWorldMap markets={MARKETS} onOpen={(m) => navigate(marketPath(m))} label={t("markets.guide.mapLabel", { count: number(MARKETS.length) })} still={reduced} />
+              </Suspense>
+            )}
+          </div>
+          <div className="mg-mapband__foot">
+            <p className="mg-mapband__legend">
+              {["market", "fair", "shop", "sale"].map((kind) => (
+                <span key={kind}>
+                  <i style={{ background: KIND_COLORS[kind] }} aria-hidden="true" />
+                  {t(`markets.kinds.${kind}`)}
+                </span>
+              ))}
+              <span className="mg-mapband__hint">{t("markets.guide.mapHint")}</span>
+            </p>
+            <nav className="mg-mapband__regions" aria-label={t("markets.guide.mapRegions")}>
+              <span>{t("markets.guide.mapRegions")}</span>
+              {regionCities
+                .filter((r) => r.slug)
+                .map((r) => (
+                  <Link key={r.region} to={cityPath(r.slug)}>
+                    {t(`markets.regions.${r.region}`)} <b>{number(r.count)}</b>
+                  </Link>
+                ))}
+            </nav>
+          </div>
+        </div>
+      </section>
 
       {/* ---------- six ways in ---------- */}
       <section className="container mg-section" aria-labelledby="mg-cats">
