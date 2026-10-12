@@ -86,7 +86,6 @@ function Guide() {
   const cities = useMemo(() => countries.find((c) => c.key === country)?.cities ?? [], [countries, country]);
   const results = useMemo(() => filterMarkets(MARKETS, { query, category, country, city: town, order, lang }), [query, category, country, town, order, lang]);
   const counts = useMemo(() => Object.fromEntries(CATEGORIES.map((c) => [c.key, MARKETS.filter(c.test).length])), []);
-  const [region, setRegion] = useState(geo[0]?.region ?? "europe");
   const featured = FEATURED.map((id) => byId.get(id)).filter(Boolean);
   const navigate = useNavigate();
   const reduced = useReducedMotion();
@@ -267,43 +266,6 @@ function Guide() {
             })}
           </ul>
         </div>
-      </section>
-
-      {/* ---------- by country and city ---------- */}
-      <section className="container mg-section" aria-labelledby="mg-geo">
-        <p className="mg-eyebrow">{t("markets.guide.geoEyebrow")}</p>
-        <h2 id="mg-geo" className="mg-title">
-          {t("markets.guide.geoTitle")}
-        </h2>
-        <div className="mg-regions" role="group" aria-label={t("markets.guide.geoEyebrow")}>
-          {geo.map((r) => (
-            <button key={r.region} type="button" aria-pressed={region === r.region} onClick={() => setRegion(r.region)}>
-              {t(`markets.regions.${r.region}`)}
-              <span>{number(r.countries.reduce((sum, c) => sum + c.count, 0))}</span>
-            </button>
-          ))}
-        </div>
-        <ul className="mg-countries">
-          {(geo.find((r) => r.region === region)?.countries ?? []).map((c) => (
-            <li key={c.key}>
-              <button type="button" className="mg-country" onClick={() => update({ country: c.key, town: "" }, { scroll: true })}>
-                <span className="mg-country__name">{countryName(c.sample, lang)}</span>
-                <span className="mg-country__count">{t("markets.guide.geoShow", { count: number(c.count) })}</span>
-              </button>
-              <p className="mg-country__cities">
-                {c.cities.slice(0, 4).map((city, i) => {
-                  const slug = MARKET_CITIES.find((mc) => mc.name === city.name && mc.country === c.key)?.slug;
-                  return (
-                    <span key={city.name}>
-                      {i > 0 && " · "}
-                      {slug ? <Link to={cityPath(slug)}>{city.name}</Link> : city.name} <span className="mg-country__n">{city.count}</span>
-                    </span>
-                  );
-                })}
-              </p>
-            </li>
-          ))}
-        </ul>
       </section>
 
       {/* ---------- the whole guide ---------- */}

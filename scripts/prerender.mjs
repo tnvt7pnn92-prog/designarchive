@@ -36,7 +36,7 @@ const { labelSvg, storySvg, renderPng } = await load("scripts/lib/og-label.mjs")
 const { SITE_NAME, ROUTE_SEO, seoForDesigner, seoForPiece, seoForStory, seoForRoute, seoForMarketCity, seoForMarketPlace } = await load("src/lib/seo.js");
 const { MARKET_CITIES, placesIn, marketPath, cityPath, cityNameOf, countryOf } = await load("src/lib/marketPlaces.js");
 const { MARKETS } = await load("src/data/markets.js");
-const { CATEGORIES: GUIDE_CATEGORIES, FEATURED, geography, mainCategory, specialtiesOf } = await load("src/lib/marketGuide.js");
+const { CATEGORIES: GUIDE_CATEGORIES, FEATURED, mainCategory, specialtiesOf } = await load("src/lib/marketGuide.js");
 const { MARKETS_HERO, commonsThumb, marketPhoto } = await load("src/data/marketPhotos.js");
 const { marketSchedule } = await load("src/lib/marketDates.js");
 const { dateKey } = await load("src/lib/today.js");
@@ -160,7 +160,7 @@ const SECTION_BODIES = {
       <span class="eyebrow">${esc(en.stories.storyOfDay)}</span>
       <p class="prerender__feature">${a(`/stories/${storyOfTheDay(today).id}`, storyOfTheDay(today).title)}</p>
       ${list(publishedStories(today).map((s) => `${a(`/stories/${s.id}`, s.title)} <span>${esc(s.hook)}</span>`))}`,
-  // The guide: its cover, the map band, the six ways in, the editorial selection and every country with its cities.
+  // The guide: its cover, the map band, the six ways in and the editorial selection.
   "/markets": () => `
       <span class="eyebrow">${esc(en.markets.guide.eyebrow)}</span>
       <h1>${esc(en.markets.guide.title)}</h1>
@@ -170,9 +170,7 @@ const SECTION_BODIES = {
       <h2>${esc(en.markets.guide.catsTitle)}</h2>
       ${list(GUIDE_CATEGORIES.map((c) => `<strong>${esc(en.markets.categories[c.key].name)}</strong> — ${esc(en.markets.categories[c.key].text)} <span>${MARKETS.filter(c.test).length}</span>`))}
       <h2>${esc(en.markets.guide.featuredTitle)}</h2>
-      ${list(FEATURED.map((id) => MARKETS.find((m) => m.id === id)).filter(Boolean).map((m) => `${a(marketPath(m), m.name)} <span>${esc(m.city)} — ${esc(m.description ?? "")}</span>`))}
-      <h2>${esc(en.markets.guide.geoTitle)}</h2>
-      ${list(geography(MARKETS).flatMap((r) => r.countries).map((c) => `<strong>${esc(c.key)}</strong> <span>${c.count}</span>: ${c.cities.slice(0, 6).map((city) => { const slug = MARKET_CITIES.find((mc) => mc.name === city.name && mc.country === c.key)?.slug; return slug ? a(cityPath(slug), city.name) : esc(city.name); }).join(", ")}`))}`,
+      ${list(FEATURED.map((id) => MARKETS.find((m) => m.id === id)).filter(Boolean).map((m) => `${a(marketPath(m), m.name)} <span>${esc(m.city)} — ${esc(m.description ?? "")}</span>`))}`,
   "/moodboard": () => `<h1>${esc(en.nav.moodboard)}</h1><p class="prerender__lede">${esc(ROUTE_SEO["/moodboard"].description)}</p>`,
   "/credits": () => `<h1>${esc(ROUTE_SEO["/credits"].title.split(" · ")[0])}</h1><p class="prerender__lede">${esc(ROUTE_SEO["/credits"].description)}</p>`,
   "/collection": () => `<h1>${esc(en.nav.collection)}</h1><p class="prerender__lede">${esc(en.collection.intro)}</p>`,

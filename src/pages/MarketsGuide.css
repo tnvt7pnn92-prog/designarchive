@@ -468,109 +468,6 @@
   text-underline-offset: 4px;
 }
 
-/* ---------- by country and city ---------- */
-.mg-regions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.2rem 1.6rem;
-  margin-top: clamp(24px, 3vw, 36px);
-  border-bottom: 1px solid var(--mg-rule);
-}
-
-.mg-regions button {
-  min-height: 44px;
-  padding: 0 0 0.2rem;
-  border: 0;
-  border-bottom: 2px solid transparent;
-  margin-bottom: -1px;
-  background: none;
-  color: var(--color-text-dim);
-  font-family: var(--font-serif);
-  font-size: 1.15rem;
-  cursor: pointer;
-}
-
-.mg-regions button span {
-  margin-left: 0.4rem;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  color: var(--color-text-faint);
-}
-
-.mg-regions button[aria-pressed="true"] {
-  border-bottom-color: var(--color-accent);
-  color: var(--color-text);
-}
-
-.mg-countries {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 0 clamp(18px, 2.4vw, 36px);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.mg-countries li {
-  padding: 1.1rem 0;
-  border-bottom: 1px solid var(--color-border-soft);
-}
-
-.mg-country {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  min-height: 44px;
-  padding: 0;
-  border: 0;
-  background: none;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-}
-
-.mg-country__name {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-}
-
-.mg-country__count {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--color-text-faint);
-  white-space: nowrap;
-}
-
-.mg-country:hover .mg-country__name {
-  color: var(--color-accent);
-}
-
-.mg-country__cities {
-  margin: 0.3rem 0 0;
-  color: var(--color-text-dim);
-  font-size: 0.88rem;
-  line-height: 1.7;
-}
-
-.mg-country__cities a {
-  color: var(--color-text-dim);
-  border-bottom: 1px solid var(--color-border);
-}
-
-.mg-country__cities a:hover {
-  color: var(--color-accent);
-}
-
-.mg-country__n {
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  color: var(--color-text-faint);
-}
-
 /* ---------- the whole guide ---------- */
 .mg-directory {
   scroll-margin-top: var(--header-height);
@@ -919,13 +816,6 @@
     content: "";
     position: absolute;
     inset: 0;
-  }
-
-  .mg-country__cities a {
-    display: inline-flex;
-    align-items: center;
-    min-width: 44px;
-    min-height: 44px;
   }
 }
 
