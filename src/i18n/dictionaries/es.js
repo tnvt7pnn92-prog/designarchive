@@ -206,7 +206,6 @@ export default {
     zoomIn: "Acercar",
     zoomOut: "Alejar",
     zoomFit: "Ajustar a la pantalla",
-    exportError: "No se pudo exportar la imagen: una de las fotos no lo permite.",
     types: { photo: "Pieza del archivo", text: "Texto", arrow: "Flecha", sticker: "Pegatina", material: "Material", color: "Color", shape: "Forma", image: "Foto" },
     font: "Fuente",
     fonts: { serif: "Serif", sans: "Sans", hand: "Manuscrita", mono: "Mono" },
@@ -383,6 +382,8 @@ export default {
       a4: "A4 vertical",
       square: "Cuadrado",
     },
+    exportError: "No se ha podido exportar la imagen. Inténtalo de nuevo en un momento.",
+    exportSkipped: "Exportada. {count} foto(s) se han quedado fuera: los sitios que las alojan no lo permiten.",
   },
   stories: {
     title: "Historias y Noticias",

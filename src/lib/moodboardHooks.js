@@ -6,28 +6,46 @@ import { FONT_FACES } from "./moodboard.js";
 // Shared cache so duplicated tiles/stickers reuse one HTMLImageElement.
 const imageCache = new Map();
 
+// A photo drawn without CORS permission makes the whole board impossible to export. Hosts that send
+// no CORS headers are asked through an image proxy that adds them (images.weserv.nl: it only sees
+// the photo's public address). Only if that fails too is the photo shown as it is — on screen
+// only: it is marked, and the export leaves it out (MoodboardCanvas exportImage).
+const proxied = (src) => `https://images.weserv.nl/?url=${encodeURIComponent(src)}&w=2400&we`;
+
+function attemptsFor(src) {
+  const local = src.startsWith("data:") || src.startsWith("blob:") || src.startsWith("/");
+  return local
+    ? [{ url: src, cors: true }]
+    : [
+        { url: src, cors: true },
+        { url: proxied(src), cors: true },
+        { url: src, cors: false },
+      ];
+}
+
 function loadImage(src) {
   let entry = imageCache.get(src);
   if (entry) return entry;
   entry = { status: "loading", image: null, tainted: false };
   entry.promise = new Promise((resolve) => {
-    const attempt = (cors) => {
+    const attempts = attemptsFor(src);
+    const attempt = (i) => {
+      const { url, cors } = attempts[i];
       const img = new window.Image();
-      // Anonymous CORS keeps the canvas exportable; if a host refuses it we still show
-      // the picture (export will then report the tainted canvas).
       if (cors) img.crossOrigin = "anonymous";
+      else img.dataset.tainted = "1";
       img.onload = () => {
         Object.assign(entry, { status: "loaded", image: img, tainted: !cors });
         resolve(entry);
       };
       img.onerror = () => {
-        if (cors && !src.startsWith("data:")) return attempt(false);
+        if (i + 1 < attempts.length) return attempt(i + 1);
         entry.status = "failed";
         resolve(entry);
       };
-      img.src = src;
+      img.src = url;
     };
-    attempt(true);
+    attempt(0);
   });
   imageCache.set(src, entry);
   return entry;

@@ -206,7 +206,6 @@ export default {
     zoomIn: "Zoom in",
     zoomOut: "Zoom out",
     zoomFit: "Fit to screen",
-    exportError: "The image couldn't be exported: one of the pictures doesn't allow it.",
     types: { photo: "Archive piece", text: "Text", arrow: "Arrow", sticker: "Sticker", material: "Material", color: "Colour", shape: "Shape", image: "Photo" },
     font: "Font",
     fonts: { serif: "Serif", sans: "Sans", hand: "Handwritten", mono: "Mono" },
@@ -383,6 +382,8 @@ export default {
       a4: "A4 portrait",
       square: "Square",
     },
+    exportError: "The image couldn't be exported. Try again in a moment.",
+    exportSkipped: "Exported. {count} photo(s) left out: the sites that host them don't allow it.",
   },
   stories: {
     title: "Stories & News",

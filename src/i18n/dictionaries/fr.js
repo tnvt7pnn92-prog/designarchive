@@ -206,7 +206,6 @@ export default {
     zoomIn: "Zoom avant",
     zoomOut: "Zoom arrière",
     zoomFit: "Ajuster à l'écran",
-    exportError: "Impossible d'exporter l'image : l'une des photos ne le permet pas.",
     types: { photo: "Pièce de l'Archive", text: "Texte", arrow: "Flèche", sticker: "Sticker", material: "Matériau", color: "Couleur", shape: "Forme", image: "Photo" },
     font: "Police",
     fonts: { serif: "Serif", sans: "Sans", hand: "Manuscrite", mono: "Mono" },
@@ -383,6 +382,8 @@ export default {
       a4: "A4 portrait",
       square: "Carré",
     },
+    exportError: "L'image n'a pas pu être exportée. Réessayez dans un instant.",
+    exportSkipped: "Exportée. {count} photo(s) laissée(s) de côté : les sites qui les hébergent ne le permettent pas.",
   },
   stories: {
     title: "Récits & Actualités",

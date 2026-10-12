@@ -335,7 +335,9 @@ export default function MoodboardCanvas({
         };
       },
       // Renders the full board at the given resolution (2× by default) regardless of the current
-      // zoom, without UI chrome.
+      // zoom, without UI chrome. Photos whose host refuses to share them (marked by
+      // lib/moodboardHooks.js) would make the whole picture unreadable: they are left out, and
+      // counted in `skipped`. Returns { url, skipped }.
       exportImage: ({ pixelRatio = 2 } = {}) => {
         const stage = stageRef.current;
         const layer = contentRef.current;
@@ -344,16 +346,19 @@ export default function MoodboardCanvas({
         const prev = { x: stage.x(), y: stage.y(), scale: stage.scaleX() };
         const attached = tr.nodes();
         const handles = layer.find(".handle");
+        const blocked = layer.find("Image").filter((node) => node.visible() && node.image()?.dataset?.tainted);
         tr.nodes([]);
         handles.forEach((h) => h.hide());
+        blocked.forEach((node) => node.hide());
         stage.position({ x: 0, y: 0 });
         stage.scale({ x: 1, y: 1 });
         try {
-          return layer.toDataURL({ x: 0, y: 0, width: b.w, height: b.h, pixelRatio });
+          return { url: layer.toDataURL({ x: 0, y: 0, width: b.w, height: b.h, pixelRatio }), skipped: blocked.length };
         } finally {
           stage.position({ x: prev.x, y: prev.y });
           stage.scale({ x: prev.scale, y: prev.scale });
           handles.forEach((h) => h.show());
+          blocked.forEach((node) => node.show());
           tr.nodes(attached);
           stage.batchDraw();
         }

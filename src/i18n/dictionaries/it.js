@@ -206,7 +206,6 @@ export default {
     zoomIn: "Ingrandisci",
     zoomOut: "Riduci",
     zoomFit: "Adatta allo schermo",
-    exportError: "Impossibile esportare l'immagine: una delle foto non lo consente.",
     types: { photo: "Pezzo d'archivio", text: "Testo", arrow: "Freccia", sticker: "Adesivo", material: "Materiale", color: "Colore", shape: "Forma", image: "Foto" },
     font: "Font",
     fonts: { serif: "Serif", sans: "Sans", hand: "Scritto a mano", mono: "Mono" },
@@ -383,6 +382,8 @@ export default {
       a4: "A4 verticale",
       square: "Quadrato",
     },
+    exportError: "Non è stato possibile esportare l'immagine. Riprova tra poco.",
+    exportSkipped: "Esportata. {count} foto lasciate fuori: i siti che le ospitano non lo consentono.",
   },
   stories: {
     title: "Storie e News",

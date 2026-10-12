@@ -206,7 +206,6 @@ export default {
     zoomIn: "放大",
     zoomOut: "缩小",
     zoomFit: "适应屏幕",
-    exportError: "无法导出图片：其中一张照片不允许导出。",
     types: { photo: "档案作品", text: "文字", arrow: "箭头", sticker: "贴纸", material: "材质", color: "颜色", shape: "形状", image: "照片" },
     font: "字体",
     fonts: { serif: "衬线", sans: "无衬线", hand: "手写", mono: "等宽" },
@@ -383,6 +382,8 @@ export default {
       a4: "A4 竖版",
       square: "方形",
     },
+    exportError: "无法导出图片，请稍后再试。",
+    exportSkipped: "已导出。有 {count} 张照片未包含：托管它们的网站不允许。",
   },
   stories: {
     title: "故事与资讯",

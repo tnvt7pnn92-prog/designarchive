@@ -201,8 +201,8 @@ export default function BoardBar({
     }
     setSharing(true);
     try {
-      const png = await boardPng(canvasRef.current);
-      const { slug, error } = await shareBoard(active, png);
+      const { url } = boardPng(canvasRef.current);
+      const { slug, error } = await shareBoard(active, url);
       if (error) throw error;
       await navigator.clipboard
         ?.writeText(siteUrl(`/m/${slug}`))
@@ -226,27 +226,29 @@ export default function BoardBar({
     });
   }
 
-  async function exportPng() {
+  // Photos whose host refuses to share them are left out of the picture: say how many.
+  function reportSkipped(skipped) {
+    if (skipped) showToast({ message: t("moodboard.exportSkipped", { count: skipped }) });
+  }
+
+  function exportPng() {
     setPop(null);
     try {
-      downloadDataUrl(
-        await boardPng(canvasRef.current),
-        `${(titleOf(active) || "design-archive").replace(/[^\w-]+/g, "-").toLowerCase()}.png`,
-      );
+      const { url, skipped } = boardPng(canvasRef.current);
+      downloadDataUrl(url, `${(titleOf(active) || "design-archive").replace(/[^\w-]+/g, "-").toLowerCase()}.png`);
+      reportSkipped(skipped);
     } catch {
-      // A cross-origin picture without CORS headers taints the canvas.
       showToast({ message: t("moodboard.exportError") });
     }
   }
 
   // The PDF is the print page: it gets the picture of the board.
-  async function exportPdf() {
+  function exportPdf() {
     setPop(null);
     try {
-      setPrintSheet({
-        boardId: active.id,
-        image: await boardPng(canvasRef.current),
-      });
+      const { url, skipped } = boardPng(canvasRef.current);
+      setPrintSheet({ boardId: active.id, image: url });
+      reportSkipped(skipped);
       navigate("/moodboard/print");
     } catch {
       showToast({ message: t("moodboard.exportError") });
