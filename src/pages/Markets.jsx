@@ -543,6 +543,9 @@ export default function Markets() {
   return (
     <div className="markets-page">
       <section className="container mk-intro">
+        <Link to="/markets" className="mk-back">
+          ← {t("markets.guide.dirEyebrow")}
+        </Link>
         <p className="mk-note">{t("markets.planner.note", { count: MARKET_COUNT })}</p>
         {/* A city page searching an area of the map is no longer that city's page. */}
         {routeEntry && !at ? (

@@ -9,6 +9,15 @@
 // A "sale" also carries `url` (the brand's page for the outlet, or where it announces the sale),
 // may carry `brand` (as spelt in the archive, for the link to its pieces) and `dates` (the days
 // of an edition the brand has announced, YYYY-MM-DD; past ones are ignored).
+//
+// Optional fields a place's page shows when they are there (nothing is guessed when they are not):
+//   url        the official site          instagram   the handle, without "@"
+//   address    the street address         hours       opening hours, only from the place itself
+//   specialties  ["midCentury", "lighting", …] (keys of SPECIALTIES in lib/marketGuide.js),
+//                set by hand; without it the page reads them from the description
+//   listing    "sponsored" for a paid listing, shown as such on the page and in the guide; the
+//              editorial selection never uses it (see FEATURED in lib/marketGuide.js)
+// Photos are not stored here: see data/marketPhotos.js (each with its author and licence).
 export const MARKET_KINDS = ["market", "fair", "shop", "sale"];
 
 export const MARKETS = [
@@ -1011,18 +1020,6 @@ export const MARKETS = [
     frequency: "Last weekend of each month, except July",
     description:
       "Traders, restorers and street dealers spread across Piazza Grande and the neighbouring squares of Modena's historic centre.",
-  },
-  {
-    // Winter venue; from June to October the market moves elsewhere in the centre.
-    id: "mercatino-antiquariato-mantua",
-    name: "Mercatino dell'Antiquariato di Mantova",
-    city: "Mantua, Italy",
-    lat: 45.15995,
-    lng: 10.79685,
-    kind: "market",
-    frequency: "Third Sunday of each month",
-    description:
-      "Antiques, modernariato and quality collectibles in Piazza Sordello, beside the Palazzo Ducale.",
   },
   {
     id: "cose-altri-tempi-piazzola-sul-brenta",

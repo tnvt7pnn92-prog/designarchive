@@ -1,0 +1,162 @@
+/* The guide's request form: a sheet of warm paper over the dimmed page, plain fields with
+   hairlines, no decoration. */
+.mc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: grid;
+  place-items: center;
+  padding: var(--space-3);
+  background: var(--surface-overlay);
+  overflow-y: auto;
+}
+
+.mc-panel {
+  position: relative;
+  width: min(560px, 100%);
+  max-height: calc(100dvh - 2 * var(--space-3));
+  overflow-y: auto;
+  padding: clamp(24px, 4vw, 40px);
+  background: var(--light-bg);
+  color: var(--light-text);
+  border-radius: var(--radius-sm);
+}
+
+.mc-panel h2 {
+  margin: 0 2.5rem 0.6rem 0;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem);
+  line-height: 1.1;
+}
+
+.mc-lede {
+  margin: 0 0 1.4rem;
+  color: var(--light-text-dim);
+  line-height: 1.55;
+}
+
+.mc-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: var(--light-text);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mc-close:hover {
+  background: var(--light-border);
+}
+
+.mc-form {
+  display: grid;
+  gap: 1rem;
+}
+
+.mc-field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.mc-field__label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--light-text-dim);
+}
+
+.mc-field__optional {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--light-text-faint);
+}
+
+.mc-field input,
+.mc-field select,
+.mc-field textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 0.55rem 0.7rem;
+  border: 0;
+  border-bottom: 1px solid var(--light-text-dim);
+  border-radius: 0;
+  background: #fffaf2;
+  color: var(--light-text);
+  font: inherit;
+}
+
+.mc-field textarea {
+  resize: vertical;
+}
+
+.mc-field input:focus-visible,
+.mc-field select:focus-visible,
+.mc-field textarea:focus-visible {
+  outline: 2px solid var(--light-text);
+  outline-offset: 1px;
+}
+
+.mc-field [aria-invalid="true"] {
+  border-bottom-color: #9a2e1c;
+}
+
+.mc-field__error {
+  color: #9a2e1c;
+  font-size: 0.82rem;
+}
+
+.mc-note,
+.mc-soon {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--light-text-dim);
+}
+
+.mc-soon {
+  padding: 0.7rem 0.9rem;
+  border-left: 2px solid var(--color-accent);
+  background: #fffaf2;
+  color: var(--light-text);
+}
+
+.mc-submit {
+  justify-self: start;
+  min-height: 48px;
+  padding: 0 1.6rem;
+  border: 1px solid var(--light-text);
+  border-radius: var(--radius-pill);
+  background: var(--light-text);
+  color: var(--light-bg);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.mc-submit:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.mc-sent {
+  padding: 1rem;
+  border-left: 2px solid var(--color-accent);
+  background: #fffaf2;
+  line-height: 1.55;
+}
+
+.mc-field input:disabled,
+.mc-field select:disabled,
+.mc-field textarea:disabled {
+  opacity: 0.6;
+}

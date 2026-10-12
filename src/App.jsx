@@ -21,6 +21,7 @@ import { revealApp } from "./lib/handoff.js";
 // moodboard are the heavy ones and most visits never open them.
 const Archive = lazy(() => import("./pages/Archive.jsx"));
 const Markets = lazy(() => import("./pages/Markets.jsx"));
+const MarketsGuide = lazy(() => import("./pages/MarketsGuide.jsx"));
 const MarketPlace = lazy(() => import("./pages/MarketPlace.jsx"));
 // The moodboard's own fonts start downloading alongside its code, not before anyone asks for it.
 const Moodboard = lazy(() => {
@@ -91,7 +92,7 @@ export default function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/archive" element={<Archive />} />
-                <Route path="/markets" element={<Markets />} />
+                <Route path="/markets" element={<MarketsGuide />} />
                 <Route path="/markets/:city" element={<Markets />} />
                 <Route path="/markets/:city/:id" element={<MarketPlace />} />
                 {/* The interactive globe used to live at /map; keep old links working. */}

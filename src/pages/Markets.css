@@ -860,3 +860,20 @@ html:has(.mk-map.is-full) {
     min-height: 44px;
   }
 }
+
+/* Back to the guide (/markets) from a city's planner. */
+.mk-back {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+}
+
+.mk-back:hover {
+  color: var(--color-accent);
+}

@@ -72,8 +72,8 @@ export const ROUTE_SEO = {
     description: `Browse ${STATS.pieces} design pieces by category, style, decade, designer, brand, country and material.`,
   },
   "/markets": {
-    title: siteTitle("Markets & fairs"),
-    description: `Where to hunt for vintage design this weekend: ${MARKET_COUNT} flea markets, fairs and galleries with their next dates, on a city map.`,
+    title: siteTitle("Design markets, galleries and vintage shops: an international guide"),
+    description: `A curated guide to ${MARKET_COUNT} flea markets, design galleries, vintage shops, antiques markets and fairs around the world, to search by city, country and kind.`,
   },
 
   "/designers": {

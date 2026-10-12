@@ -138,6 +138,25 @@ sempre nel browser e non sanno se c'è un account.
 3. `npm run check`. Se due grafie diverse dello stesso designer o produttore finiscono sullo stesso
    indirizzo (per esempio «Molteni&C» e «Molteni & C.»), il controllo lo segnala.
 
+## La guida dei mercatini (Markets)
+
+`/markets` è la guida: copertina con ricerca, sei categorie, «Luoghi che valgono il viaggio», Paesi e
+città, l'elenco completo con filtri e i due moduli (negozi e segnalazioni). Il pianificatore del
+weekend sta nelle pagine delle città (`/markets/milan`); i vecchi link `/markets?city=…` lo aprono
+ancora.
+
+- **Dati:** `src/data/markets.js`. Un luogo ha sempre nome, città, coordinate, tipo, frequenza e
+  descrizione; i campi facoltativi (sito, Instagram, indirizzo, orari, specializzazioni, inserzione a
+  pagamento) sono descritti in testa al file e compaiono nella scheda solo se ci sono.
+- **Categorie e specializzazioni:** `src/lib/marketGuide.js`. Gallerie e mercati dell'antiquariato si
+  riconoscono da nome e descrizione; le specializzazioni sono parole trovate nella descrizione, mai
+  supposte.
+- **Selezione editoriale:** `FEATURED` in `marketGuide.js`, solo luoghi con una foto vera in
+  `src/data/marketPhotos.js` (Wikimedia Commons, con autore e licenza, citati nei Crediti). Non è mai a
+  pagamento: un'inserzione pagata avrà `listing: "sponsored"` e lo dirà.
+- **Moduli:** scrivono un'email all'indirizzo della variabile del repository `CONTACT_EMAIL`
+  (`VITE_CONTACT_EMAIL` in locale). Finché manca, i moduli dicono «in arrivo» e non inviano nulla.
+
 ## Aggiungere una stringa o una lingua
 
 Nessun testo dell'interfaccia va scritto direttamente nei componenti: si usa `t("gruppo.chiave")`,

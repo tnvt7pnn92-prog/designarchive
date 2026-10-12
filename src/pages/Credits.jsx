@@ -5,6 +5,8 @@ import { OBJECT_PHOTOS, photoSource, photoPage } from "../data/objectPhotos.js";
 import { PLACES } from "../data/places.js";
 import { MATERIALS } from "../data/materials.js";
 import { PROMO_IMAGES } from "../data/promoImages.js";
+import { MARKETS } from "../data/markets.js";
+import { MARKETS_HERO, MARKET_PHOTOS, commonsPage } from "../data/marketPhotos.js";
 import "./Credits.css";
 
 export default function Credits() {
@@ -81,6 +83,23 @@ export default function Credits() {
               <span className="credits-list__label">{m.name}</span>
               <span className="credits-list__meta">
                 {m.credit.author} · {m.credit.license} · via Wikimedia Commons
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="credits-section">
+        <h2>Markets guide</h2>
+        <ul className="credits-list">
+          {[["Markets guide cover", MARKETS_HERO], ...Object.entries(MARKET_PHOTOS).map(([id, photo]) => [MARKETS.find((m) => m.id === id)?.name ?? id, photo])].map(([label, photo]) => (
+            <li key={label}>
+              <span className="credits-list__label">{label}</span>
+              <span className="credits-list__meta">
+                {photo.author} · {photo.license} · via{" "}
+                <a href={commonsPage(photo)} target="_blank" rel="noreferrer">
+                  Wikimedia Commons
+                </a>
               </span>
             </li>
           ))}

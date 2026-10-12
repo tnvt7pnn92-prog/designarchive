@@ -50,6 +50,9 @@ jobs:
           # API_URL: the address Railway gives the accounts API (server/); when set, it is used
           # instead of Supabase.
           VITE_API_URL: ${{ vars.API_URL }}
+          # Where the markets guide's requests (listings, suggestions) are written to. Unset: the forms
+          # say they are coming soon.
+          VITE_CONTACT_EMAIL: ${{ vars.CONTACT_EMAIL }}
           VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
       - uses: actions/upload-pages-artifact@v3

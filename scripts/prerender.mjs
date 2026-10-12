@@ -35,6 +35,9 @@ const { MARKET_COUNT } = await load("src/data/stats.js");
 const { labelSvg, storySvg, renderPng } = await load("scripts/lib/og-label.mjs");
 const { SITE_NAME, ROUTE_SEO, seoForDesigner, seoForPiece, seoForStory, seoForRoute, seoForMarketCity, seoForMarketPlace } = await load("src/lib/seo.js");
 const { MARKET_CITIES, placesIn, marketPath, cityPath, cityNameOf, countryOf } = await load("src/lib/marketPlaces.js");
+const { MARKETS } = await load("src/data/markets.js");
+const { CATEGORIES: GUIDE_CATEGORIES, FEATURED, geography, mainCategory, specialtiesOf } = await load("src/lib/marketGuide.js");
+const { MARKETS_HERO, commonsThumb, marketPhoto } = await load("src/data/marketPhotos.js");
 const { marketSchedule } = await load("src/lib/marketDates.js");
 const { dateKey } = await load("src/lib/today.js");
 const en = (await load("src/i18n/dictionaries/en.js")).default;
@@ -157,11 +160,17 @@ const SECTION_BODIES = {
       <span class="eyebrow">${esc(en.stories.storyOfDay)}</span>
       <p class="prerender__feature">${a(`/stories/${storyOfTheDay(today).id}`, storyOfTheDay(today).title)}</p>
       ${list(publishedStories(today).map((s) => `${a(`/stories/${s.id}`, s.title)} <span>${esc(s.hook)}</span>`))}`,
+  // The guide: its cover, the six ways in, the editorial selection and every country with its cities.
   "/markets": () => `
-      <h1>${esc(`${en.markets.planner.title1} ${en.markets.planner.title2} ${en.markets.planner.title3}`)}</h1>
-      <p class="prerender__feature prerender__feature--text">${esc(ROUTE_SEO["/markets"].description)}</p>
-      <h2>${esc(en.markets.planner.citiesTitle)}</h2>
-      ${list(MARKET_CITIES.map((city) => `${a(cityPath(city.slug), city.name)} <span>${city.count}</span>`))}`,
+      <span class="eyebrow">${esc(en.markets.guide.eyebrow)}</span>
+      <h1>${esc(en.markets.guide.title)}</h1>
+      <p class="prerender__lede">${esc(en.markets.guide.subtitle)}</p>
+      <h2>${esc(en.markets.guide.catsTitle)}</h2>
+      ${list(GUIDE_CATEGORIES.map((c) => `<strong>${esc(en.markets.categories[c.key].name)}</strong> — ${esc(en.markets.categories[c.key].text)} <span>${MARKETS.filter(c.test).length}</span>`))}
+      <h2>${esc(en.markets.guide.featuredTitle)}</h2>
+      ${list(FEATURED.map((id) => MARKETS.find((m) => m.id === id)).filter(Boolean).map((m) => `${a(marketPath(m), m.name)} <span>${esc(m.city)} — ${esc(m.description ?? "")}</span>`))}
+      <h2>${esc(en.markets.guide.geoTitle)}</h2>
+      ${list(geography(MARKETS).flatMap((r) => r.countries).map((c) => `<strong>${esc(c.key)}</strong> <span>${c.count}</span>: ${c.cities.slice(0, 6).map((city) => { const slug = MARKET_CITIES.find((mc) => mc.name === city.name && mc.country === c.key)?.slug; return slug ? a(cityPath(slug), city.name) : esc(city.name); }).join(", ")}`))}`,
   "/moodboard": () => `<h1>${esc(en.nav.moodboard)}</h1><p class="prerender__lede">${esc(ROUTE_SEO["/moodboard"].description)}</p>`,
   "/credits": () => `<h1>${esc(ROUTE_SEO["/credits"].title.split(" · ")[0])}</h1><p class="prerender__lede">${esc(ROUTE_SEO["/credits"].description)}</p>`,
   "/collection": () => `<h1>${esc(en.nav.collection)}</h1><p class="prerender__lede">${esc(en.collection.intro)}</p>`,
@@ -181,7 +190,7 @@ const SECTION_BODIES = {
 // Personal pages exist for their visitors, not for search engines.
 const NOINDEX = new Set(["/collection", "/account", "/accedi"]);
 for (const [p, body] of Object.entries(SECTION_BODIES)) {
-  pages.push({ path: p, seo: seoForRoute(p), image: PROMO_IMAGES.hero.image, body: body(), noindex: NOINDEX.has(p) });
+  pages.push({ path: p, seo: seoForRoute(p), image: p === "/markets" ? commonsThumb(MARKETS_HERO, 1280) : PROMO_IMAGES.hero.image, body: body(), noindex: NOINDEX.has(p) });
 }
 
 // Markets: a page per city and per place. The dates are those of the day of the build.
@@ -219,7 +228,9 @@ for (const city of MARKET_CITIES) {
     };
     // A market, fair or sample sale with a known next day is an Event; a shop or outlet open all
     // year a LocalBusiness; the rest a Place. A brand's own page goes in sameAs.
-    const official = m.url ? { sameAs: m.url } : {};
+    const photo = marketPhoto(m.id);
+    const photoUrl = photo ? commonsThumb(photo, 1280) : null;
+    const official = { ...(m.url ? { sameAs: m.url } : {}), ...(photoUrl ? { image: photoUrl } : {}) };
     const data =
       schedule.type === "dates"
         ? { "@context": "https://schema.org", "@type": "Event", name: m.name, description: m.description, startDate: schedule.dates[0], eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode", location: place, url: abs(marketPath(m)), ...official }
@@ -235,13 +246,14 @@ for (const city of MARKET_CITIES) {
     pages.push({
       path: marketPath(m),
       seo: seoForMarketPlace(m, city.slug),
-      image: PROMO_IMAGES.hero.image,
+      image: photoUrl ?? PROMO_IMAGES.hero.image,
       jsonld: [data],
       body: `
       <nav class="prerender__crumbs">${a("/markets", en.nav.markets)} / ${a(cityPath(city.slug), city.name)} / <span>${esc(m.name)}</span></nav>
-      <span class="eyebrow">${esc(kindLabel(m.kind))} · ${esc(m.city)}</span>
+      <span class="eyebrow">${esc(en.markets.categories[mainCategory(m)].name)} · ${esc(m.city)}</span>
       <h1>${esc(m.name)}</h1>
       <p class="prerender__lede">${esc(m.description ?? "")}</p>
+      ${specialtiesOf(m).length ? `<p>${esc(en.markets.guide.themes)}: ${specialtiesOf(m).map((s) => esc(en.markets.specialties[s])).join(", ")}</p>` : ""}
       <p>${esc(en.markets.place.frequency)}: ${esc(m.frequency)}</p>
       <p>${esc(when)}</p>`,
     });
@@ -416,7 +428,8 @@ const manifest = existsSync(manifestFile) ? JSON.parse(readFileSync(manifestFile
 const PAGE_MODULES = [
   [/^\/archive$/, "Archive"],
   [/^\/markets\/[^/]+\/[^/]+$/, "MarketPlace"],
-  [/^\/markets(\/[^/]+)?$/, "Markets"],
+  [/^\/markets$/, "MarketsGuide"],
+  [/^\/markets\/[^/]+$/, "Markets"],
   [/^\/stories$/, "Stories"],
   [/^\/stories\//, "StoryPage"],
   [/^\/piece\//, "Piece"],

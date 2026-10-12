@@ -12,6 +12,9 @@ import { siteUrl } from "../lib/site.js";
 import { useToday } from "../lib/today.js";
 import { useDocumentMeta } from "../lib/useDocumentMeta.js";
 import ObjectCard from "../components/ObjectCard.jsx";
+import MarketContactDialog from "../components/MarketContactDialog.jsx";
+import { commonsPage, commonsSrcSet, commonsThumb, marketPhoto } from "../data/marketPhotos.js";
+import { countryName, mainCategory, specialtiesOf } from "../lib/marketGuide.js";
 import NotFound from "./NotFound.jsx";
 import "./Markets.css";
 import "./MarketPlace.css";
@@ -29,6 +32,7 @@ export default function MarketPlace() {
   const market = marketById(id);
   useDocumentMeta(market ? seoForMarketPlace(market, citySlugOf(market)) : undefined);
   const [pieces, setPieces] = useState(null);
+  const [fixing, setFixing] = useState(false);
   const country = market ? archiveCountryOf(market) : "";
   // A brand's own sale shows that brand's pieces; any other place, its country's.
   const brand = market?.brand ?? "";
@@ -77,11 +81,28 @@ export default function MarketPlace() {
     );
   }
 
+  const photo = marketPhoto(market.id);
+  const themes = specialtiesOf(market);
+  const countryLabel = countryName(market, lang);
+  const instagram = market.instagram?.replace(/^@/, "");
+
   return (
     <div className="market-place container">
       <nav className="market-place__crumbs" aria-label={t("piece.breadcrumb")}>
         <Link to="/markets">{t("nav.markets")}</Link> / <Link to={cityPath(citySlug)}>{cityName}</Link> / <span>{market.name}</span>
       </nav>
+
+      {/* A real photograph of the place, when the guide has one (data/marketPhotos.js). */}
+      {photo && (
+        <figure className="market-place__photo">
+          <img src={commonsThumb(photo, 1280)} srcSet={commonsSrcSet(photo)} sizes="(max-width: 1100px) 100vw, 1100px" alt={`${market.name}, ${cityName}`} fetchPriority="high" decoding="async" />
+          <figcaption>
+            <a href={commonsPage(photo)} target="_blank" rel="noreferrer">
+              {t("markets.guide.photoCredit", { author: photo.author, license: photo.license })}
+            </a>
+          </figcaption>
+        </figure>
+      )}
 
       <div className="market-place__grid">
         <article className="mk-ticket market-place__ticket" style={{ "--kind": KIND_COLOR[market.kind] }}>
@@ -111,12 +132,32 @@ export default function MarketPlace() {
           </div>
           <div className="mk-ticket__body">
             <p className="mk-ticket__meta">
-              <span className="mk-ticket__kind">{t(`markets.kindLabels.${market.kind}`)}</span>
-              <span>{market.city}</span>
+              <span className="mk-ticket__kind">{t(`markets.categories.${mainCategory(market)}.name`)}</span>
+              <span>
+                {cityName}, {countryLabel}
+              </span>
             </p>
+            {market.listing === "sponsored" && <p className="market-place__paid">{t("markets.guide.sponsored")}</p>}
             <h1>{market.name}</h1>
             {market.description && <p className="mk-ticket__desc">{market.description}</p>}
+            {themes.length > 0 && (
+              <p className="market-place__themes">
+                <span>{t("markets.guide.themes")}</span> {themes.map((s) => t(`markets.specialties.${s}`)).join(" · ")}
+              </p>
+            )}
             <dl className="market-place__facts">
+              {market.address && (
+                <div>
+                  <dt>{t("markets.place.address")}</dt>
+                  <dd>{market.address}</dd>
+                </div>
+              )}
+              {market.hours && (
+                <div>
+                  <dt>{t("markets.place.hours")}</dt>
+                  <dd>{market.hours}</dd>
+                </div>
+              )}
               <div>
                 <dt>{t("markets.place.frequency")}</dt>
                 <dd>{market.frequency}</dd>
@@ -152,8 +193,13 @@ export default function MarketPlace() {
                 {t("markets.planner.directions")} ↗
               </a>
               {market.url && (
-                <a href={market.url} target="_blank" rel="noreferrer">
+                <a href={market.url} target="_blank" rel="noopener noreferrer">
                   {t("markets.place.official")} ↗
+                </a>
+              )}
+              {instagram && (
+                <a href={`https://www.instagram.com/${encodeURIComponent(instagram)}/`} target="_blank" rel="noopener noreferrer">
+                  {t("markets.place.instagram")} ↗
                 </a>
               )}
             </div>
@@ -168,7 +214,13 @@ export default function MarketPlace() {
       </div>
 
       {/* Days a brand announced are its own, not worked out from the frequency. */}
-      <p className="market-place__note">{first && market.dates?.includes(first) ? t("markets.place.datesAnnounced") : t("markets.planner.datesNote")}</p>
+      <p className="market-place__note">
+        {first && market.dates?.includes(first) ? t("markets.place.datesAnnounced") : t("markets.planner.datesNote")}{" "}
+        <button type="button" className="market-place__fix" onClick={() => setFixing(true)}>
+          {t("markets.contact.fixLink")}
+        </button>
+      </p>
+      {fixing && <MarketContactDialog mode="suggest" place={{ name: market.name, city: `${cityName}, ${countryLabel}` }} onClose={() => setFixing(false)} />}
 
       {nearby.length > 0 && (
         <section className="market-place__section">
