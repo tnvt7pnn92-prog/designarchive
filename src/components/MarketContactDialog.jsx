@@ -5,14 +5,16 @@ import { CATEGORIES } from "../lib/marketGuide.js";
 import { CONTACT_EMAIL, mailto, validEmail, validLink } from "../lib/contact.js";
 import "./MarketContactDialog.css";
 
-// The guide's two requests, in one dialog: "listing" (a shop asks to be in the guide) and
-// "suggest" (a visitor tells us about a place, or corrects one: `place` fills the name and city).
+// The guide's requests, in one dialog: "listing" (a shop asks to be in the guide), "products" (a brand
+// or designer proposes pieces for the archive) and "suggest" (a visitor tells us about a place, or
+// corrects one: `place` fills the name and city).
 // Checked here, then written as an email for the visitor's own mail app — there is no server.
 export default function MarketContactDialog({ mode, place = null, onClose }) {
   const { t } = useLanguage();
   const id = useId();
   const panel = useRef(null);
   const listing = mode === "listing";
+  const products = mode === "products";
   const [values, setValues] = useState({
     name: place?.name ?? "",
     city: place?.city ?? "",
@@ -47,8 +49,8 @@ export default function MarketContactDialog({ mode, place = null, onClose }) {
     if (!values.name.trim()) next.name = t("markets.contact.required");
     if (!values.city.trim()) next.city = t("markets.contact.required");
     if (!validLink(values.link)) next.link = t("markets.contact.invalidLink");
-    // A shop must leave a way to answer; a suggestion may come without one.
-    if (listing && !values.email.trim()) next.email = t("markets.contact.required");
+    // A shop or a brand must leave a way to answer; a suggestion may come without one.
+    if ((listing || products) && !values.email.trim()) next.email = t("markets.contact.required");
     else if (values.email.trim() && !validEmail(values.email)) next.email = t("markets.contact.invalidEmail");
     return next;
   }
@@ -65,7 +67,7 @@ export default function MarketContactDialog({ mode, place = null, onClose }) {
     }
     const kindName = values.kind ? t(`markets.categories.${values.kind}.name`) : "";
     const lines = [
-      [t("markets.contact.fieldName"), values.name],
+      [t(products ? "markets.contact.fieldBrand" : "markets.contact.fieldName"), values.name],
       [t("markets.contact.fieldCity"), values.city],
       [t("markets.contact.fieldKind"), kindName],
       [t("markets.contact.fieldLink"), values.link],
@@ -74,7 +76,7 @@ export default function MarketContactDialog({ mode, place = null, onClose }) {
       .filter(([, v]) => v.trim())
       .map(([label, v]) => `${label}: ${v.trim()}`);
     const body = `${lines.join("\n")}${values.message.trim() ? `\n\n${values.message.trim()}` : ""}${place ? `\n\n${window.location.href}` : ""}`;
-    const subject = t(listing ? "markets.contact.subjectListing" : "markets.contact.subjectSuggest", { name: values.name.trim() });
+    const subject = t(listing ? "markets.contact.subjectListing" : products ? "markets.contact.subjectProducts" : "markets.contact.subjectSuggest", { name: values.name.trim() });
     window.location.href = mailto({ subject, body });
     setSent(true);
   }
@@ -114,8 +116,8 @@ export default function MarketContactDialog({ mode, place = null, onClose }) {
         <button type="button" className="mc-close" onClick={onClose} aria-label={t("markets.contact.close")}>
           ×
         </button>
-        <h2 id={`${id}-title`}>{t(listing ? "markets.contact.ownerTitle" : place ? "markets.contact.fixLink" : "markets.contact.suggestTitle")}</h2>
-        <p className="mc-lede">{t(listing ? "markets.contact.ownerText" : "markets.contact.suggestText")}</p>
+        <h2 id={`${id}-title`}>{t(listing ? "markets.contact.ownerTitle" : products ? "markets.contact.productsTitle" : place ? "markets.contact.fixLink" : "markets.contact.suggestTitle")}</h2>
+        <p className="mc-lede">{t(listing ? "markets.contact.ownerText" : products ? "markets.contact.productsText" : "markets.contact.suggestText")}</p>
 
         {sent ? (
           <p className="mc-sent" role="status">
@@ -123,26 +125,29 @@ export default function MarketContactDialog({ mode, place = null, onClose }) {
           </p>
         ) : (
           <form className="mc-form" onSubmit={submit} noValidate>
-            {field("name", t("markets.contact.fieldName"))}
+            {field("name", t(products ? "markets.contact.fieldBrand" : "markets.contact.fieldName"))}
             {field("city", t("markets.contact.fieldCity"))}
-            <label className="mc-field">
-              <span className="mc-field__label">
-                {t("markets.contact.fieldKind")}
-                <span className="mc-field__optional"> · {t("markets.contact.optional")}</span>
-              </span>
-              <select name="kind" value={values.kind} onChange={set("kind")} disabled={!ready}>
-                <option value="">—</option>
-                {CATEGORIES.map((c) => (
-                  <option key={c.key} value={c.key}>
-                    {t(`markets.categories.${c.key}.name`)}
-                  </option>
-                ))}
-              </select>
-            </label>
+            {!products && (
+              <label className="mc-field">
+                <span className="mc-field__label">
+                  {t("markets.contact.fieldKind")}
+                  <span className="mc-field__optional"> · {t("markets.contact.optional")}</span>
+                </span>
+                <select name="kind" value={values.kind} onChange={set("kind")} disabled={!ready}>
+                  <option value="">—</option>
+                  {CATEGORIES.map((c) => (
+                    <option key={c.key} value={c.key}>
+                      {t(`markets.categories.${c.key}.name`)}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            )}
             {field("link", t("markets.contact.fieldLink"), { optional: true, autoComplete: "url" })}
-            {field("email", t("markets.contact.fieldEmail"), { type: "email", optional: !listing, autoComplete: "email" })}
+            {field("email", t("markets.contact.fieldEmail"), { type: "email", optional: !listing && !products, autoComplete: "email" })}
             {field("message", t("markets.contact.fieldMessage"), { as: "textarea", optional: true })}
             {listing && <p className="mc-note">{t("markets.contact.listingNote")}</p>}
+            {products && <p className="mc-note">{t("markets.contact.productsNote")}</p>}
             {!ready && (
               <p className="mc-soon" role="note">
                 {t("markets.contact.soon")}

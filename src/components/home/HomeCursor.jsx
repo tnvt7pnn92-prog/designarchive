@@ -4,7 +4,7 @@ import { onFrame, pointer, lerp } from "../../lib/frameLoop.js";
 // The home page's cursor, with a mouse only and without reduced motion: a thin gold ring that
 // trails the pointer and a dot exactly on it. Its shape never changes; over the gold buttons it turns
 // dark so it can still be seen, and it fades when the pointer leaves the window.
-const GOLD = ".home-btn--gold, .btn--gold, .home-tabs [aria-pressed='true'], .site-footer__langs [aria-pressed='true'], .home-slider__nav button:not(:disabled)";
+const GOLD = ".home-btn--gold, .btn--gold, .home-tabs [aria-pressed='true'], .site-footer__langs [aria-pressed='true'], .home-slider__nav button:not(:disabled), .site-footer__partners";
 
 export default function HomeCursor() {
   const ring = useRef(null);

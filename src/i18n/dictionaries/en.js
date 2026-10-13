@@ -677,6 +677,11 @@ export default {
       listingNote: "Every listing is reviewed by hand. The editorial selection is never paid for; a paid listing, when there are any, is marked as such.",
       subjectListing: "Listing request: {name}",
       subjectSuggest: "Place suggestion: {name}",
+      productsTitle: "Propose your pieces for the archive",
+      productsText: "A brand, a maker or a designer? Tell us about your pieces and where to see their photos.",
+      productsNote: "A piece enters the archive only with a verified photo and the credit of whoever took it.",
+      fieldBrand: "Brand, maker or designer",
+      subjectProducts: "Pieces for the archive: {name}",
     },
   },
   footer: {
@@ -686,6 +691,13 @@ export default {
     explore: "Explore",
     project: "The project",
     sourcesNote: "Every photo is credited and links back to the page it comes from.",
+    partners: {
+      eyebrow: "For shops, brands and designers",
+      title: "Work with Design Archive",
+      text: "Do you run a shop, a gallery or a design brand? Bring your space into the markets guide, or propose your pieces for the archive.",
+      shop: "List your shop",
+      products: "Propose your products",
+    },
   },
   search: {
     close: "Close search",

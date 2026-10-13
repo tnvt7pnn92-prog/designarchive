@@ -677,6 +677,11 @@ export default {
       listingNote: "Chaque fiche est vérifiée à la main. La sélection de la rédaction n'est jamais payée ; une annonce payante, quand il y en aura, sera signalée comme telle.",
       subjectListing: "Demande de fiche : {name}",
       subjectSuggest: "Proposition de lieu : {name}",
+      productsTitle: "Proposez vos pièces pour l'archive",
+      productsText: "Une marque, un fabricant ou un designer ? Parlez-nous de vos pièces et dites-nous où voir leurs photos.",
+      productsNote: "Une pièce n'entre dans l'archive qu'avec une photo vérifiée et le crédit de son auteur.",
+      fieldBrand: "Marque, fabricant ou designer",
+      subjectProducts: "Pièces pour l'archive : {name}",
     },
   },
   footer: {
@@ -686,6 +691,13 @@ export default {
     explore: "Explorer",
     project: "Le projet",
     sourcesNote: "Chaque photo est créditée et renvoie à la page d'où elle provient.",
+    partners: {
+      eyebrow: "Pour boutiques, marques et designers",
+      title: "Collaborez avec Design Archive",
+      text: "Vous avez une boutique, une galerie ou une marque de design ? Faites entrer votre lieu dans le guide des marchés ou proposez vos pièces pour l'archive.",
+      shop: "Inscrire votre boutique",
+      products: "Proposer vos produits",
+    },
   },
   search: {
     close: "Fermer la recherche",

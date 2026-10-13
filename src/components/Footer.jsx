@@ -1,9 +1,13 @@
+import { Suspense, lazy, useCallback, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useLanguage } from "../i18n/LanguageContext.jsx";
 import { LANGUAGE_NAMES } from "../i18n/dictionaries.js";
 import { useAuth } from "../lib/auth.js";
 import { updateProfile } from "../lib/profile.js";
 import "./Footer.css";
+
+// The request form opens only when asked for, so it weighs nothing on the pages.
+const MarketContactDialog = lazy(() => import("./MarketContactDialog.jsx"));
 
 const CHIPS = { en: "EN", it: "IT", es: "ES", fr: "FR", zh: "中文" };
 
@@ -35,10 +39,13 @@ const COLUMNS = [
   },
 ];
 
-// The big wordmark (its letters lift under the pointer), the columns, and the languages.
+// The big wordmark (its letters lift under the pointer), the columns, the languages, and a band in
+// gold for shops, brands and designers who want to work with the archive.
 export default function Footer() {
   const { t, lang, setLang, languages } = useLanguage();
   const { status } = useAuth();
+  const [request, setRequest] = useState(null);
+  const closeRequest = useCallback(() => setRequest(null), []);
 
   function pick(code) {
     setLang(code);
@@ -80,6 +87,26 @@ export default function Footer() {
             </nav>
           ))}
         </div>
+        <section className="site-footer__partners" aria-labelledby="site-footer-partners">
+          <div>
+            <p className="site-footer__partners-eyebrow">{t("footer.partners.eyebrow")}</p>
+            <h2 id="site-footer-partners">{t("footer.partners.title")}</h2>
+            <p>{t("footer.partners.text")}</p>
+          </div>
+          <div className="site-footer__partners-actions">
+            <button type="button" onClick={() => setRequest("listing")}>
+              {t("footer.partners.shop")}
+            </button>
+            <button type="button" onClick={() => setRequest("products")}>
+              {t("footer.partners.products")}
+            </button>
+          </div>
+        </section>
+        {request && (
+          <Suspense fallback={null}>
+            <MarketContactDialog mode={request} onClose={closeRequest} />
+          </Suspense>
+        )}
         <div className="site-footer__bottom">
           <span>
             © {new Date().getFullYear()} Design Archive. {t("footer.rights")}

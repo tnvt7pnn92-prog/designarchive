@@ -100,6 +100,80 @@
   color: var(--paper-ink);
 }
 
+/* For shops, brands and designers: the one gold band of the footer, so it is seen. */
+.site-footer__partners {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4) var(--space-5);
+  margin-top: clamp(36px, 5vw, 56px);
+  padding: clamp(24px, 4vw, 44px);
+  background: var(--color-accent);
+  color: var(--paper-ink);
+}
+
+.site-footer__partners > div:first-child {
+  flex: 1 1 380px;
+}
+
+.site-footer__partners-eyebrow {
+  margin: 0 0 0.5rem;
+  font: 500 0.68rem var(--font-mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.site-footer__partners h2 {
+  margin: 0 0 0.6rem;
+  font: 400 clamp(1.6rem, 1rem + 2vw, 2.4rem) / 1.1 var(--font-serif);
+  letter-spacing: -0.02em;
+}
+
+.site-footer__partners p:last-child {
+  max-width: 52ch;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.site-footer__partners-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.site-footer__partners-actions button {
+  min-height: 48px;
+  padding: 0 22px;
+  border: 1px solid var(--paper-ink);
+  border-radius: var(--radius-pill);
+  background: var(--paper-ink);
+  color: var(--color-accent);
+  font: 500 0.74rem var(--font-mono);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.site-footer__partners-actions button + button {
+  background: none;
+  color: var(--paper-ink);
+}
+
+.site-footer__partners-actions button:hover {
+  background: none;
+  color: var(--paper-ink);
+}
+
+.site-footer__partners-actions button + button:hover {
+  background: var(--paper-ink);
+  color: var(--color-accent);
+}
+
 .site-footer__bottom {
   margin-top: clamp(32px, 5vw, 44px);
   padding-block: 22px;

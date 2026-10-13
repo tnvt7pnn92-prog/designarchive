@@ -677,6 +677,11 @@ export default {
       listingNote: "Cada ficha se revisa a mano. La selección editorial nunca es de pago; un anuncio de pago, cuando lo haya, se indicará como tal.",
       subjectListing: "Solicitud de inclusión: {name}",
       subjectSuggest: "Sugerencia de lugar: {name}",
+      productsTitle: "Propón tus piezas para el archivo",
+      productsText: "¿Eres una marca, un fabricante o un diseñador? Cuéntanos tus piezas y dónde ver sus fotos.",
+      productsNote: "Una pieza entra en el archivo solo con una foto verificada y el crédito de quien la tomó.",
+      fieldBrand: "Marca, fabricante o diseñador",
+      subjectProducts: "Piezas para el archivo: {name}",
     },
   },
   footer: {
@@ -686,6 +691,13 @@ export default {
     explore: "Explora",
     project: "El proyecto",
     sourcesNote: "Cada foto lleva su crédito y enlaza a la página de la que procede.",
+    partners: {
+      eyebrow: "Para tiendas, marcas y diseñadores",
+      title: "Colabora con Design Archive",
+      text: "¿Tienes una tienda, una galería o una marca de diseño? Lleva tu espacio a la guía de mercadillos o propón tus piezas para el archivo.",
+      shop: "Añade tu tienda",
+      products: "Propón tus productos",
+    },
   },
   search: {
     close: "Cerrar búsqueda",

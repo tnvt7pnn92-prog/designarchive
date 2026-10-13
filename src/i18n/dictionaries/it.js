@@ -677,6 +677,11 @@ export default {
       listingNote: "Ogni inserimento è verificato a mano. La selezione editoriale non è mai a pagamento; un'inserzione a pagamento, quando ci sarà, sarà indicata come tale.",
       subjectListing: "Richiesta di inserimento: {name}",
       subjectSuggest: "Segnalazione di un luogo: {name}",
+      productsTitle: "Proponi i tuoi pezzi per l'archivio",
+      productsText: "Sei un marchio, un produttore o un designer? Raccontaci i tuoi pezzi e dove vederne le foto.",
+      productsNote: "Un pezzo entra nell'archivio solo con una foto verificata e il credito di chi l'ha scattata.",
+      fieldBrand: "Marchio, produttore o designer",
+      subjectProducts: "Pezzi per l'archivio: {name}",
     },
   },
   footer: {
@@ -686,6 +691,13 @@ export default {
     explore: "Esplora",
     project: "Il progetto",
     sourcesNote: "Ogni foto è accreditata e rimanda alla pagina da cui proviene.",
+    partners: {
+      eyebrow: "Per negozi, marchi e designer",
+      title: "Collabora con Design Archive",
+      text: "Hai un negozio, una galleria o un marchio di design? Porta il tuo spazio nella guida dei mercatini o proponi i tuoi pezzi per l'archivio.",
+      shop: "Inserisci il tuo negozio",
+      products: "Proponi i tuoi prodotti",
+    },
   },
   search: {
     close: "Chiudi ricerca",

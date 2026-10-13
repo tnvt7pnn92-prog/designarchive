@@ -677,6 +677,11 @@ export default {
       listingNote: "每条收录都经过人工审核。编辑精选从不付费；付费推广（如有）会明确标注。",
       subjectListing: "收录申请：{name}",
       subjectSuggest: "地点推荐：{name}",
+      productsTitle: "为档案推荐你的作品",
+      productsText: "你是品牌、制造商或设计师吗？介绍你的作品，并告诉我们在哪里可以看到照片。",
+      productsNote: "作品只有附带经过核实的照片及拍摄者署名才会收入档案。",
+      fieldBrand: "品牌、制造商或设计师",
+      subjectProducts: "档案作品推荐：{name}",
     },
   },
   footer: {
@@ -686,6 +691,13 @@ export default {
     explore: "探索",
     project: "关于项目",
     sourcesNote: "每张照片都注明来源，并链接回原始页面。",
+    partners: {
+      eyebrow: "面向店铺、品牌与设计师",
+      title: "与 Design Archive 合作",
+      text: "你经营店铺、画廊或设计品牌吗？把你的空间加入市集指南，或为档案推荐你的作品。",
+      shop: "加入你的店铺",
+      products: "推荐你的产品",
+    },
   },
   search: {
     close: "关闭搜索",
