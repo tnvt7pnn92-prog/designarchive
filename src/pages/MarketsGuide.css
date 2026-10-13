@@ -571,8 +571,28 @@
   display: grid;
   grid-template-columns: minmax(150px, 0.32fr) minmax(0, 1fr);
   gap: 0.4rem 2rem;
-  padding: 1.3rem 0;
+  padding: 1rem 0;
   border-bottom: 1px solid var(--color-border-soft);
+}
+
+/* Wide screens: two places side by side, the kind above the name, so the list is half as long. */
+@media (min-width: 1000px) {
+  .mg-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(28px, 4vw, 56px);
+  }
+
+  .mg-row {
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+  }
+
+  .mg-row__kind {
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0;
+  }
 }
 
 .mg-row__kind {
@@ -624,10 +644,15 @@
 
 .mg-row__desc {
   max-width: 72ch;
-  margin: 0.45rem 0 0;
+  display: -webkit-box;
+  margin: 0.4rem 0 0;
+  overflow: hidden;
   color: var(--color-text-dim);
   font-size: 0.92rem;
   line-height: 1.55;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
 
 .mg-more {

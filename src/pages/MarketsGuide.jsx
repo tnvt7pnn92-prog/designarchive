@@ -19,7 +19,7 @@ const Planner = lazy(() => import("./Markets.jsx"));
 const MarketsWorldMap = lazy(() => import("../components/MarketsWorldMap.jsx"));
 const PLANNER_PARAMS = ["city", "km", "when", "kinds", "at", "view", "market"];
 
-const PAGE = 30;
+const PAGE = 12;
 const KIND_COLOR = { market: "var(--kind-market)", fair: "var(--kind-fair)", shop: "var(--kind-shop)", sale: "var(--kind-sale)" };
 // Where "Plan the weekend" starts: the last city planned, or one of the largest for the language.
 const DEFAULT_CITY = { it: "milan", fr: "paris", es: "madrid", en: "london", zh: "tokyo" };
