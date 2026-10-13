@@ -21,6 +21,23 @@ for (const lang of LANGS) {
   dicts[lang] = flatten(mod.default);
 }
 
+// Texts that read the same as English on purpose: "moodboard" is the site's word in every language
+// that uses the Latin alphabet, "designers" is French too, and an example address needs no translation.
+const SAME_ON_PURPOSE = new Set([
+  "it: merge.moodboard",
+  "it: boards.untitled",
+  "es: merge.moodboard",
+  "es: merge.moodboards",
+  "es: boards.untitled",
+  "es: boards.count",
+  "fr: home.rooms.designers.figure",
+  "fr: merge.moodboard",
+  "fr: merge.moodboards",
+  "fr: boards.untitled",
+  "fr: boards.count",
+  "zh: auth.emailPlaceholder",
+]);
+
 const errors = [];
 const untranslated = [];
 const reference = dicts.en;
@@ -32,7 +49,7 @@ for (const lang of LANGS.filter((l) => l !== "en")) {
   for (const [key, value] of dict) {
     // Same text as English is usually a scaffolded key nobody translated yet. Proper nouns and
     // short labels legitimately match, so this only prints as a reminder.
-    if (reference.get(key) === value && typeof value === "string" && value.length > 12) untranslated.push(`${lang}: ${key}`);
+    if (reference.get(key) === value && typeof value === "string" && value.length > 12 && !SAME_ON_PURPOSE.has(`${lang}: ${key}`)) untranslated.push(`${lang}: ${key}`);
   }
 }
 
